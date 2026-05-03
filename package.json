@@ -50,7 +50,8 @@
     "dotenv": "^16.4.7",
     "eslint": "^9.16.0",
     "globals": "^15.13.0",
-    "prettier": "^3.4.2"
+    "prettier": "^3.4.2",
+    "supertest": "^7.2.2"
   },
   "engines": {
     "node": ">=20.0.0"

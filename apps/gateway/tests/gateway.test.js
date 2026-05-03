@@ -1,7 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
-const http = require('node:http');
 const jwt = require('jsonwebtoken');
+const supertest = require('supertest');
 const { createApp } = require('../src/app');
 const { getGatewayConfig } = require('../src/config/gateway.config');
 const { IdempotencyRecord } = require('../src/services/idempotency.service');
@@ -35,33 +35,29 @@ function createAccessToken(overrides = {}) {
 
 async function withServer(run) {
   const app = createApp();
-  const server = http.createServer(app);
-
-  await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
-  const address = server.address();
-  const baseUrl = `http://127.0.0.1:${address.port}`;
-
-  try {
-    await run(baseUrl);
-  } finally {
-    await new Promise((resolve, reject) => {
-      server.close((error) => (error ? reject(error) : resolve()));
-    });
-  }
+  const request = supertest(app);
+  await run(request);
 }
 
-async function request(baseUrl, path, options = {}) {
-  const response = await fetch(`${baseUrl}${path}`, options);
-  const text = await response.text();
-  let body = null;
+async function request(app, path, options = {}) {
+  let req = app[options.method ? options.method.toLowerCase() : 'get'](path);
 
-  try {
-    body = text ? JSON.parse(text) : null;
-  } catch (_error) {
-    body = text;
+  if (options.headers) {
+    for (const [key, value] of Object.entries(options.headers)) {
+      req = req.set(key, value);
+    }
   }
 
-  return { response, body };
+  if (options.body !== undefined) {
+    const body =
+      typeof options.body === 'string' && options.headers?.['content-type']?.includes('application/json')
+        ? JSON.parse(options.body)
+        : options.body;
+    req = req.send(body);
+  }
+
+  const response = await req;
+  return { response, body: response.body };
 }
 
 function installInMemoryIdempotencyStore() {
@@ -107,8 +103,8 @@ test.afterEach(() => {
 });
 
 test('GET /health returns gateway envelope', async () => {
-  await withServer(async (baseUrl) => {
-    const { response, body } = await request(baseUrl, '/health');
+  await withServer(async (app) => {
+    const { response, body } = await request(app, '/health');
     assert.equal(response.status, 200);
     assert.equal(body.success, true);
     assert.equal(body.data.service, 'gateway');
@@ -118,8 +114,8 @@ test('GET /health returns gateway envelope', async () => {
 });
 
 test('GET /ready returns readiness envelope', async () => {
-  await withServer(async (baseUrl) => {
-    const { response, body } = await request(baseUrl, '/ready');
+  await withServer(async (app) => {
+    const { response, body } = await request(app, '/ready');
     assert.equal(response.status, 200);
     assert.equal(body.success, true);
     assert.equal(body.data.service, 'gateway');
@@ -128,8 +124,8 @@ test('GET /ready returns readiness envelope', async () => {
 });
 
 test('GET /api/v1/openapi.json returns OpenAPI 3.1 document', async () => {
-  await withServer(async (baseUrl) => {
-    const { response, body } = await request(baseUrl, '/api/v1/openapi.json');
+  await withServer(async (app) => {
+    const { response, body } = await request(app, '/api/v1/openapi.json');
     assert.equal(response.status, 200);
     assert.equal(body.openapi, '3.1.0');
     assert.equal(body.info.title, 'UdyogSetu 360 API');
@@ -137,27 +133,27 @@ test('GET /api/v1/openapi.json returns OpenAPI 3.1 document', async () => {
 });
 
 test('correlation ID is generated when missing', async () => {
-  await withServer(async (baseUrl) => {
-    const { response } = await request(baseUrl, '/api/v1/health');
-    assert.ok(response.headers.get('x-correlation-id'));
-    assert.ok(response.headers.get('x-request-id'));
+  await withServer(async (app) => {
+    const { response } = await request(app, '/api/v1/health');
+    assert.ok(response.headers['x-correlation-id']);
+    assert.ok(response.headers['x-request-id']);
   });
 });
 
 test('correlation ID is preserved when provided', async () => {
-  await withServer(async (baseUrl) => {
-    const { response } = await request(baseUrl, '/api/v1/health', {
+  await withServer(async (app) => {
+    const { response } = await request(app, '/api/v1/health', {
       headers: { 'x-correlation-id': 'demo-correlation-001' }
     });
-    assert.equal(response.headers.get('x-correlation-id'), 'demo-correlation-001');
+    assert.equal(response.headers['x-correlation-id'], 'demo-correlation-001');
   });
 });
 
 test('validation failures return 400 envelope', async () => {
   installInMemoryIdempotencyStore();
 
-  await withServer(async (baseUrl) => {
-    const { response, body } = await request(baseUrl, '/api/v1/cases', {
+  await withServer(async (app) => {
+    const { response, body } = await request(app, '/api/v1/cases', {
       method: 'POST',
       headers: {
         authorization: `Bearer ${createAccessToken()}`,
@@ -174,8 +170,8 @@ test('validation failures return 400 envelope', async () => {
 });
 
 test('unknown API route returns 404 envelope', async () => {
-  await withServer(async (baseUrl) => {
-    const { response, body } = await request(baseUrl, '/api/v1/does-not-exist');
+  await withServer(async (app) => {
+    const { response, body } = await request(app, '/api/v1/does-not-exist');
     assert.equal(response.status, 404);
     assert.equal(body.success, false);
     assert.equal(body.error.code, 'NOT_FOUND');
@@ -185,14 +181,14 @@ test('unknown API route returns 404 envelope', async () => {
 test('idempotency key replays matching completed request', async () => {
   installInMemoryIdempotencyStore();
 
-  await withServer(async (baseUrl) => {
+  await withServer(async (app) => {
     const token = createAccessToken();
     const payload = {
       caseType: 'new_industrial_unit',
       title: 'Demo Factory Approval'
     };
 
-    const first = await request(baseUrl, '/api/v1/cases', {
+    const first = await request(app, '/api/v1/cases', {
       method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,
@@ -202,7 +198,7 @@ test('idempotency key replays matching completed request', async () => {
       body: JSON.stringify(payload)
     });
 
-    const second = await request(baseUrl, '/api/v1/cases', {
+    const second = await request(app, '/api/v1/cases', {
       method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,
@@ -214,7 +210,7 @@ test('idempotency key replays matching completed request', async () => {
 
     assert.equal(first.response.status, 201);
     assert.equal(second.response.status, 201);
-    assert.equal(second.response.headers.get('x-idempotency-status'), 'replayed');
+    assert.equal(second.response.headers['x-idempotency-status'], 'replayed');
     assert.deepEqual(second.body, first.body);
   });
 });
@@ -222,10 +218,10 @@ test('idempotency key replays matching completed request', async () => {
 test('idempotency conflict returns 409 for changed payload', async () => {
   installInMemoryIdempotencyStore();
 
-  await withServer(async (baseUrl) => {
+  await withServer(async (app) => {
     const token = createAccessToken();
 
-    await request(baseUrl, '/api/v1/cases', {
+    await request(app, '/api/v1/cases', {
       method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,
@@ -238,7 +234,7 @@ test('idempotency conflict returns 409 for changed payload', async () => {
       })
     });
 
-    const { response, body } = await request(baseUrl, '/api/v1/cases', {
+    const { response, body } = await request(app, '/api/v1/cases', {
       method: 'POST',
       headers: {
         authorization: `Bearer ${token}`,
@@ -252,14 +248,14 @@ test('idempotency conflict returns 409 for changed payload', async () => {
     });
 
     assert.equal(response.status, 409);
-    assert.equal(response.headers.get('x-idempotency-status'), 'conflict');
+    assert.equal(response.headers['x-idempotency-status'], 'conflict');
     assert.equal(body.error.code, 'IDEMPOTENCY_CONFLICT');
   });
 });
 
 test('invalid webhook signature is rejected', async () => {
-  await withServer(async (baseUrl) => {
-    const { response, body } = await request(baseUrl, '/api/v1/webhooks/n8n/demo-workflow', {
+  await withServer(async (app) => {
+    const { response, body } = await request(app, '/api/v1/webhooks/n8n/demo-workflow', {
       method: 'POST',
       headers: {
         'content-type': 'application/json',
@@ -276,10 +272,10 @@ test('invalid webhook signature is rejected', async () => {
 });
 
 test('legacy API aliases redirect to versioned routes with deprecation headers', async () => {
-  await withServer(async (baseUrl) => {
-    const response = await fetch(`${baseUrl}/api/cases`, { redirect: 'manual' });
+  await withServer(async (app) => {
+    const response = await app.get('/api/cases').redirects(0);
     assert.equal(response.status, 307);
-    assert.equal(response.headers.get('deprecation'), 'true');
-    assert.equal(response.headers.get('link'), '</api/v1/cases>; rel="successor-version"');
+    assert.equal(response.headers.deprecation, 'true');
+    assert.equal(response.headers.link, '</api/v1/cases>; rel="successor-version"');
   });
 });
