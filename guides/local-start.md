@@ -165,6 +165,12 @@ curl http://127.0.0.1:8000/health
 
 ## 11. Seed Demo Data
 
+Enable demo seeding first:
+
+```bash
+export DEMO_SEED_ENABLED=true
+```
+
 Seed department mappings:
 
 ```bash
@@ -188,6 +194,41 @@ Optional legacy compatibility seed:
 ```bash
 npm run seed
 ```
+
+## 11A. Default Demo Credentials
+
+After running `npm run seed:demo-users`, these demo accounts are available.
+
+Demo password for seeded users:
+
+- `password123`
+
+Recommended first-login accounts:
+
+- Investor: `investor@udyogsetu.local`
+- Admin: `admin@udyogsetu.local`
+- Nodal officer: `nodal@udyogsetu.local`
+- Auditor: `auditor@udyogsetu.local`
+
+Department officer accounts:
+
+- Pollution: `officer.pollution@udyogsetu.local`
+- Power: `officer.power@udyogsetu.local`
+- Fire: `officer.fire@udyogsetu.local`
+- Industrial safety: `officer.industrial@udyogsetu.local`
+- Labour: `officer.labour@udyogsetu.local`
+
+Department supervisor accounts:
+
+- Pollution: `supervisor.pollution@udyogsetu.local`
+- Power: `supervisor.power@udyogsetu.local`
+- Fire: `supervisor.fire@udyogsetu.local`
+- Industrial safety: `supervisor.industrial@udyogsetu.local`
+- Labour: `supervisor.labour@udyogsetu.local`
+
+System utility account:
+
+- `system@udyogsetu.local`
 
 ## 12. Run Tests
 
