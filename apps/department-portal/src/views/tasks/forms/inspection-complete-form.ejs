@@ -1,0 +1,7 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/inspection/complete">
+  <h3>Complete inspection</h3>
+  <div class="form-field"><label for="result">Result</label><select id="result" name="result"><option value="passed">Passed</option><option value="failed">Failed</option><option value="conditional">Conditional</option><option value="reschedule_required">Reschedule required</option></select></div>
+  <div class="form-field"><label for="findings">Findings</label><textarea id="findings" name="findings" rows="3"></textarea></div>
+  <div class="form-field"><label for="completedAt">Completed at</label><input id="completedAt" name="completedAt" type="datetime-local"></div>
+  <button class="button" type="submit">Complete inspection</button>
+</form>

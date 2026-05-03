@@ -1,0 +1,19 @@
+<div class="table-scroll">
+  <table>
+    <caption><%= caption || 'Age bucket summary' %></caption>
+    <thead>
+      <tr>
+        <th scope="col">Bucket</th>
+        <th scope="col">Count</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Object.entries(buckets || {}).forEach(function(entry){ %>
+        <tr>
+          <td><%= entry[0] %></td>
+          <td><%= entry[1] %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

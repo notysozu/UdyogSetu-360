@@ -1,0 +1,23 @@
+# Department Adapter Checklist
+
+- [x] Base adapter created
+- [x] REST adapter created
+- [x] SFTP/file-drop adapter created
+- [x] Database adapter created
+- [x] Webhook adapter created
+- [x] Human-assisted adapter created
+- [x] RPA adapter created
+- [x] Adapter config schema/model created
+- [x] Registry created
+- [x] Factory created
+- [x] Mapping utilities created
+- [x] Transformation helpers created
+- [x] Signature validation created
+- [x] Retry policy hooks created
+- [x] Acknowledgement capture created
+- [x] Error classification created
+- [x] Five mock adapters created
+- [x] Routes added
+- [x] Tests added
+- [x] Seed config added
+- [x] Existing flows preserved behind adapter-runtime service boundaries

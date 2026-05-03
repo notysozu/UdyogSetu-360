@@ -1,0 +1,6 @@
+<section class="card">
+  <h2>Task-wise progress</h2>
+  <% tasks.forEach(function(task) { %>
+    <%- include('../partials/investor/task-card', { task: task }) %>
+  <% }) %>
+</section>

@@ -1,0 +1,9 @@
+<table>
+  <caption>Consumer status</caption>
+  <thead><tr><th>Group</th><th>Topic/Queue</th><th>Lag</th><th>Status</th></tr></thead>
+  <tbody>
+    <% (consumers || []).forEach(function(consumer) { %>
+      <tr><td><%= consumer.consumerGroup %></td><td><%= consumer.topicOrQueue %></td><td><%= consumer.lag %></td><td><%= consumer.status %></td></tr>
+    <% }) %>
+  </tbody>
+</table>

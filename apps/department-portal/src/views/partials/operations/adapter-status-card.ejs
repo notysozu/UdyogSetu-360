@@ -1,0 +1,12 @@
+<table>
+  <caption>Adapter status</caption>
+  <thead><tr><th>Adapter</th><th>Status</th></tr></thead>
+  <tbody>
+    <% if (!adapters || adapters.length === 0) { %>
+      <tr><td colspan="2">No adapter details available.</td></tr>
+    <% } %>
+    <% (adapters || []).forEach(function(adapter) { %>
+      <tr><td><%= adapter.code || adapter.name %></td><td><%= adapter.status || 'unknown' %></td></tr>
+    <% }) %>
+  </tbody>
+</table>

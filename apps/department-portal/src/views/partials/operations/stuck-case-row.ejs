@@ -1,0 +1,14 @@
+<table>
+  <caption>Stuck-case findings</caption>
+  <thead><tr><th>Finding ID</th><th>Type</th><th>Severity</th><th>Status</th></tr></thead>
+  <tbody>
+    <% (items || []).forEach(function(item) { %>
+      <tr>
+        <td><a href="/admin/operations/stuck-cases/<%= item.findingId %>"><%= item.findingId %></a></td>
+        <td><%= item.findingType %></td>
+        <td><%= item.severity %></td>
+        <td><%= item.status %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

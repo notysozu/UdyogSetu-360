@@ -1,0 +1,8 @@
+<form class="language-switcher" method="post" action="/settings/language">
+  <label for="language" class="sr-only">Select language</label>
+  <select id="language" name="language" onchange="this.form.submit()">
+    <option value="en" <%= currentLocale === 'en' ? 'selected' : '' %>>English</option>
+    <option value="kn" <%= currentLocale === 'kn' ? 'selected' : '' %>>Kannada</option>
+    <option value="hi" <%= currentLocale === 'hi' ? 'selected' : '' %>>Hindi</option>
+  </select>
+</form>

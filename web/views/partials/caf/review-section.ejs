@@ -1,0 +1,16 @@
+<section class="card">
+  <h2>Review Summary</h2>
+  <div class="grid-2">
+    <div>
+      <p><strong>Organisation:</strong> <%= (formData.enterprise && formData.enterprise.legalName) || 'Not provided' %></p>
+      <p><strong>Project:</strong> <%= (formData.project && formData.project.projectName) || 'Not provided' %></p>
+      <p><strong>District:</strong> <%= (formData.project && formData.project.projectDistrict) || 'Not provided' %></p>
+      <p><strong>Investment:</strong> <%= (formData.project && formData.project.investmentAmount) ?? 'Not provided' %></p>
+    </div>
+    <div>
+      <p><strong>Expected employment:</strong> <%= (formData.project && formData.project.employmentExpected) ?? 'Not provided' %></p>
+      <p><strong>Power requirement:</strong> <%= (formData.project && formData.project.powerRequirementKw) ?? 'Not provided' %></p>
+      <p><strong>Attachments declared:</strong> <%= Array.isArray(formData.attachments) ? formData.attachments.filter(function(item) { return item.documentType; }).length : 0 %></p>
+    </div>
+  </div>
+</section>

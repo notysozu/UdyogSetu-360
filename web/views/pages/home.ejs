@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>UdyogSetu 360 | Karnataka Government Interoperability Platform</title>
+    <meta
+      name="description"
+      content="UdyogSetu 360 connects Karnataka's Single Window System with department systems through real-time two-way synchronisation, universal case IDs, SLA tracking, grievance tracking, document verification and audit trails."
+    >
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+    <style>
+      :root {
+        color-scheme: light;
+        --gov-navy: #071d35;
+        --gov-slate: #102b45;
+        --gov-red: #bf1f2f;
+        --gov-gold: #f5c044;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: Arial, Helvetica, sans-serif;
+        background: #eef2f6;
+        color: #102033;
+      }
+
+      .hero-bg {
+        background-image:
+          linear-gradient(118deg, rgba(3, 18, 38, 0.96) 0%, rgba(10, 35, 61, 0.9) 44%, rgba(17, 47, 74, 0.68) 100%),
+          url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=85");
+        background-position: center;
+        background-size: cover;
+      }
+
+      .gov-shadow {
+        box-shadow: 0 24px 70px rgba(7, 29, 53, 0.18);
+      }
+
+      .quick-link {
+        writing-mode: vertical-rl;
+        text-orientation: mixed;
+      }
+
+      .focus-ring:focus-visible {
+        outline: 3px solid #f5c044;
+        outline-offset: 3px;
+      }
+
+      body.accessibility-mode {
+        filter: contrast(1.12);
+      }
+
+      body.theme-contrast {
+        background: #dfe7ef;
+      }
+
+      body.theme-contrast .hero-bg {
+        background-image:
+          linear-gradient(118deg, rgba(0, 10, 24, 0.98) 0%, rgba(5, 26, 50, 0.94) 48%, rgba(18, 18, 18, 0.82) 100%),
+          url("https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2200&q=85");
+      }
+    </style>
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var scale = Number(localStorage.getItem('us360_font_scale') || '100');
+          if (!Number.isNaN(scale)) root.style.setProperty('--app-font-scale', String(Math.min(140, Math.max(80, scale)) / 100));
+          if (localStorage.getItem('us360_high_contrast') === 'true') root.classList.add('a11y-high-contrast');
+          if (localStorage.getItem('us360_dark_mode') === 'true') root.classList.add('a11y-dark-mode');
+          if (localStorage.getItem('us360_grayscale') === 'true') root.classList.add('a11y-grayscale');
+          if (localStorage.getItem('us360_reduce_motion') === 'true') root.classList.add('a11y-reduce-motion');
+          if (localStorage.getItem('us360_dyslexia_font') === 'true') root.classList.add('a11y-dyslexia-font');
+          if (localStorage.getItem('us360_letter_spacing') === 'true') root.classList.add('a11y-letter-spacing');
+          if (localStorage.getItem('us360_highlight_links') === 'true') root.classList.add('a11y-highlight-links');
+          if (localStorage.getItem('us360_large_cursor') === 'true') root.classList.add('a11y-large-cursor');
+          if (localStorage.getItem('us360_focus_mode') === 'true') root.classList.add('a11y-focus-mode');
+          if (localStorage.getItem('us360_screen_reader_mode') === 'true') root.classList.add('a11y-screen-reader-mode');
+        } catch (_error) {}
+      })();
+    </script>
+  </head>
+  <% const hasSavedCookieConsent = Boolean(typeof cookieConsent !== 'undefined' && cookieConsent); %>
+  <% const currentLanguage = typeof selectedLanguage !== 'undefined' ? selectedLanguage : 'en'; %>
+  <% const homeCopy = {
+    en: {
+      languageLabel: 'Language',
+      login: 'Login',
+      register: 'Register',
+      startApplication: 'Start Application',
+      trackApplication: 'Track Application',
+      departmentPortal: 'Department Portal',
+      admin: 'Admin',
+      verifyCertificate: 'Verify Certificate',
+      submitGrievance: 'Submit Grievance',
+      learnMore: 'Learn More',
+      contact: 'Contact',
+      feedback: 'Feedback',
+      helpdesk: 'Helpdesk',
+      trackCase: 'Track Case',
+      share: 'Share',
+      theme: 'Theme',
+      title: 'UdyogSetu 360',
+      tagline: 'One Submission. Every Department. Fully Synced.',
+      subtitle: 'Interoperability Backbone for Unified Governance',
+      subtitleLine: 'Connecting Single Window System and Department Systems in real time',
+      description: 'UdyogSetu 360 is a unified interoperability backbone for Karnataka that connects the Single Window System with department systems, enabling real-time two-way synchronisation, universal case IDs, SLA clocks, grievance tracking, document verification, and full audit trails.',
+      searchPlaceholder: 'Search applications, departments, approvals, certificates...',
+      searchButton: 'Search',
+      trending: 'Trending:',
+      onlineServices: 'Online Services',
+      onlineServicesText: 'Avail unified approvals & save time',
+      viewAll: 'View All',
+      howItWorks: 'How it works',
+      howItWorksHeading: 'One workflow across every department',
+      whyHeading: 'Why UdyogSetu 360?'
+    },
+    kn: {
+      languageLabel: 'ಭಾಷೆ',
+      login: 'ಲಾಗಿನ್',
+      register: 'ನೋಂದಣಿ',
+      startApplication: 'ಅರ್ಜಿ ಪ್ರಾರಂಭಿಸಿ',
+      trackApplication: 'ಅರ್ಜಿಯ ಸ್ಥಿತಿ ನೋಡಿ',
+      departmentPortal: 'ವಿಭಾಗ ಪೋರ್ಟಲ್',
+      admin: 'ನಿರ್ವಹಣೆ',
+      verifyCertificate: 'ಪ್ರಮಾಣಪತ್ರ ಪರಿಶೀಲನೆ',
+      submitGrievance: 'ಅಹವಾಲು ಸಲ್ಲಿಸಿ',
+      learnMore: 'ಹೆಚ್ಚು ತಿಳಿಯಿರಿ',
+      contact: 'ಸಂಪರ್ಕ',
+      feedback: 'ಪ್ರತಿಕ್ರಿಯೆ',
+      helpdesk: 'ಸಹಾಯವಾಣಿ',
+      trackCase: 'ಕೇಸ್ ಟ್ರ್ಯಾಕ್',
+      share: 'ಹಂಚಿಕೆ',
+      theme: 'ಥೀಮ್',
+      title: 'ಉದ್ಯೋಗಸೇತು 360',
+      tagline: 'ಒಂದು ಸಲ್ಲಿಕೆ. ಪ್ರತಿಯೊಂದು ಇಲಾಖೆ. ಸಂಪೂರ್ಣ ಸಿಂಕ್.',
+      subtitle: 'ಏಕೀಕೃತ ಆಡಳಿತಕ್ಕಾಗಿ ಇಂಟರೋಪರಬಿಲಿಟಿ ಬ್ಯಾಕ್ಬೋನ್',
+      subtitleLine: 'ಸಿಂಗಲ್ ವಿಂಡೋ ಸಿಸ್ಟಂ ಮತ್ತು ವಿಭಾಗೀಯ ಸಿಸ್ಟಂಗಳ ನಡುವೆ ತಕ್ಷಣದ ಸಂಪರ್ಕ',
+      description: 'ಉದ್ಯೋಗಸೇತು 360 ಕರ್ನಾಟಕಕ್ಕಾಗಿ ನಿರ್ಮಿತ ಏಕೀಕೃತ ಇಂಟರೋಪರಬಿಲಿಟಿ ವೇದಿಕೆ. ಇದು ಸಿಂಗಲ್ ವಿಂಡೋ ಸಿಸ್ಟಂ ಮತ್ತು ಇಲಾಖೆಗಳ ವ್ಯವಸ್ಥೆಗಳನ್ನು ಜೋಡಿಸಿ, ರಿಯಲ್-ಟೈಮ್ ಎರಡು ದಿಕ್ಕಿನ ಸಿಂಕ್ರೊನೈಸೇಶನ್, ಯುನಿವರ್ಸಲ್ ಕೇಸ್ ಐಡಿ, SLA ಘಡಿಗಳು, ಅಹವಾಲು ಟ್ರ್ಯಾಕಿಂಗ್, ದಸ್ತಾವೇಜು ಪರಿಶೀಲನೆ ಮತ್ತು ಸಂಪೂರ್ಣ ಆಡಿಟ್ ಟ್ರೇಲ್ ಒದಗಿಸುತ್ತದೆ.',
+      searchPlaceholder: 'ಅರ್ಜಿಗಳು, ಇಲಾಖೆಗಳು, ಅನುಮತಿಗಳು, ಪ್ರಮಾಣಪತ್ರಗಳನ್ನು ಹುಡುಕಿ...',
+      searchButton: 'ಹುಡುಕಿ',
+      trending: 'ಪ್ರಚಲಿತ ಹುಡುಕಾಟ:',
+      onlineServices: 'ಆನ್‌ಲೈನ್ ಸೇವೆಗಳು',
+      onlineServicesText: 'ಏಕೀಕೃತ ಅನುಮತಿಗಳನ್ನು ಪಡೆದು ಸಮಯ ಉಳಿಸಿ',
+      viewAll: 'ಎಲ್ಲವನ್ನೂ ನೋಡಿ',
+      howItWorks: 'ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ',
+      howItWorksHeading: 'ಎಲ್ಲಾ ಇಲಾಖೆಗಳಿಗೂ ಒಂದೇ ಕಾರ್ಯಪ್ರವಾಹ',
+      whyHeading: 'ಯಾಕೆ ಉದ್ಯೋಗಸೇತು 360?'
+    },
+    hi: {
+      languageLabel: 'भाषा',
+      login: 'लॉगिन',
+      register: 'पंजीकरण',
+      startApplication: 'आवेदन शुरू करें',
+      trackApplication: 'आवेदन ट्रैक करें',
+      departmentPortal: 'विभाग पोर्टल',
+      admin: 'एडमिन',
+      verifyCertificate: 'प्रमाणपत्र सत्यापित करें',
+      submitGrievance: 'शिकायत दर्ज करें',
+      learnMore: 'और जानें',
+      contact: 'संपर्क',
+      feedback: 'प्रतिक्रिया',
+      helpdesk: 'हेल्पडेस्क',
+      trackCase: 'केस ट्रैक करें',
+      share: 'शेयर',
+      theme: 'थीम',
+      title: 'उद्योगसेतु 360',
+      tagline: 'एक सबमिशन. हर विभाग. पूरी तरह सिंक.',
+      subtitle: 'एकीकृत शासन के लिए इंटरऑपरेबिलिटी बैकबोन',
+      subtitleLine: 'सिंगल विंडो सिस्टम और विभागीय सिस्टम को रियल टाइम में जोड़ना',
+      description: 'उद्योगसेतु 360 कर्नाटक के लिए एकीकृत इंटरऑपरेबिलिटी प्लेटफॉर्म है, जो सिंगल विंडो सिस्टम और विभागीय सिस्टम को जोड़कर रियल-टाइम दो-तरफा सिंक्रोनाइज़ेशन, यूनिवर्सल केस आईडी, SLA क्लॉक, शिकायत ट्रैकिंग, दस्तावेज़ सत्यापन और पूर्ण ऑडिट ट्रेल उपलब्ध कराता है।',
+      searchPlaceholder: 'आवेदन, विभाग, अनुमतियां, प्रमाणपत्र खोजें...',
+      searchButton: 'खोजें',
+      trending: 'लोकप्रिय खोज:',
+      onlineServices: 'ऑनलाइन सेवाएं',
+      onlineServicesText: 'एकीकृत अनुमतियां लें और समय बचाएं',
+      viewAll: 'सभी देखें',
+      howItWorks: 'यह कैसे काम करता है',
+      howItWorksHeading: 'हर विभाग के लिए एक ही वर्कफ़्लो',
+      whyHeading: 'उद्योगसेतु 360 क्यों?'
+    }
+  }; %>
+  <% const t = homeCopy[currentLanguage] || homeCopy.en; %>
+  <body class="min-h-screen bg-slate-100 <%= hasSavedCookieConsent ? '' : 'pb-48 md:pb-28' %>">
+    <%- include('../partials/accessibility-panel') %>
+    <header class="hero-bg relative min-h-screen overflow-hidden text-white">
+      <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_35%,rgba(255,255,255,0.13),transparent_32rem)]"></div>
+
+      <nav aria-label="Utility links" class="relative z-30 flex justify-end px-4 pt-4 sm:px-8 lg:px-12">
+        <div class="relative">
+          <div class="flex items-center gap-1.5 rounded-sm border border-white/20 bg-[#06182d]/55 px-2 py-1.5 text-sm shadow-xl backdrop-blur-md sm:gap-2 sm:px-3">
+          <button class="focus-ring flex h-9 w-9 items-center justify-center rounded-sm hover:bg-white/10" type="button" aria-label="Show calendar" aria-expanded="false" aria-controls="calendar-panel" data-calendar-toggle>
+            <i class="fa-regular fa-calendar-days"></i>
+          </button>
+          <form method="get" action="/language" class="flex items-center">
+            <input type="hidden" name="next" value="/">
+            <label class="sr-only-enhanced" for="language-select"><%= t.languageLabel %></label>
+            <select id="language-select" name="lang" class="focus-ring h-9 rounded-sm border border-white/20 bg-[#06182d] px-2 text-sm font-bold text-white" aria-label="Select language" data-language-select>
+              <option value="en" <%= currentLanguage === 'en' ? 'selected' : '' %>>A English</option>
+              <option value="kn" <%= currentLanguage === 'kn' ? 'selected' : '' %>>ಅ Kannada</option>
+              <option value="hi" <%= currentLanguage === 'hi' ? 'selected' : '' %>>अ Hindi</option>
+            </select>
+          </form>
+          <button class="focus-ring flex h-9 w-10 flex-col justify-center gap-1 rounded-sm px-2 hover:bg-white/10" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="portal-menu" data-menu-toggle>
+            <span class="block h-1 rounded-full bg-[#ff9933]"></span>
+            <span class="block h-1 rounded-full bg-white"></span>
+            <span class="block h-1 rounded-full bg-[#138808]"></span>
+          </button>
+          </div>
+
+          <div id="calendar-panel" class="absolute right-0 mt-2 hidden w-64 rounded-sm border border-white/20 bg-white p-4 text-left text-slate-900 shadow-2xl" data-calendar-panel>
+            <p class="text-xs font-extrabold uppercase tracking-[0.18em] text-[var(--gov-red)]">Today</p>
+            <p class="mt-1 text-lg font-extrabold" data-calendar-date></p>
+          </div>
+
+          <div id="portal-menu" class="absolute right-0 mt-2 hidden w-72 overflow-hidden rounded-sm border border-white/20 bg-white text-left text-slate-900 shadow-2xl" data-mobile-menu>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/auth/login"><%= t.login %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/auth/register"><%= t.register %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/cases/new"><%= t.startApplication %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/cases"><%= t.trackApplication %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/department"><%= t.departmentPortal %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/admin"><%= t.admin %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/verify"><%= t.verifyCertificate %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="/grievances/new"><%= t.submitGrievance %></a>
+            <a class="block border-b border-slate-200 px-4 py-3 font-bold hover:bg-slate-100" href="#how-it-works"><%= t.learnMore %></a>
+            <a class="block px-4 py-3 font-bold hover:bg-slate-100" href="/contact"><%= t.contact %></a>
+          </div>
+        </div>
+      </nav>
+
+      <aside class="fixed right-2 top-[56%] z-40 hidden w-16 -translate-y-1/2 overflow-hidden rounded-md border border-white/30 bg-white text-slate-800 shadow-2xl lg:block xl:right-4 xl:w-10 2xl:right-6" aria-label="Quick links">
+        <a class="quick-link flex min-h-24 items-center justify-center border-b border-slate-200 px-2.5 py-3 text-xs font-bold uppercase tracking-wide hover:bg-slate-100" href="/contact?topic=feedback"><%= t.feedback %></a>
+        <a class="quick-link flex min-h-24 items-center justify-center border-b border-slate-200 px-2.5 py-3 text-xs font-bold uppercase tracking-wide hover:bg-slate-100" href="/contact?topic=helpdesk"><%= t.helpdesk %></a>
+        <a class="quick-link flex min-h-24 items-center justify-center border-b border-slate-200 px-2.5 py-3 text-xs font-bold uppercase tracking-wide hover:bg-slate-100" href="/cases"><%= t.trackCase %></a>
+        <button class="quick-link flex min-h-20 items-center justify-center border-b border-slate-200 px-2.5 py-3 text-xs font-bold uppercase tracking-wide hover:bg-slate-100" type="button" data-share-page><%= t.share %></button>
+        <button class="quick-link flex min-h-20 items-center justify-center px-2.5 py-3 text-xs font-bold uppercase tracking-wide hover:bg-slate-100" type="button" data-theme-toggle><%= t.theme %></button>
+      </aside>
+
+      <section class="relative z-10 mx-auto flex min-h-[calc(100vh-5rem)] max-w-7xl flex-col items-center justify-center px-4 pb-40 pt-12 text-center sm:px-8 lg:px-12">
+        <div class="mb-5 flex h-20 w-20 items-center justify-center rounded-full border-2 border-white/75 bg-white/10 text-4xl shadow-2xl backdrop-blur-md sm:h-24 sm:w-24 sm:text-5xl" aria-hidden="true">
+          <i class="fa-solid fa-landmark-dome"></i>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-center gap-3">
+          <h1 class="text-4xl font-extrabold leading-tight text-white sm:text-6xl lg:text-7xl"><%= t.title %></h1>
+          <span class="rounded-sm bg-[var(--gov-gold)] px-3 py-1 text-sm font-extrabold uppercase tracking-wider text-slate-950">Beta</span>
+        </div>
+
+        <p class="mt-4 text-xl font-semibold text-white sm:text-2xl"><%= t.tagline %></p>
+        <p class="mt-3 text-base font-semibold uppercase tracking-[0.18em] text-amber-200"><%= t.subtitle %></p>
+        <p class="mt-3 max-w-3xl text-base leading-7 text-slate-100 sm:text-lg">
+          <%= t.subtitleLine %>
+        </p>
+        <p class="mt-5 max-w-4xl text-sm leading-7 text-slate-200 sm:text-base">
+          <%= t.description %>
+        </p>
+
+        <div class="mt-7 flex flex-wrap items-center justify-center gap-3">
+          <a class="focus-ring rounded-sm bg-[var(--gov-red)] px-5 py-3 text-sm font-extrabold uppercase tracking-wide text-white shadow-xl transition hover:bg-[#a01825]" href="/cases/new"><%= t.startApplication %></a>
+          <a class="focus-ring rounded-sm border border-white/35 bg-white/10 px-5 py-3 text-sm font-extrabold uppercase tracking-wide text-white backdrop-blur transition hover:bg-white hover:text-slate-950" href="/cases"><%= t.trackApplication %></a>
+          <a class="focus-ring rounded-sm border border-white/35 bg-white/10 px-5 py-3 text-sm font-extrabold uppercase tracking-wide text-white backdrop-blur transition hover:bg-white hover:text-slate-950" href="#how-it-works"><%= t.learnMore %></a>
+        </div>
+
+        <form class="mt-9 w-full max-w-5xl rounded-md bg-white p-2 shadow-2xl" action="/search" method="get" role="search">
+          <div class="grid gap-2 md:grid-cols-[1fr_190px_150px]">
+            <label class="sr-only-enhanced" for="portal-search">Search applications, departments, approvals, certificates...</label>
+            <div class="flex items-center gap-3 rounded-sm border border-slate-200 bg-white px-4">
+              <i class="fa-solid fa-magnifying-glass text-slate-400" aria-hidden="true"></i>
+              <input
+                id="portal-search"
+                name="q"
+                class="focus-ring min-h-14 w-full border-0 bg-transparent text-base text-slate-900 placeholder:text-slate-500 focus:outline-none"
+                type="search"
+                placeholder="<%= t.searchPlaceholder %>"
+              >
+            </div>
+            <label class="sr-only-enhanced" for="service-filter">Service category</label>
+            <select id="service-filter" name="service" class="focus-ring min-h-14 rounded-sm border border-slate-200 bg-slate-50 px-4 font-bold text-slate-800">
+              <option value="All Services">All Services</option>
+              <option value="Approvals">Approvals</option>
+              <option value="Certificates">Certificates</option>
+              <option value="Grievances">Grievances</option>
+              <option value="Departments">Departments</option>
+            </select>
+            <button class="focus-ring min-h-14 rounded-sm bg-[var(--gov-red)] px-6 font-extrabold uppercase tracking-wide text-white transition hover:bg-[#a01825]" type="submit">
+              <%= t.searchButton %>
+            </button>
+          </div>
+        </form>
+
+        <div class="mt-5 flex max-w-5xl flex-wrap items-center justify-center gap-2 text-sm" aria-label="Trending searches">
+          <span class="mr-1 font-bold text-slate-100"><%= t.trending %></span>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=Universal%20Case%20ID">Universal Case ID</a>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=Pollution%20Clearance">Pollution Clearance</a>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=Power%20Connection">Power Connection</a>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=Fire%20NOC">Fire NOC</a>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=Labour%20Registration">Labour Registration</a>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=SLA%20Status">SLA Status</a>
+          <a class="focus-ring rounded-full border border-white/30 bg-white/10 px-4 py-2 font-semibold text-white backdrop-blur transition hover:bg-white hover:text-slate-900" href="/search?q=Grievances">Grievances</a>
+        </div>
+      </section>
+    </header>
+
+    <main id="main-content" tabindex="-1">
+      <section class="relative z-20 -mt-28 px-4 sm:px-8 lg:px-12" aria-labelledby="online-services-heading">
+        <div class="gov-shadow mx-auto max-w-7xl rounded-t-[2rem] bg-white p-4 sm:p-6 lg:p-8">
+          <div class="grid gap-5 lg:grid-cols-[340px_1fr]">
+            <article class="rounded-md bg-[var(--gov-red)] p-7 text-white shadow-xl sm:p-8">
+              <p class="text-sm font-bold uppercase tracking-[0.2em] text-red-100">Citizen and investor desk</p>
+              <h2 id="online-services-heading" class="mt-3 text-3xl font-extrabold"><%= t.onlineServices %></h2>
+              <div class="mt-3 h-1 w-20 bg-white"></div>
+              <p class="mt-5 max-w-sm text-lg font-semibold leading-7 text-red-50"><%= t.onlineServicesText %></p>
+              <a class="focus-ring mt-8 inline-flex items-center gap-3 rounded-sm bg-white px-5 py-3 text-sm font-extrabold uppercase tracking-wide text-[var(--gov-red)] transition hover:bg-red-50" href="/services">
+                <%= t.viewAll %>
+                <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+              </a>
+            </article>
+
+            <div class="grid gap-4 md:grid-cols-3">
+              <article class="group cursor-pointer rounded-md border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl" role="link" tabindex="0" data-card-href="/cases">
+                <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-blue-50 text-xl text-blue-800">
+                  <i class="fa-solid fa-fingerprint" aria-hidden="true"></i>
+                </div>
+                <h3 class="mt-5 text-xl font-extrabold text-slate-900">Track Universal Case ID</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Monitor every department movement, SLA milestone, query and decision from one case spine.</p>
+                <a class="focus-ring mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-blue-800 hover:text-blue-950" href="/cases">
+                  Track now
+                  <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                </a>
+              </article>
+
+              <article class="group cursor-pointer rounded-md border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl" role="link" tabindex="0" data-card-href="/cases/new">
+                <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-emerald-50 text-xl text-emerald-800">
+                  <i class="fa-solid fa-file-circle-plus" aria-hidden="true"></i>
+                </div>
+                <h3 class="mt-5 text-xl font-extrabold text-slate-900">Submit Common Application</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">Submit once and route structured requests to all mapped Karnataka department systems.</p>
+                <a class="focus-ring mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-blue-800 hover:text-blue-950" href="/cases/new">
+                  Start application
+                  <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                </a>
+              </article>
+
+              <article class="group cursor-pointer rounded-md border border-slate-200 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-xl" role="link" tabindex="0" data-card-href="/department">
+                <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-amber-50 text-xl text-amber-800">
+                  <i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i>
+                </div>
+                <h3 class="mt-5 text-xl font-extrabold text-slate-900">Department Sync Dashboard</h3>
+                <p class="mt-3 text-sm leading-6 text-slate-600">View live two-way synchronisation, pending callbacks, reconciliation alerts and audit events.</p>
+                <a class="focus-ring mt-5 inline-flex items-center gap-2 text-sm font-extrabold text-blue-800 hover:text-blue-950" href="/department">
+                  Open dashboard
+                  <i class="fa-solid fa-chevron-right text-xs" aria-hidden="true"></i>
+                </a>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="how-it-works" class="px-4 pt-12 sm:px-8 lg:px-12" aria-labelledby="how-heading">
+        <div class="mx-auto max-w-7xl rounded-md border border-slate-200 bg-white p-6 shadow-sm lg:p-8">
+          <div class="mb-6 flex flex-col justify-between gap-4 border-b border-slate-200 pb-5 md:flex-row md:items-end">
+            <div>
+              <p class="text-sm font-extrabold uppercase tracking-[0.2em] text-[var(--gov-red)]"><%= t.howItWorks %></p>
+              <h2 id="how-heading" class="mt-2 text-3xl font-extrabold text-slate-950"><%= t.howItWorksHeading %></h2>
+            </div>
+            <a class="focus-ring inline-flex items-center gap-2 rounded-sm border border-slate-300 px-4 py-3 text-sm font-extrabold uppercase tracking-wide text-slate-900 hover:bg-slate-100" href="/contact">
+              <%= t.contact %>
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+            </a>
+          </div>
+          <div class="grid gap-4 md:grid-cols-3">
+            <article class="rounded-md bg-slate-50 p-5">
+              <span class="text-sm font-extrabold text-[var(--gov-red)]">01</span>
+              <h3 class="mt-2 text-lg font-extrabold text-slate-950">Submit once</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">The common application captures applicant, enterprise and approval details once.</p>
+            </article>
+            <article class="rounded-md bg-slate-50 p-5">
+              <span class="text-sm font-extrabold text-[var(--gov-red)]">02</span>
+              <h3 class="mt-2 text-lg font-extrabold text-slate-950">Synchronise everywhere</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Department tasks, documents and status updates flow through one Universal Case ID.</p>
+            </article>
+            <article class="rounded-md bg-slate-50 p-5">
+              <span class="text-sm font-extrabold text-[var(--gov-red)]">03</span>
+              <h3 class="mt-2 text-lg font-extrabold text-slate-950">Track to closure</h3>
+              <p class="mt-2 text-sm leading-6 text-slate-600">Investors and officials see SLA clocks, grievances, certificates and audit trails.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="px-4 py-14 sm:px-8 lg:px-12" aria-labelledby="why-heading">
+        <div class="mx-auto max-w-7xl">
+          <div class="mb-8 flex flex-col justify-between gap-4 border-b border-slate-300 pb-5 md:flex-row md:items-end">
+            <div>
+              <p class="text-sm font-extrabold uppercase tracking-[0.2em] text-[var(--gov-red)]">Unified governance backbone</p>
+              <h2 id="why-heading" class="mt-2 text-3xl font-extrabold text-slate-950 sm:text-4xl"><%= t.whyHeading %></h2>
+            </div>
+            <p class="max-w-2xl text-sm leading-6 text-slate-600">
+              Built for transparent coordination across Single Window, department offices, investors, grievance desks and audit teams.
+            </p>
+          </div>
+
+          <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <article class="rounded-md border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-slate-900 text-xl text-white">
+                <i class="fa-solid fa-right-left" aria-hidden="true"></i>
+              </div>
+              <h3 class="mt-5 text-lg font-extrabold text-slate-950">Two-Way Synchronisation</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">Application data, department decisions and status updates move both ways without duplicate entry.</p>
+            </article>
+
+            <article class="rounded-md border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-slate-900 text-xl text-white">
+                <i class="fa-solid fa-stopwatch" aria-hidden="true"></i>
+              </div>
+              <h3 class="mt-5 text-lg font-extrabold text-slate-950">SLA &amp; Escalation Tracking</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">Every case carries accountable clocks, reminders, escalation rules and visible delay signals.</p>
+            </article>
+
+            <article class="rounded-md border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-slate-900 text-xl text-white">
+                <i class="fa-solid fa-file-shield" aria-hidden="true"></i>
+              </div>
+              <h3 class="mt-5 text-lg font-extrabold text-slate-950">DigiLocker-ready Documents</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">Verification metadata and certificate records are prepared for trusted digital document exchange.</p>
+            </article>
+
+            <article class="rounded-md border border-slate-200 bg-white p-6 shadow-sm">
+              <div class="flex h-12 w-12 items-center justify-center rounded-sm bg-slate-900 text-xl text-white">
+                <i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>
+              </div>
+              <h3 class="mt-5 text-lg font-extrabold text-slate-950">Audit-First Governance</h3>
+              <p class="mt-3 text-sm leading-6 text-slate-600">Full trails capture who changed what, when it changed and which system originated the event.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <section
+      class="<%= hasSavedCookieConsent ? 'hidden ' : '' %>fixed inset-x-0 bottom-0 z-50 border-t border-slate-200 bg-white px-4 py-4 shadow-[0_-16px_40px_rgba(15,23,42,0.12)] sm:px-6"
+      aria-label="Cookie notice"
+      data-cookie-banner
+    >
+      <div class="mx-auto flex max-w-7xl flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <p class="max-w-3xl text-sm leading-6 text-slate-700">
+            We use cookies to improve your experience on UdyogSetu 360, measure portal performance, and support secure government service delivery. You can accept all cookies or manage optional cookies.
+          </p>
+          <p class="mt-1 hidden text-sm font-bold text-[var(--gov-red)]" data-cookie-status role="status"></p>
+        </div>
+        <div class="grid gap-2 sm:grid-cols-3 lg:min-w-[620px]" data-cookie-actions>
+          <button class="focus-ring rounded-sm border border-slate-400 px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-slate-900 hover:bg-slate-100" type="button" data-cookie-open-customize>
+            Customize Cookies
+          </button>
+          <button class="focus-ring rounded-sm border border-slate-400 px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-slate-900 hover:bg-slate-100" type="button" data-cookie-action="decline_optional">
+            Decline Optional Cookies
+          </button>
+          <button class="focus-ring rounded-sm bg-[var(--gov-red)] px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-white hover:bg-[#a01825]" type="button" data-cookie-action="accept_all">
+            Accept All Cookies
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <div class="fixed inset-0 z-[60] hidden items-center justify-center bg-slate-950/70 px-4 py-8" data-cookie-modal>
+      <section class="max-h-[calc(100vh-4rem)] w-full max-w-2xl overflow-y-auto rounded-md bg-white p-6 shadow-2xl sm:p-7" role="dialog" aria-modal="true" aria-labelledby="cookie-settings-title">
+        <div class="flex items-start justify-between gap-4 border-b border-slate-200 pb-4">
+          <div>
+            <p class="text-sm font-extrabold uppercase tracking-[0.2em] text-[var(--gov-red)]">Cookie settings</p>
+            <h2 id="cookie-settings-title" class="mt-2 text-2xl font-extrabold text-slate-950">Manage optional cookies</h2>
+          </div>
+          <button class="focus-ring flex h-10 w-10 items-center justify-center rounded-sm border border-slate-300 text-slate-700 hover:bg-slate-100" type="button" aria-label="Close cookie settings" data-cookie-close-customize>
+            <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+          </button>
+        </div>
+
+        <form class="mt-5 grid gap-4" data-cookie-customize-form>
+          <div class="rounded-md border border-slate-200 bg-slate-50 p-4">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <h3 class="font-extrabold text-slate-950">Necessary cookies</h3>
+                <p class="mt-1 text-sm leading-6 text-slate-600">Required for secure sessions, service routing and core portal operation.</p>
+              </div>
+              <span class="rounded-sm bg-slate-900 px-3 py-1 text-xs font-extrabold uppercase tracking-wide text-white">Always on</span>
+            </div>
+          </div>
+
+          <label class="flex cursor-pointer items-start justify-between gap-4 rounded-md border border-slate-200 bg-white p-4 hover:bg-slate-50">
+            <span>
+              <span class="block font-extrabold text-slate-950">Performance analytics</span>
+              <span class="mt-1 block text-sm leading-6 text-slate-600">Helps measure landing page usage, search interactions and service discovery patterns.</span>
+            </span>
+            <input class="mt-1 h-5 w-5 accent-[var(--gov-red)]" type="checkbox" name="analytics" checked>
+          </label>
+
+          <label class="flex cursor-pointer items-start justify-between gap-4 rounded-md border border-slate-200 bg-white p-4 hover:bg-slate-50">
+            <span>
+              <span class="block font-extrabold text-slate-950">Preference cookies</span>
+              <span class="mt-1 block text-sm leading-6 text-slate-600">Remembers language, accessibility and display preferences for return visits.</span>
+            </span>
+            <input class="mt-1 h-5 w-5 accent-[var(--gov-red)]" type="checkbox" name="preferences" checked>
+          </label>
+
+          <div class="mt-2 grid gap-2 sm:grid-cols-3">
+            <button class="focus-ring rounded-sm border border-slate-400 px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-slate-900 hover:bg-slate-100" type="button" data-cookie-action="decline_optional">
+              Decline Optional
+            </button>
+            <button class="focus-ring rounded-sm border border-slate-400 px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-slate-900 hover:bg-slate-100" type="submit">
+              Save Choices
+            </button>
+            <button class="focus-ring rounded-sm bg-[var(--gov-red)] px-4 py-3 text-xs font-extrabold uppercase tracking-wide text-white hover:bg-[#a01825]" type="button" data-cookie-action="accept_all">
+              Accept All
+            </button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const menuToggle = document.querySelector('[data-menu-toggle]');
+        const mobileMenu = document.querySelector('[data-mobile-menu]');
+        const calendarToggle = document.querySelector('[data-calendar-toggle]');
+        const calendarPanel = document.querySelector('[data-calendar-panel]');
+        const calendarDate = document.querySelector('[data-calendar-date]');
+        const languageSelect = document.querySelector('[data-language-select]');
+
+        if (calendarDate) {
+          calendarDate.textContent = new Intl.DateTimeFormat('en-IN', {
+            weekday: 'long',
+            day: 'numeric',
+            month: 'long',
+            year: 'numeric'
+          }).format(new Date());
+        }
+
+        const closeMenu = () => {
+          if (!menuToggle || !mobileMenu) return;
+          mobileMenu.classList.add('hidden');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        };
+
+        menuToggle?.addEventListener('click', () => {
+          if (!mobileMenu) return;
+          const isOpen = !mobileMenu.classList.contains('hidden');
+          mobileMenu.classList.toggle('hidden', isOpen);
+          menuToggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        mobileMenu?.querySelectorAll('a').forEach((link) => {
+          link.addEventListener('click', closeMenu);
+        });
+
+        calendarToggle?.addEventListener('click', () => {
+          if (!calendarPanel) return;
+          const isOpen = !calendarPanel.classList.contains('hidden');
+          calendarPanel.classList.toggle('hidden', isOpen);
+          calendarToggle.setAttribute('aria-expanded', String(!isOpen));
+        });
+
+        document.querySelector('[data-share-page]')?.addEventListener('click', async () => {
+          const shareData = {
+            title: document.title,
+            text: 'UdyogSetu 360 - Karnataka interoperability platform',
+            url: window.location.href
+          };
+
+          try {
+            if (navigator.share) {
+              await navigator.share(shareData);
+              return;
+            }
+
+            await navigator.clipboard?.writeText(window.location.href);
+            window.alert('Page link copied.');
+          } catch (_error) {}
+        });
+
+        languageSelect?.addEventListener('change', () => {
+          languageSelect.form?.submit();
+        });
+
+        document.querySelectorAll('[data-card-href]').forEach((card) => {
+          const openCard = () => {
+            window.location.href = card.dataset.cardHref;
+          };
+
+          card.addEventListener('click', (event) => {
+            if (event.target.closest('a, button, input, select, textarea')) return;
+            openCard();
+          });
+
+          card.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+              event.preventDefault();
+              openCard();
+            }
+          });
+        });
+
+        document.addEventListener('click', (event) => {
+          if (mobileMenu && menuToggle && !mobileMenu.contains(event.target) && !menuToggle.contains(event.target)) {
+            closeMenu();
+          }
+          if (calendarPanel && calendarToggle && !calendarPanel.contains(event.target) && !calendarToggle.contains(event.target)) {
+            calendarPanel.classList.add('hidden');
+            calendarToggle.setAttribute('aria-expanded', 'false');
+          }
+        });
+
+        const banner = document.querySelector('[data-cookie-banner]');
+        const modal = document.querySelector('[data-cookie-modal]');
+        const customizeForm = document.querySelector('[data-cookie-customize-form]');
+        const status = document.querySelector('[data-cookie-status]');
+
+        if (!banner) return;
+
+        const setStatus = (message) => {
+          if (!status) return;
+          status.textContent = message;
+          status.classList.toggle('hidden', !message);
+        };
+
+        const setBusy = (isBusy) => {
+          document.querySelectorAll('[data-cookie-action], [data-cookie-open-customize], [data-cookie-close-customize], [data-cookie-customize-form] button').forEach((button) => {
+            button.disabled = isBusy;
+            button.classList.toggle('opacity-60', isBusy);
+            button.classList.toggle('cursor-not-allowed', isBusy);
+          });
+        };
+
+        const closeModal = () => {
+          if (!modal) return;
+          modal.classList.add('hidden');
+          modal.classList.remove('flex');
+          document.body.classList.remove('overflow-hidden');
+        };
+
+        const hideBanner = () => {
+          banner.classList.add('hidden');
+          document.body.classList.remove('pb-48', 'md:pb-28');
+          closeModal();
+        };
+
+        const saveConsent = async (payload) => {
+          setBusy(true);
+          setStatus('');
+
+          try {
+            const response = await fetch('/cookies/consent', {
+              method: 'POST',
+              headers: {
+                Accept: 'application/json',
+                'Content-Type': 'application/json'
+              },
+              credentials: 'same-origin',
+              body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) throw new Error('Cookie preference could not be saved.');
+
+            hideBanner();
+          } catch (_error) {
+            setStatus('We could not save your cookie preference. Please try again.');
+          } finally {
+            setBusy(false);
+          }
+        };
+
+        document.querySelectorAll('[data-cookie-action]').forEach((button) => {
+          button.addEventListener('click', () => {
+            saveConsent({ action: button.dataset.cookieAction });
+          });
+        });
+
+        document.querySelector('[data-cookie-open-customize]')?.addEventListener('click', () => {
+          if (!modal) return;
+          modal.classList.remove('hidden');
+          modal.classList.add('flex');
+          document.body.classList.add('overflow-hidden');
+          modal.querySelector('input[name="analytics"]')?.focus();
+        });
+
+        document.querySelector('[data-cookie-close-customize]')?.addEventListener('click', closeModal);
+
+        modal?.addEventListener('click', (event) => {
+          if (event.target === modal) closeModal();
+        });
+
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') closeModal();
+        });
+
+        customizeForm?.addEventListener('submit', (event) => {
+          event.preventDefault();
+          const formData = new FormData(customizeForm);
+
+          saveConsent({
+            action: 'customize',
+            categories: {
+              analytics: formData.has('analytics'),
+              preferences: formData.has('preferences')
+            }
+          });
+        });
+      });
+    </script>
+    <script src="/js/accessibility.js" defer></script>
+  </body>
+</html>

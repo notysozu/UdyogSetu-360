@@ -1,0 +1,15 @@
+<table>
+  <caption>Queue backlog</caption>
+  <thead><tr><th>Queue</th><th>Ready</th><th>Unacked</th><th>Consumers</th><th>Dead-letter</th></tr></thead>
+  <tbody>
+    <% (queues || []).forEach(function(queue) { %>
+      <tr>
+        <td><%= queue.queueName %></td>
+        <td><%= queue.readyMessages %></td>
+        <td><%= queue.unackedMessages %></td>
+        <td><%= queue.consumers %></td>
+        <td><%= queue.deadLetterCount %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

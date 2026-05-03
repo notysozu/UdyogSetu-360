@@ -1,0 +1,6 @@
+<a class="notification-bell" href="/notifications" aria-label="Open notifications">
+  Notifications
+  <% if (typeof unreadCount === 'number' && unreadCount > 0) { %>
+    <span class="badge" aria-live="polite"><%= unreadCount %></span>
+  <% } %>
+</a>

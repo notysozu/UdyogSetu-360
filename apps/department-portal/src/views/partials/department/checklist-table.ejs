@@ -1,0 +1,17 @@
+<div class="table-wrap">
+  <table>
+    <caption>Scrutiny checklist</caption>
+    <thead><tr><th>Item</th><th>Required</th><th>Status</th><th>Remarks</th><th>Reviewed at</th></tr></thead>
+    <tbody>
+      <% (task.checklist || []).forEach(function(item) { %>
+        <tr>
+          <td><%= item.label %></td>
+          <td><%= item.required ? 'Yes' : 'No' %></td>
+          <td><%= item.status %></td>
+          <td><%= item.remarks || '—' %></td>
+          <td><%= view.formatDateTime(item.reviewedAt, currentLocale) %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,23 @@
+# Document Subsystem Checklist
+
+- [x] Document model created
+- [x] Access log model created
+- [x] DigiLocker consent model created
+- [x] DigiLocker reconciliation model created
+- [x] S3 storage provider created
+- [x] Local fallback provider created
+- [x] Upload route works
+- [x] Signed upload route works
+- [x] Signed download route works
+- [x] Hashing works
+- [x] Versioning works
+- [x] Tags work
+- [x] Permissions work
+- [x] Certificate storage works
+- [x] Public verification works
+- [x] Scanning hooks exist
+- [x] DigiLocker mock consent works
+- [x] DigiLocker import works
+- [x] Events and audit stubs exist
+- [x] Tests added
+- [x] Existing app not broken

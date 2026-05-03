@@ -1,0 +1,9 @@
+<section class="card">
+  <h2>Audit Integrity Check</h2>
+  <form method="post" action="/admin/audit/integrity/verify">
+    <button type="submit">Verify Hash Chain</button>
+  </form>
+  <% if (result) { %>
+    <%- include('../partials/audit/hash-chain-status', { result: result }) %>
+  <% } %>
+</section>

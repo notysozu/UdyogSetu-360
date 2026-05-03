@@ -1,0 +1,36 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Amendment</p>
+    <h1>Request or Apply Amendment</h1>
+    <p>Update the current CAF data with a recorded amendment reason. This flow is audit-tracked.</p>
+  </div>
+</section>
+
+<% if (Object.keys(errors || {}).length) { %>
+  <section class="card flash flash-error">
+    <ul>
+      <% Object.entries(errors).forEach(function(entry) { %>
+        <% entry[1].forEach(function(message) { %><li><%= message %></li><% }) %>
+      <% }) %>
+    </ul>
+  </section>
+<% } %>
+
+<form class="stack" method="post" action="/cases/<%= caseDoc.caseId %>/amend">
+  <section class="card">
+    <label>Amendment reason
+      <textarea name="reason" rows="4" required><%= formData.reason || '' %></textarea>
+    </label>
+  </section>
+
+  <% const fieldError = function () { return null; }; %>
+  <%- include('../../partials/caf/enterprise-section', { formData, errors: {}, fieldError }) %>
+  <%- include('../../partials/caf/project-section', { formData, errors: {}, fieldError }) %>
+
+  <section class="card">
+    <div class="button-row">
+      <a class="button button-muted" href="/cases/<%= caseDoc.caseId %>">Cancel</a>
+      <button class="button" type="submit">Apply Amendment</button>
+    </div>
+  </section>
+</form>

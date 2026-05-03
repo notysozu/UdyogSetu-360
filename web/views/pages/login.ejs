@@ -1,0 +1,23 @@
+<section class="auth-panel">
+  <div>
+    <p class="eyebrow">Secure access</p>
+    <h1>Sign in to UdyogSetu 360</h1>
+  </div>
+  <form class="card form-card" method="post" action="/auth/login">
+    <p class="form-helper">Required fields are marked in text and support keyboard submission.</p>
+    <% if (typeof next !== 'undefined' && next) { %>
+      <input type="hidden" name="next" value="<%= next %>">
+    <% } %>
+    <label>Email
+      <input name="email" type="email" autocomplete="email" placeholder="investor@udyogsetu.local" value="<%= values?.email || '' %>" required aria-describedby="login-email-help">
+    </label>
+    <span id="login-email-help" class="field-help">Use your registered UdyogSetu 360 email address.</span>
+    <label>Password
+      <input name="password" type="password" autocomplete="current-password" placeholder="password123" required aria-describedby="login-password-help">
+    </label>
+    <span id="login-password-help" class="field-help">Enter the password associated with your account.</span>
+    <button class="button" type="submit">Sign in</button>
+    <p>New investor? <a href="/auth/register">Create an account</a></p>
+    <p><a href="/auth/forgot-password">Forgot password?</a></p>
+  </form>
+</section>

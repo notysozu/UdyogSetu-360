@@ -1,0 +1,8 @@
+<section class="card">
+  <h2>Renew certificate</h2>
+  <p>Certificate: <%= certificate?.certificateNumber || 'Not available' %></p>
+  <form method="post" action="/certificates/<%= certificate?._id || certificate?.certificateNumber || '' %>/renew">
+    <div class="form-field"><label for="remarks">Remarks</label><textarea id="remarks" name="remarks" rows="4"></textarea></div>
+    <button class="button" type="submit">Submit renewal request</button>
+  </form>
+</section>

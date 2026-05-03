@@ -1,0 +1,50 @@
+<section class="page-header acknowledgement-print">
+  <div>
+    <p class="eyebrow">Submission Receipt</p>
+    <h1>CAF Acknowledgement</h1>
+    <p>Your Combined Application Form has been received and routed for departmental scrutiny.</p>
+  </div>
+</section>
+
+<section class="grid-2">
+  <article class="card">
+    <h2>Receipt Details</h2>
+    <p><strong>Universal Case ID:</strong> <%= acknowledgement.universalCaseId %></p>
+    <p><strong>Acknowledgement Number:</strong> <%= acknowledgement.acknowledgementNumber %></p>
+    <p><strong>Submitted At:</strong> <%= new Date(acknowledgement.submittedAt).toLocaleString() %></p>
+    <p><strong>Status:</strong> <%= caseDoc.status %></p>
+    <p><strong>Checksum:</strong> <%= acknowledgement.checksum %></p>
+  </article>
+  <article class="card">
+    <h2>Applicant Snapshot</h2>
+    <p><strong>Applicant:</strong> <%= acknowledgement.applicantName %></p>
+    <p><strong>Organisation:</strong> <%= acknowledgement.organisationName %></p>
+    <p><strong>Project:</strong> <%= acknowledgement.projectName %></p>
+    <p><strong>Attachments received:</strong> <%= acknowledgement.attachmentCount %></p>
+    <p><strong>Tasks created:</strong> <%= acknowledgement.taskCount %></p>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Departments Involved</h2>
+  <ul>
+    <% acknowledgement.requiredDepartments.forEach(function(item) { %>
+      <li><strong><%= item.departmentCode %>:</strong> <%= item.reason %></li>
+    <% }) %>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Next Steps</h2>
+  <p><%= acknowledgement.verificationNote %></p>
+  <ul>
+    <li>Track your case status from the investor dashboard.</li>
+    <li>Respond promptly if any department raises a query.</li>
+    <li>Keep attachment references available for future verification.</li>
+  </ul>
+  <div class="button-row no-print">
+    <button class="button button-muted" type="button" onclick="window.print()">Print Receipt</button>
+    <a class="button" href="/cases/<%= caseDoc.caseId %>">View Case Timeline</a>
+    <a class="button button-muted" href="/dashboard">Back to Dashboard</a>
+  </div>
+</section>

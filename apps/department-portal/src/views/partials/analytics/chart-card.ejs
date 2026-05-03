@@ -1,0 +1,5 @@
+<section class="analytics-chart-card">
+  <h3><%= title %></h3>
+  <p>Chart view is optional. Table fallback is shown below for accessibility.</p>
+  <%- include('./table-card', { title, caption: title, headers, rows }) %>
+</section>

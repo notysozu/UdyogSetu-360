@@ -1,0 +1,25 @@
+<section class="card">
+  <h2>Operations Console</h2>
+  <p>Overall health summary</p>
+  <ul>
+    <% Object.entries(health || {}).forEach(function(item) { %>
+      <li><strong><%= item[0] %>:</strong> <%= item[1] %></li>
+    <% }) %>
+  </ul>
+</section>
+<section class="card">
+  <h3>Queue Backlog</h3>
+  <%- include('../partials/operations/queue-card', { queues: queues.queues || [] }) %>
+</section>
+<section class="card">
+  <h3>Slow Consumers</h3>
+  <%- include('../partials/operations/consumer-status-card', { consumers: consumers.consumers || [] }) %>
+</section>
+<section class="card">
+  <h3>Recent Stuck Cases</h3>
+  <%- include('../partials/operations/stuck-case-row', { items: stuck.items || [] }) %>
+</section>
+<section class="card">
+  <h3>Recent Replay Attempts</h3>
+  <%- include('../partials/operations/replay-attempt-row', { items: replay.items || [] }) %>
+</section>

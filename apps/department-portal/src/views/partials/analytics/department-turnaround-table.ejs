@@ -1,0 +1,29 @@
+<div class="table-scroll">
+  <table>
+    <caption>Department turnaround comparison</caption>
+    <thead>
+      <tr>
+        <th scope="col">Department</th>
+        <th scope="col">Total</th>
+        <th scope="col">Completed</th>
+        <th scope="col">Pending</th>
+        <th scope="col">Avg Hours</th>
+        <th scope="col">Median Hours</th>
+        <th scope="col">SLA Compliance %</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% (rows || []).forEach(function(row){ %>
+        <tr>
+          <td><%= row.departmentCode %></td>
+          <td><%= row.totalTasks %></td>
+          <td><%= row.completedTasks %></td>
+          <td><%= row.pendingTasks %></td>
+          <td><%= row.averageTurnaroundHours %></td>
+          <td><%= row.medianTurnaroundHours %></td>
+          <td><%= row.slaComplianceRate %></td>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

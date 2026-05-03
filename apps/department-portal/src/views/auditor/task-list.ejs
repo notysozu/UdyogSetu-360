@@ -1,0 +1,1 @@
+<section class="card"><h2>Audit task list</h2><% tasks.forEach(function(task) { %><%- include('../partials/department/task-card', { task: task, href: '/audit/tasks/' + task._id }) %><% }) %></section>

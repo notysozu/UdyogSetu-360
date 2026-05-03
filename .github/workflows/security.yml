@@ -1,0 +1,24 @@
+name: Security
+
+on:
+  pull_request:
+  schedule:
+    - cron: '0 2 * * 1'
+
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+      - run: npm ci
+      - run: npm audit --audit-level=high
+      - name: Secret scanning placeholder
+        run: git grep -n "replace-me\\|dev-ai-service-key\\|dev-ai-advisory-key" -- . ':!*.md' ':!.env.example' || true
+      - name: Dockerfile scanning placeholder
+        run: find . -name Dockerfile -print
+      - name: License check placeholder
+        run: npm ls --workspaces --if-present --depth=0 || true

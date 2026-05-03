@@ -1,0 +1,53 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Universal Case ID</p>
+    <h1><%= caseDoc.universalCaseId || caseDoc.caseId %></h1>
+    <p><%= caseDoc.cafData?.enterprise?.legalName || caseDoc.enterprise.name %> · <%= caseDoc.cafData?.project?.projectDistrict || caseDoc.enterprise.district %></p>
+  </div>
+  <%- include('../partials/statusBadge', { status: caseDoc.status }) %>
+</section>
+
+<section class="grid-2">
+  <article class="card">
+    <h2>Approval tasks</h2>
+    <% const taskItems = (typeof tasks !== 'undefined' && tasks.length) ? tasks : caseDoc.approvals; %>
+    <% taskItems.forEach((approval) => { %>
+      <div class="task-row">
+        <div>
+          <strong><%= approval.department?.name || approval.departmentCode || 'Department task' %></strong>
+          <p>SLA due: <%= (approval.slaDueAt || approval.dueAt) ? new Date(approval.slaDueAt || approval.dueAt).toDateString() : 'Not set' %></p>
+        </div>
+        <%- include('../partials/statusBadge', { status: approval.status }) %>
+      </div>
+    <% }) %>
+  </article>
+
+  <article class="card">
+    <h2>AI route summary</h2>
+    <p><%= caseDoc.ai?.summary || 'No AI summary available.' %></p>
+    <p>Confidence: <strong><%= Math.round((caseDoc.ai?.routeConfidence || 0) * 100) %>%</strong></p>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Raise grievance</h2>
+  <form method="post" action="/cases/<%= caseDoc.caseId %>/grievances" class="compact-form">
+    <input name="subject" placeholder="Subject" required>
+    <textarea name="message" placeholder="Describe the issue" required></textarea>
+    <button class="button" type="submit">Attach grievance to timeline</button>
+  </form>
+</section>
+
+<section class="grid-2">
+  <article class="card">
+    <h2>Grievances</h2>
+    <% if (!grievances.length) { %><p>No grievances for this case.</p><% } %>
+    <% grievances.forEach((g) => { %>
+      <div class="notice-row"><strong><%= g.subject %></strong><p><%= g.message %></p><%- include('../partials/statusBadge', { status: g.status }) %></div>
+    <% }) %>
+  </article>
+  <article class="card">
+    <h2>Event timeline</h2>
+    <%- include('../partials/timeline', { events }) %>
+  </article>
+</section>

@@ -1,0 +1,23 @@
+# API Gateway Checklist
+
+- [x] `GET /health` works
+- [x] `GET /ready` works
+- [x] `GET /api/health` works
+- [x] `GET /api/v1/health` works
+- [x] `GET /api/v1/ready` works
+- [x] `GET /api/v1/openapi.json` works
+- [x] `GET /api/v1/docs` works
+- [x] `/api/v1` prefix is mounted
+- [x] legacy aliases exist with deprecation headers
+- [x] standard response envelope helpers exist
+- [x] correlation ID is generated and propagated
+- [x] request ID is generated and returned
+- [x] validation middleware exists for body, params, query, and headers
+- [x] rate limiting middleware exists
+- [x] idempotency-key middleware exists for unsafe routes
+- [x] webhook verification middleware exists
+- [x] controller stubs exist for cases, tasks, documents, events, certificates, grievances, and dashboards
+- [x] central not-found middleware exists
+- [x] central error middleware exists
+- [x] OpenAPI 3.1 base document is generated
+- [x] EJS routes in `web/` remain untouched by the gateway app

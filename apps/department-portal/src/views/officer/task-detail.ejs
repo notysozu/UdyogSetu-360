@@ -1,0 +1,30 @@
+<%- include('../partials/department/breadcrumbs', { items: [{ label: 'Task Inbox', href: '/department/tasks' }, { label: task.universalCaseId }, { label: task.title }] }) %>
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2><%= task.title %></h2>
+      <p><strong>Case:</strong> <%= task.universalCaseId %></p>
+    </div>
+    <%- include('../partials/department/status-badge', { status: task.status }) %>
+  </div>
+  <%- include('../partials/department/sla-countdown', { sla: sla }) %>
+</section>
+<section class="card">
+  <h2>Checklist-based scrutiny</h2>
+  <%- include('../partials/department/checklist-table', { task: task }) %>
+</section>
+<section class="card">
+  <h2>Documents</h2>
+  <% documents.forEach(function(document) { %>
+    <%- include('../partials/department/document-review-card', { task: task, document: document }) %>
+  <% }) %>
+</section>
+<section class="card">
+  <h2>Timeline</h2>
+  <%- include('../partials/department/timeline', { timeline: timeline }) %>
+</section>
+<section class="card">
+  <h2>Comments</h2>
+  <%- include('../partials/department/comment-thread', { comments: comments }) %>
+</section>
+<%- include('../partials/department/action-panel', { task: task }) %>

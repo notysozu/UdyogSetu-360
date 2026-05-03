@@ -1,0 +1,12 @@
+services:
+  gateway:
+    environment:
+      NODE_ENV: development
+  case-service:
+    environment:
+      NODE_ENV: development
+  ai-service:
+    environment:
+      NODE_ENV: development
+      AI_SERVICE_MODEL_MODE: dummy
+      AI_ADVISORY_MODEL_MODE: dummy

@@ -1,0 +1,17 @@
+name: Deploy Staging
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-staging:
+    runs-on: ubuntu-latest
+    environment: staging
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build images
+        run: docker compose -f docker-compose.yml config
+      - name: Deploy staging placeholder
+        run: echo "Deploy to staging cluster using infra/k8s manifests or platform pipeline."
+      - name: Smoke tests
+        run: scripts/smoke-test.sh || true

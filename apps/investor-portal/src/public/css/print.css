@@ -1,0 +1,13 @@
+@media print {
+  .sidebar,
+  .topbar,
+  .footer,
+  .flash-stack,
+  .button,
+  .section-actions,
+  form { display: none !important; }
+  body { background: #fff; color: #000; font-size: 12pt; }
+  .portal-main, .card { padding: 0; box-shadow: none; border: 0; }
+  .print-header { display: block; margin-bottom: 1rem; border-bottom: 2px solid #000; }
+  .timeline-item, .task-card, .document-card { break-inside: avoid; }
+}

@@ -1,0 +1,14 @@
+sequenceDiagram
+  autonumber
+  participant Legacy as Legacy SWS Data
+  participant Import as Import Dry Run
+  participant Mapping as Department Mapping
+  participant Parallel as Parallel Run
+  participant Cutover as Controlled Cut-Over
+  participant Rollback as Rollback Path
+  Legacy->>Import: Export pilot records
+  Import->>Mapping: Validate IDs and references
+  Mapping->>Parallel: Run mock/sandbox sync
+  Parallel->>Cutover: Approve selected case set
+  Cutover->>Cutover: Enable adapters and jobs
+  Cutover-->>Rollback: Disable adapters and pause workers if needed

@@ -1,0 +1,8 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/approve">
+  <fieldset>
+    <legend>Approve task</legend>
+    <div class="form-field"><label for="decisionReason">Decision reason</label><textarea id="decisionReason" name="decisionReason" rows="3" required></textarea></div>
+    <div class="form-field"><label><input type="checkbox" name="certificateRequired" value="true"> Certificate required</label></div>
+    <button class="button" type="submit" data-confirm="Approve this task?">Approve</button>
+  </fieldset>
+</form>

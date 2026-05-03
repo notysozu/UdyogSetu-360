@@ -1,0 +1,22 @@
+<%- include('cases/caf-form', {
+  formData: typeof formData !== 'undefined' ? formData : {
+    enterprise: {},
+    project: {},
+    land: {},
+    environment: {},
+    power: {},
+    fire: {},
+    industrialSafety: {},
+    labour: {},
+    attachments: []
+  },
+  errors: typeof errors !== 'undefined' ? errors : {},
+  warnings: typeof warnings !== 'undefined' ? warnings : [],
+  caseDoc: typeof caseDoc !== 'undefined' ? caseDoc : null,
+  duplicateCheck: typeof duplicateCheck !== 'undefined' ? duplicateCheck : null,
+  generatedIdempotencyKey: typeof generatedIdempotencyKey !== 'undefined' ? generatedIdempotencyKey : null,
+  formAction: typeof formAction !== 'undefined' ? formAction : '/cases/draft',
+  submitAction: typeof submitAction !== 'undefined' ? submitAction : null,
+  validateAction: typeof validateAction !== 'undefined' ? validateAction : null,
+  saveMethodOverride: typeof saveMethodOverride !== 'undefined' ? saveMethodOverride : null
+}) %>

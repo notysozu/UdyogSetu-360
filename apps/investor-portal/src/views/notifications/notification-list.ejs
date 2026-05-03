@@ -1,0 +1,27 @@
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2>Notifications</h2>
+      <p>Review unread and recent activity.</p>
+    </div>
+    <form method="post" action="/notifications/mark-all-read">
+      <button class="button button--secondary" type="submit">Mark all read</button>
+    </form>
+  </div>
+  <% if (notifications.length) { %>
+    <ul class="notification-list">
+      <% notifications.forEach(function(notification) { %>
+        <li class="notification-item <%= notification.readAt ? '' : 'is-unread' %>">
+          <div>
+            <%- include('../partials/notifications/notification-item', { notification: notification }) %>
+          </div>
+          <form method="post" action="/notifications/<%= notification._id %>/read">
+            <button class="button button--secondary" type="submit">Mark read</button>
+          </form>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No notifications available.</p>
+  <% } %>
+</section>

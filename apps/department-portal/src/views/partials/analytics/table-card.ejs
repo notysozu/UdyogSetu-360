@@ -1,0 +1,24 @@
+<section class="analytics-table-card">
+  <h3><%= title %></h3>
+  <% if (!rows || !rows.length) { %>
+    <%- include('./no-data') %>
+  <% } else { %>
+    <div class="table-scroll">
+      <table>
+        <caption><%= caption || title %></caption>
+        <thead>
+          <tr>
+            <% headers.forEach(function(header){ %><th scope="col"><%= header %></th><% }) %>
+          </tr>
+        </thead>
+        <tbody>
+          <% rows.forEach(function(row){ %>
+            <tr>
+              <% row.forEach(function(cell){ %><td><%= cell %></td><% }) %>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } %>
+</section>

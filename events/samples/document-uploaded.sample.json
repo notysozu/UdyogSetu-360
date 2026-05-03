@@ -1,0 +1,32 @@
+{
+  "id": "33333333-3333-4333-8333-333333333333",
+  "source": "us360.case-service",
+  "specversion": "1.0",
+  "type": "document.uploaded.v1",
+  "subject": "document/US360-KA-2026-000001",
+  "time": "2026-05-02T00:02:00.000Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://udyogsetu360.local/schemas/document.uploaded.v1.json",
+  "correlationid": "corr-document-uploaded-001",
+  "causationid": null,
+  "traceparent": null,
+  "partitionkey": "US360-KA-2026-000001",
+  "data": {
+    "eventVersion": 1,
+    "aggregateType": "document",
+    "aggregateId": "68143f0d86e5ab0012345673",
+    "universalCaseId": "US360-KA-2026-000001",
+    "previousStatus": null,
+    "nextStatus": "uploaded",
+    "actor": {
+      "actorType": "user",
+      "actorId": "68143f0d86e5ab0012345601",
+      "role": "investor"
+    },
+    "payload": {
+      "documentType": "project_report",
+      "objectKey": "cases/US360-KA-2026-000001/project-report.pdf"
+    },
+    "metadata": {}
+  }
+}

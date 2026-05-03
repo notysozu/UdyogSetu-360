@@ -1,0 +1,74 @@
+<%- include('../partials/public/no-pii-notice') %>
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Public dashboard</p>
+    <h1>Transparency dashboard</h1>
+    <p>Aggregate, non-sensitive metrics about application movement, certificates, and grievances.</p>
+  </div>
+</section>
+<form method="get" action="/public/dashboard" class="filter-card" data-auto-submit-filter>
+  <div class="filter-grid">
+    <%- include('../partials/public/date-range-filter', { filters }) %>
+    <%- include('../partials/public/department-filter', { filters }) %>
+    <div class="filter-group">
+      <label for="stage">Stage</label>
+      <input id="stage" name="stage" value="<%= filters?.stage || '' %>">
+    </div>
+  </div>
+  <button class="button" type="submit">Apply filters</button>
+</form>
+<section class="metrics-grid">
+  <%- include('../partials/public/metric-card', { label: 'Applications received', value: view.formatNumber(bundle.overview.totalApplicationsReceived) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Submitted this month', value: view.formatNumber(bundle.overview.applicationsSubmittedThisMonth) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Active applications', value: view.formatNumber(bundle.overview.activeApplications) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Approved applications', value: view.formatNumber(bundle.overview.approvedApplications) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Rejected applications', value: view.formatNumber(bundle.overview.rejectedApplications) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Certificates issued', value: view.formatNumber(bundle.overview.certificatesIssued) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Grievances opened', value: view.formatNumber(bundle.overview.grievancesOpened) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Average turnaround', value: `${bundle.overview.averageTurnaroundDays} days` }) %>
+</section>
+<section class="content-grid">
+  <div>
+    <h2>Stage-wise counts</h2>
+    <%- include('../partials/public/public-table', {
+      caption: 'Application stages',
+      columns: [{ label: 'Stage', key: 'stage' }, { label: 'Count', render: (row) => view.formatNumber(row.count || row.applicationsHandled || 0) }],
+      rows: bundle.stageCounts
+    }) %>
+  </div>
+  <div>
+    <h2>Monthly application trend</h2>
+    <%- include('../partials/public/public-table', {
+      caption: 'Monthly applications received',
+      columns: [{ label: 'Month', render: (row) => view.formatDate(row.month) }, { label: 'Applications received', render: (row) => view.formatNumber(row.applicationsReceived) }],
+      rows: bundle.monthlyApplications
+    }) %>
+  </div>
+</section>
+<section class="content-grid">
+  <div>
+    <h2>Department turnaround</h2>
+    <%- include('../partials/public/public-table', {
+      caption: 'Department turnaround summary',
+      columns: [
+        { label: 'Department', render: (row) => view.departmentLabel(row.departmentCode) },
+        { label: 'Handled', render: (row) => view.formatNumber(row.applicationsHandled) },
+        { label: 'Approved', render: (row) => view.formatNumber(row.approvedCount) },
+        { label: 'Rejected', render: (row) => view.formatNumber(row.rejectedCount) },
+        { label: 'Average turnaround (days)', render: (row) => row.averageTurnaroundDays }
+      ],
+      rows: bundle.departmentTurnaround
+    }) %>
+  </div>
+  <div>
+    <h2>Approval rates</h2>
+    <%- include('../partials/public/public-table', {
+      caption: 'Approval rates by department',
+      columns: [
+        { label: 'Department', render: (row) => view.departmentLabel(row.departmentCode) },
+        { label: 'Approval rate', render: (row) => view.formatPercentage(row.approvalRate) }
+      ],
+      rows: bundle.approvalRates.departmentWise
+    }) %>
+  </div>
+</section>

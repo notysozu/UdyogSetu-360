@@ -1,0 +1,16 @@
+<section>
+  <h3>Messages</h3>
+  <% if (!messages || messages.length === 0) { %>
+    <p>No messages yet.</p>
+  <% } else { %>
+    <ul>
+      <% messages.forEach(function(message) { %>
+        <li>
+          <strong><%= message.visibility || 'message' %></strong>
+          <p><%= message.body %></p>
+          <small><%= new Date(message.createdAt || Date.now()).toLocaleString() %></small>
+        </li>
+      <% }) %>
+    </ul>
+  <% } %>
+</section>

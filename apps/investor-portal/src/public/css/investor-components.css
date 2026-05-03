@@ -1,0 +1,8 @@
+.breadcrumbs ol { list-style: none; display: flex; gap: .5rem; padding: 0; margin: 0 0 1rem; flex-wrap: wrap; }
+.breadcrumbs li::after { content: "/"; margin-left: .5rem; color: var(--muted); }
+.breadcrumbs li:last-child::after { content: ""; }
+.welcome-card { background: radial-gradient(circle at top right, #dbeafe 0%, #fffdf9 45%, #fffdf9 100%); }
+.response-card { padding: 1rem 0; border-bottom: 1px solid var(--border); }
+.print-header { display: none; }
+.language-switcher select { min-width: 9rem; }
+.empty-state { text-align: center; padding: 2rem 1rem; border: 2px dashed var(--border); border-radius: 1rem; }

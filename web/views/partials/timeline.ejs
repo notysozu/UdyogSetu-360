@@ -1,0 +1,14 @@
+<div class="timeline" role="list" aria-label="Event timeline">
+  <% events.forEach((event) => { %>
+    <article class="timeline-item" role="listitem">
+      <div class="timeline-dot" aria-hidden="true"></div>
+      <div>
+        <strong><%= event.type %></strong>
+        <p><%= event.actor?.name || event.source %> · <%= event.occurredAt.toLocaleString() %></p>
+        <% if (event.payload && Object.keys(event.payload).length) { %>
+          <pre><%= JSON.stringify(event.payload, null, 2) %></pre>
+        <% } %>
+      </div>
+    </article>
+  <% }) %>
+</div>

@@ -1,0 +1,22 @@
+<% const labour = formData.labour || {}; %>
+<fieldset class="card">
+  <legend>Labour Details</legend>
+  <div class="grid-2">
+    <label>Employee count <span class="required-text">Required on final submit</span>
+      <input name="labour[employeeCount]" type="number" min="0" value="<%= labour.employeeCount ?? '' %>">
+      <% if (fieldError('labour.employeeCount')) { %><span class="field-error"><%= fieldError('labour.employeeCount') %></span><% } %>
+    </label>
+    <label>Contract labour count
+      <input name="labour[contractLabourCount]" type="number" min="0" value="<%= labour.contractLabourCount ?? '' %>">
+    </label>
+    <label>Interstate migrant workers
+      <input name="labour[interstateMigrantWorkers]" type="checkbox" value="true" <%= labour.interstateMigrantWorkers ? 'checked' : '' %>>
+    </label>
+    <label>Shops and establishment required
+      <input name="labour[shopsEstablishmentRequired]" type="checkbox" value="true" <%= labour.shopsEstablishmentRequired ? 'checked' : '' %>>
+    </label>
+    <label>Labour registration required
+      <input name="labour[labourRegistrationRequired]" type="checkbox" value="true" <%= labour.labourRegistrationRequired ? 'checked' : '' %>>
+    </label>
+  </div>
+</fieldset>

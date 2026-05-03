@@ -1,0 +1,12 @@
+<section class="card">
+  <h2>Settings</h2>
+  <form method="post" action="/settings/notification-preferences">
+    <fieldset>
+      <legend>Notification preferences</legend>
+      <label><input type="checkbox" name="email" <%= settings?.notificationPreferences?.email ? 'checked' : '' %>> Email</label>
+      <label><input type="checkbox" name="sms" <%= settings?.notificationPreferences?.sms ? 'checked' : '' %>> SMS</label>
+      <label><input type="checkbox" name="inApp" <%= settings?.notificationPreferences?.inApp !== false ? 'checked' : '' %>> In-app</label>
+    </fieldset>
+    <button class="button" type="submit">Save settings</button>
+  </form>
+</section>

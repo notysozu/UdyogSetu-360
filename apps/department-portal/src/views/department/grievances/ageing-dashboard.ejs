@@ -1,0 +1,19 @@
+<section class="card">
+  <h2>Grievance Ageing Dashboard</h2>
+  <p><strong>Overdue:</strong> <%= grievance.overdueCount || 0 %></p>
+  <p><strong>Warning:</strong> <%= grievance.warningCount || 0 %></p>
+  <p><strong>Escalated:</strong> <%= grievance.escalatedCount || 0 %></p>
+</section>
+
+<section class="card">
+  <h3>Age Buckets</h3>
+  <table>
+    <caption>Open grievances by age bucket</caption>
+    <thead><tr><th>Bucket</th><th>Count</th></tr></thead>
+    <tbody>
+      <% Object.entries(grievance.ageBuckets || {}).forEach(function(row) { %>
+        <tr><td><%= row[0] %></td><td><%= row[1] %></td></tr>
+      <% }) %>
+    </tbody>
+  </table>
+</section>

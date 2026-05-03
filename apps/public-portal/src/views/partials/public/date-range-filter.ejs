@@ -1,0 +1,8 @@
+<div class="filter-group">
+  <label for="fromDate">From date</label>
+  <input id="fromDate" name="fromDate" type="date" value="<%= filters?.fromDate ? new Date(filters.fromDate).toISOString().slice(0, 10) : '' %>">
+</div>
+<div class="filter-group">
+  <label for="toDate">To date</label>
+  <input id="toDate" name="toDate" type="date" value="<%= filters?.toDate ? new Date(filters.toDate).toISOString().slice(0, 10) : '' %>">
+</div>

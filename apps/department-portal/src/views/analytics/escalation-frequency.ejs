@@ -1,0 +1,7 @@
+<section class="analytics-page">
+  <h1>Escalation Frequency</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.departmentCode, r.escalationType, r.escalationLevel, r.escalationCount, r.affectedCaseCount, r.resolutionRate]); %>
+  <%- include('../partials/analytics/table-card', { title: 'Escalations by Level', headers: ['Department', 'Type', 'Level', 'Count', 'Affected Cases', 'Resolution Rate'], rows }) %>
+  <%- include('../partials/analytics/export-button', { exportType: 'escalation_frequency' }) %>
+</section>

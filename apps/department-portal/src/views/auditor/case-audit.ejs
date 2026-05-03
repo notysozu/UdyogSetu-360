@@ -1,0 +1,1 @@
+<section class="card"><h2>Case audit trail</h2><p>Case: <%= data.caseDoc.universalCaseId %></p><% data.tasks.forEach(function(task) { %><%- include('../partials/department/task-card', { task: task, href: '/audit/tasks/' + task._id }) %><% }) %></section>

@@ -1,0 +1,13 @@
+<section class="stack">
+  <h1><%= document.title || document.documentType %></h1>
+  <p>Status: <strong><%= document.status %></strong></p>
+  <p>Type: <%= document.documentType %></p>
+  <p>Version: <%= document.version %></p>
+  <p>Verification: <%= document.verification?.status || 'not_required' %></p>
+  <p>Visibility: <%= document.visibility %></p>
+  <div class="stack">
+    <a href="/documents/<%= document._id %>/versions">View versions</a>
+    <a href="/api/v1/documents/<%= document._id %>/signed-download-url">Get signed download URL</a>
+    <a href="/api/v1/documents/<%= document._id %>/preview">Preview</a>
+  </div>
+</section>

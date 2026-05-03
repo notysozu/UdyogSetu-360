@@ -1,0 +1,21 @@
+<% const industrialSafety = formData.industrialSafety || {}; %>
+<fieldset class="card">
+  <legend>Industrial Safety Details</legend>
+  <div class="grid-2">
+    <label>Factory licence required
+      <input name="industrialSafety[factoryLicenseRequired]" type="checkbox" value="true" <%= industrialSafety.factoryLicenseRequired ? 'checked' : '' %>>
+    </label>
+    <label>Machinery installed
+      <input name="industrialSafety[machineryInstalled]" type="checkbox" value="true" <%= industrialSafety.machineryInstalled ? 'checked' : '' %>>
+    </label>
+    <label>Pressure vessels
+      <input name="industrialSafety[pressureVessels]" type="checkbox" value="true" <%= industrialSafety.pressureVessels ? 'checked' : '' %>>
+    </label>
+    <label>Boilers
+      <input name="industrialSafety[boilers]" type="checkbox" value="true" <%= industrialSafety.boilers ? 'checked' : '' %>>
+    </label>
+    <label>Worker safety plan available
+      <input name="industrialSafety[workerSafetyPlanAvailable]" type="checkbox" value="true" <%= industrialSafety.workerSafetyPlanAvailable ? 'checked' : '' %>>
+    </label>
+  </div>
+</fieldset>

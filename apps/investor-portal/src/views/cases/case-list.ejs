@@ -1,0 +1,39 @@
+<%- include('../partials/investor/breadcrumbs', { items: [{ label: t('myCases', 'My Cases') }] }) %>
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2>Case list</h2>
+      <p>Search and track applications across departments.</p>
+    </div>
+    <a class="button" href="/cases/new">Create new CAF</a>
+  </div>
+  <form class="filter-grid" method="get" action="/cases">
+    <div class="form-field"><label for="search">Search by case ID or project</label><input id="search" name="search" value="<%= filters.search || '' %>"></div>
+    <div class="form-field"><label for="status">Status</label><input id="status" name="status" value="<%= filters.status || '' %>"></div>
+    <div class="form-field"><button class="button" type="submit">Apply filters</button></div>
+  </form>
+</section>
+<section class="card">
+  <% if (cases.length) { %>
+    <div class="table-wrap">
+      <table>
+        <caption>Investor cases</caption>
+        <thead><tr><th>Case ID</th><th>Project</th><th>Status</th><th>Stage</th><th>Last updated</th><th>Action</th></tr></thead>
+        <tbody>
+          <% cases.forEach(function(item) { %>
+            <tr>
+              <td><%= item.universalCaseId || item.caseId %></td>
+              <td><%= item.title || item.projectName || 'Untitled project' %></td>
+              <td><%- include('../partials/investor/status-badge', { status: item.status }) %></td>
+              <td><%= item.currentStage || 'In progress' %></td>
+              <td><%= view.formatDate(item.lastActivityAt || item.updatedAt, currentLocale) %></td>
+              <td><a href="/cases/<%= item.caseId || item.universalCaseId %>">Open</a></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <%- include('../partials/investor/empty-state', { title: 'No cases found', message: 'Try adjusting the filters or create a new application.', href: '/cases/new', actionLabel: 'Start new CAF' }) %>
+  <% } %>
+</section>

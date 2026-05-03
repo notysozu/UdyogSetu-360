@@ -1,0 +1,36 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Helpdesk</p>
+    <h1>Submit a grievance</h1>
+    <p>Raise a service issue and optionally link it to a Universal Case ID.</p>
+  </div>
+</section>
+
+<form class="card form-grid" method="post" action="/grievances">
+  <p class="form-helper" style="grid-column: 1 / -1;">Describe the issue clearly. You can submit a general grievance or link it to one of your cases.</p>
+  <% if (errors && errors.length) { %>
+    <div class="alert alert-error" role="alert" aria-live="assertive">
+      <% errors.forEach((item) => { %>
+        <div><%= item %></div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <label>Link to case
+    <select name="caseId">
+      <option value="">No case selected</option>
+      <% cases.forEach((caseDoc) => { %>
+        <option value="<%= caseDoc.caseId %>" <%= values.caseId === caseDoc.caseId ? 'selected' : '' %>>
+          <%= caseDoc.caseId %> - <%= caseDoc.enterprise.name %>
+        </option>
+      <% }) %>
+    </select>
+  </label>
+  <label>Subject
+    <input name="subject" required value="<%= values.subject || '' %>" placeholder="Delay in department update">
+  </label>
+  <label style="grid-column: 1 / -1;">Message
+    <textarea name="message" required placeholder="Describe the issue clearly"><%= values.message || '' %></textarea>
+  </label>
+  <button class="button" type="submit">Submit Grievance</button>
+</form>

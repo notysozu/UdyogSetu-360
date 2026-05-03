@@ -1,0 +1,19 @@
+sequenceDiagram
+  autonumber
+  participant Dept as Department System
+  participant N8N as n8n/Webhook
+  participant Gateway
+  participant Adapter as Adapter Runtime
+  participant Orch as Orchestration
+  participant Case as Case Service
+  participant Audit as Audit Service
+  participant Kafka
+  Dept->>N8N: Status callback
+  N8N->>Gateway: Forward signed payload
+  Gateway->>Adapter: Verify and normalise
+  Adapter->>Orch: Request task transition
+  Orch->>Case: Load case/task context
+  Orch->>Audit: Record callback transition
+  Orch->>Kafka: Publish task/case event
+  Orch-->>Gateway: Accepted
+  Gateway-->>N8N: 200 OK

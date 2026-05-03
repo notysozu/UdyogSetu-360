@@ -1,0 +1,9 @@
+<div class="filter-group">
+  <label for="departmentCode">Department</label>
+  <select id="departmentCode" name="departmentCode">
+    <option value="">All departments</option>
+    <% ['pollution', 'power', 'fire', 'industrial_safety', 'labour'].forEach((code) => { %>
+      <option value="<%= code %>" <%= filters?.departmentCode === code ? 'selected' : '' %>><%= view.departmentLabel(code) %></option>
+    <% }) %>
+  </select>
+</div>

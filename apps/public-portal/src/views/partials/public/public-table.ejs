@@ -1,0 +1,21 @@
+<div class="table-wrap">
+  <table>
+    <caption><%= caption %></caption>
+    <thead>
+      <tr>
+        <% columns.forEach((column) => { %>
+          <th scope="col"><%= column.label %></th>
+        <% }) %>
+      </tr>
+    </thead>
+    <tbody>
+      <% rows.forEach((row) => { %>
+        <tr>
+          <% columns.forEach((column) => { %>
+            <td><%= typeof column.render === 'function' ? column.render(row) : row[column.key] %></td>
+          <% }) %>
+        </tr>
+      <% }) %>
+    </tbody>
+  </table>
+</div>

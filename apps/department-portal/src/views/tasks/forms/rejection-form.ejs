@@ -1,0 +1,8 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/reject">
+  <fieldset>
+    <legend>Reject task</legend>
+    <div class="form-field"><label for="rejectionReason">Rejection reason</label><textarea id="rejectionReason" name="rejectionReason" rows="3" required></textarea></div>
+    <div class="form-field"><label for="rejectionCategory">Category</label><input id="rejectionCategory" name="rejectionCategory"></div>
+    <button class="button button--secondary" type="submit" data-confirm="Reject this task?">Reject</button>
+  </fieldset>
+</form>

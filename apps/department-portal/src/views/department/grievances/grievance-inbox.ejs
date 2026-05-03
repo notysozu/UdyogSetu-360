@@ -1,0 +1,24 @@
+<section class="card">
+  <h2>Department Grievance Inbox</h2>
+  <% if (!grievances || grievances.length === 0) { %>
+    <p>No grievances in the selected filters.</p>
+  <% } else { %>
+    <table>
+      <caption>Grievances assigned to your scope</caption>
+      <thead>
+        <tr><th>Number</th><th>Subject</th><th>Status</th><th>Priority</th><th>Due</th></tr>
+      </thead>
+      <tbody>
+      <% grievances.forEach(function(g) { %>
+        <tr>
+          <td><a href="/department/grievances/<%= g._id %>"><%= g.grievanceNumber %></a></td>
+          <td><%= g.subject %></td>
+          <td><span class="status-badge status-badge--<%= g.status %>"><%= g.status %></span></td>
+          <td><%= g.priority %></td>
+          <td><%= g.dueAt ? new Date(g.dueAt).toLocaleString() : '-' %></td>
+        </tr>
+      <% }) %>
+      </tbody>
+    </table>
+  <% } %>
+</section>

@@ -1,0 +1,9 @@
+<div class="timeline">
+  <% (timeline || []).forEach(function(item) { %>
+    <article class="timeline-item">
+      <p class="timeline-item__meta"><%= view.formatDateTime(item.occurredAt || item.createdAt, currentLocale) %></p>
+      <h3><%= item.payload?.title || view.statusLabel(item.type) %></h3>
+      <p><%= item.payload?.description || item.payload?.message || 'Workflow event recorded.' %></p>
+    </article>
+  <% }) %>
+</div>

@@ -1,0 +1,7 @@
+<section class="stack printable">
+  <h1>Certificate Detail</h1>
+  <p>Certificate Number: <strong><%= certificate.certificate?.certificateNumber %></strong></p>
+  <p>Status: <strong><%= certificate.status %></strong></p>
+  <p>Issued At: <%= certificate.certificate?.issuedAt ? new Date(certificate.certificate.issuedAt).toLocaleString() : 'N/A' %></p>
+  <p>Valid Until: <%= certificate.certificate?.validUntil ? new Date(certificate.certificate.validUntil).toLocaleDateString() : 'Open-ended' %></p>
+</section>

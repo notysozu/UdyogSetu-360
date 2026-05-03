@@ -1,0 +1,24 @@
+<% const land = formData.land || {}; %>
+<fieldset class="card">
+  <legend>Land and Building Details</legend>
+  <div class="grid-2">
+    <label>Land ownership type
+      <input name="land[landOwnershipType]" value="<%= land.landOwnershipType || '' %>">
+    </label>
+    <label>Survey number
+      <input name="land[landSurveyNumber]" value="<%= land.landSurveyNumber || '' %>">
+    </label>
+    <label>Land use type
+      <input name="land[landUseType]" value="<%= land.landUseType || '' %>">
+    </label>
+    <label>Zoning status
+      <input name="land[zoningStatus]" value="<%= land.zoningStatus || '' %>">
+    </label>
+    <label>Building plan available
+      <input name="land[buildingPlanAvailable]" type="checkbox" value="true" <%= land.buildingPlanAvailable ? 'checked' : '' %>>
+    </label>
+    <label>Occupancy certificate available
+      <input name="land[occupancyCertificateAvailable]" type="checkbox" value="true" <%= land.occupancyCertificateAvailable ? 'checked' : '' %>>
+    </label>
+  </div>
+</fieldset>

@@ -1,0 +1,48 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Duplicate Detection</p>
+    <h1>Potential Duplicate Application</h1>
+    <p>We found an existing application that appears similar to this CAF.</p>
+  </div>
+</section>
+
+<section class="card flash flash-warning">
+  <h2>Detection Summary</h2>
+  <p><strong>Confidence:</strong> <%= duplicateCheck.confidence %>%</p>
+  <p><strong>Blocking:</strong> <%= duplicateCheck.blocking ? 'Yes' : 'No' %></p>
+  <ul>
+    <% (duplicateCheck.reasons || []).forEach(function(reason) { %>
+      <li><%= reason %></li>
+    <% }) %>
+  </ul>
+</section>
+
+<section class="card">
+  <h2>Matched Cases</h2>
+  <ul>
+    <% (duplicateCheck.matchedCases || []).forEach(function(item) { %>
+      <li>
+        <strong><%= item.universalCaseId || item.caseId %></strong>
+        <% if (item.reason) { %> - <%= item.reason %><% } %>
+      </li>
+    <% }) %>
+  </ul>
+</section>
+
+<% if (!duplicateCheck.blocking && caseDoc) { %>
+  <form class="card" method="post" action="/cases/<%= caseDoc.caseId %>/submit">
+    <input type="hidden" name="duplicateOverrideConfirmed" value="true">
+    <input type="hidden" name="idempotencyKey" value="<%= generatedIdempotencyKey %>">
+    <label>Override reason
+      <textarea name="duplicateOverrideReason" rows="3" required></textarea>
+    </label>
+    <div class="button-row">
+      <a class="button button-muted" href="/cases/<%= caseDoc.caseId %>/edit">Return to draft</a>
+      <button class="button" type="submit">Submit with Override</button>
+    </div>
+  </form>
+<% } else if (caseDoc) { %>
+  <div class="button-row">
+    <a class="button button-muted" href="/cases/<%= caseDoc.caseId %>/edit">Return to draft</a>
+  </div>
+<% } %>

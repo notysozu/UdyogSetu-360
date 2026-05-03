@@ -1,0 +1,15 @@
+<nav id="investor-sidebar" class="sidebar" aria-label="Investor navigation">
+  <ul class="sidebar__list">
+    <li><a href="/dashboard" class="<%= currentPath === '/dashboard' ? 'is-active' : '' %>"><%= t('dashboard', 'Dashboard') %></a></li>
+    <li><a href="/cases"><%= t('myCases', 'My Cases') %></a></li>
+    <li><a href="/documents"><%= t('documents', 'Documents') %></a></li>
+    <li><a href="/queries">Queries</a></li>
+    <li><a href="/fees">Fees</a></li>
+    <li><a href="/certificates"><%= t('certificates', 'Certificates') %></a></li>
+    <li><a href="/renewals"><%= t('renewals', 'Renewals') %></a></li>
+    <li><a href="/notifications"><%= t('notifications', 'Notifications') %></a></li>
+    <li><a href="/grievances"><%= t('grievances', 'Grievances') %></a></li>
+    <li><a href="/profile"><%= t('profile', 'Profile') %></a></li>
+    <li><a href="/settings"><%= t('settings', 'Settings') %></a></li>
+  </ul>
+</nav>

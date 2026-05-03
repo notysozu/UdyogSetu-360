@@ -1,0 +1,16 @@
+<%- include('../partials/public/no-pii-notice') %>
+<section class="page-header"><div><p class="eyebrow">Certificates</p><h1>Certificate issuance metrics</h1></div></section>
+<section class="metrics-grid">
+  <%- include('../partials/public/metric-card', { label: 'Issued total', value: view.formatNumber(bundle.certificateMetrics.totalIssued) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Active', value: view.formatNumber(bundle.certificateMetrics.activeCount) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Expired', value: view.formatNumber(bundle.certificateMetrics.expiredCount) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Revoked', value: view.formatNumber(bundle.certificateMetrics.revokedCount) }) %>
+</section>
+<%- include('../partials/public/public-table', {
+  caption: 'Certificates issued by department',
+  columns: [
+    { label: 'Department', render: (row) => view.departmentLabel(row.departmentCode) },
+    { label: 'Certificates issued', render: (row) => view.formatNumber(row.certificatesIssued) }
+  ],
+  rows: bundle.certificateMetrics.byDepartment
+}) %>

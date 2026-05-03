@@ -1,0 +1,12 @@
+<%- include('../partials/public/no-pii-notice') %>
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Third-party verification</p>
+    <h1>Verify a certificate or approval</h1>
+    <p>Use the verification token, or combine the certificate/reference number with a Universal Case ID or checksum.</p>
+  </div>
+</section>
+<%- include('../partials/public/verification-form', { values }) %>
+<% if (result && result.status === 'invalid') { %>
+  <section class="notice-card" aria-live="polite"><p><%= result.publicMessage %></p></section>
+<% } %>

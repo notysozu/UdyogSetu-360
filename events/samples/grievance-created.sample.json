@@ -1,0 +1,31 @@
+{
+  "id": "44444444-4444-4444-8444-444444444444",
+  "source": "us360.case-service",
+  "specversion": "1.0",
+  "type": "grievance.created.v1",
+  "subject": "grievance/US360-KA-2026-000001",
+  "time": "2026-05-02T00:03:00.000Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://udyogsetu360.local/schemas/grievance.created.v1.json",
+  "correlationid": "corr-grievance-created-001",
+  "causationid": null,
+  "traceparent": null,
+  "partitionkey": "US360-KA-2026-000001",
+  "data": {
+    "eventVersion": 1,
+    "aggregateType": "grievance",
+    "aggregateId": "68143f0d86e5ab0012345674",
+    "universalCaseId": "US360-KA-2026-000001",
+    "previousStatus": null,
+    "nextStatus": "open",
+    "actor": {
+      "actorType": "user",
+      "actorId": "68143f0d86e5ab0012345601",
+      "role": "investor"
+    },
+    "payload": {
+      "subject": "Status clarification requested"
+    },
+    "metadata": {}
+  }
+}

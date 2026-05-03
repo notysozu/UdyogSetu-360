@@ -1,0 +1,27 @@
+flowchart LR
+  SWS[Karnataka Single Window System] --> Gateway[Gateway API]
+  Investor[Investor Portal] --> Gateway
+  DeptPortal[Department Portal] --> Gateway
+  PublicPortal[Public Portal] --> Gateway
+  Gateway --> Case[Case Service]
+  Gateway --> Orchestration[Orchestration Service]
+  Case --> Mongo[(MongoDB)]
+  Orchestration --> Mongo
+  Case --> Outbox[MongoDB Outbox]
+  Outbox --> Kafka[(Kafka Event Backbone)]
+  Kafka --> Projections[Analytics/Public Projections]
+  Kafka --> Notification[Notification Service]
+  Orchestration --> Rabbit[(RabbitMQ Delivery Queues)]
+  Rabbit --> AdapterRuntime[Adapter Runtime]
+  AdapterRuntime --> Departments[Department Systems]
+  Departments --> AdapterRuntime
+  Case --> Docs[Document Service]
+  Docs --> S3[S3/MinIO Storage]
+  Case --> Audit[Audit Service]
+  Audit --> Mongo
+  Case --> AI[AI Service + Advisory Module]
+  Orchestration --> AI
+  N8N[n8n Automations] --> Gateway
+  Kafka --> Ops[Operations Console]
+  Rabbit --> Ops
+  AdapterRuntime --> Ops

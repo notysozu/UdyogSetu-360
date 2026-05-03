@@ -1,0 +1,19 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: mongodb-backup
+  namespace: udyogsetu
+spec:
+  schedule: "0 2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+            - name: backup
+              image: mongo:7
+              command: ["sh", "-c", "echo Run mongodump to approved backup target"]
+              envFrom:
+                - secretRef:
+                    name: udyogsetu-secrets

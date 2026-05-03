@@ -1,0 +1,25 @@
+<section class="card">
+  <h2>Fee placeholders</h2>
+  <% if (fees.length) { %>
+    <div class="table-wrap">
+      <table>
+        <caption>Fee demands and placeholders</caption>
+        <thead><tr><th>Case</th><th>Department</th><th>Amount</th><th>Due date</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <% fees.forEach(function(fee) { %>
+            <tr>
+              <td><%= fee.caseId %></td>
+              <td><%= view.departmentLabel(fee.departmentCode) %></td>
+              <td><%= view.formatCurrency(fee.amount, currentLocale) %></td>
+              <td><%= view.formatDate(fee.dueAt, currentLocale) %></td>
+              <td><%= fee.status %></td>
+              <td><a href="/fees/<%= fee._id %>">Open</a></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <p>No fee records are available right now.</p>
+  <% } %>
+</section>

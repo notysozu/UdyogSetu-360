@@ -1,0 +1,20 @@
+<section class="card">
+  <h2>New grievance</h2>
+  <form method="post" action="/grievances">
+    <div class="form-field">
+      <label for="caseId">Case</label>
+      <select id="caseId" name="caseId">
+        <option value="">General portal issue</option>
+        <% cases.forEach(function(item) { %>
+          <option value="<%= item.caseId %>"><%= item.universalCaseId || item.caseId %> - <%= item.title || 'Case' %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-field"><label for="departmentCode">Department</label><input id="departmentCode" name="departmentCode"></div>
+    <%- include('../partials/grievances/grievance-form') %>
+    <div class="form-field"><label for="priority">Priority</label><select id="priority" name="priority"><option value="low">Low</option><option value="normal">Normal</option><option value="high">High</option><option value="urgent">Urgent</option></select></div>
+    <div class="form-field"><label for="contactPreference">Contact preference</label><select id="contactPreference" name="contactPreference"><option value="email">Email</option><option value="phone">Phone</option></select></div>
+    <div class="form-field"><label><input type="checkbox" name="consent" required> I confirm the details are accurate.</label></div>
+    <button class="button" type="submit">Submit grievance</button>
+  </form>
+</section>

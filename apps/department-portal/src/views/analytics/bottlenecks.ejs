@@ -1,0 +1,7 @@
+<section class="analytics-page">
+  <h1>Bottleneck Detection</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.departmentCode, r.stage, r.severity, r.bottleneckScore, r.affectedCaseCount, r.recommendedAction]); %>
+  <%- include('../partials/analytics/table-card', { title: 'Open Bottlenecks', caption: 'Bottlenecks by department and stage', headers: ['Department', 'Stage', 'Severity', 'Score', 'Affected Cases', 'Recommended Action'], rows }) %>
+  <%- include('../partials/analytics/export-button', { exportType: 'bottlenecks' }) %>
+</section>

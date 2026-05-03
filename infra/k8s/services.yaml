@@ -1,0 +1,123 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: gateway
+  namespace: udyogsetu
+spec:
+  selector:
+    app: gateway
+  ports:
+    - port: 4000
+      targetPort: 4000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: case-service
+  namespace: udyogsetu
+spec:
+  selector:
+    app: case-service
+  ports:
+    - port: 4100
+      targetPort: 4100
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: orchestration-service
+  namespace: udyogsetu
+spec:
+  selector:
+    app: orchestration-service
+  ports:
+    - port: 4101
+      targetPort: 4101
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: adapter-runtime
+  namespace: udyogsetu
+spec:
+  selector:
+    app: adapter-runtime
+  ports:
+    - port: 4102
+      targetPort: 4102
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: notification-service
+  namespace: udyogsetu
+spec:
+  selector:
+    app: notification-service
+  ports:
+    - port: 4103
+      targetPort: 4103
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: audit-service
+  namespace: udyogsetu
+spec:
+  selector:
+    app: audit-service
+  ports:
+    - port: 4104
+      targetPort: 4104
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-service
+  namespace: udyogsetu
+spec:
+  selector:
+    app: ai-service
+  ports:
+    - port: 8000
+      targetPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-advisory-service
+  namespace: udyogsetu
+spec:
+  selector:
+    app: ai-advisory-service
+  ports:
+    - port: 8010
+      targetPort: 8010
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mongodb
+  namespace: udyogsetu
+spec:
+  selector:
+    app: mongodb
+  ports:
+    - port: 27017
+      targetPort: 27017
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: minio
+  namespace: udyogsetu
+spec:
+  selector:
+    app: minio
+  ports:
+    - name: api
+      port: 9000
+      targetPort: 9000
+    - name: console
+      port: 9001
+      targetPort: 9001

@@ -1,0 +1,40 @@
+<nav class="topbar" aria-label="Primary">
+  <% const activePath = typeof currentPath !== 'undefined' ? currentPath : ''; %>
+  <a class="brand" href="/">
+    <span class="brand-mark" aria-hidden="true"><i class="fa-solid fa-landmark-dome"></i></span>
+    <span>UdyogSetu 360</span>
+  </a>
+  <div class="nav-links">
+    <% if (user) { %>
+      <% const effectiveRole = user.primaryRole || user.role; %>
+      <% if (effectiveRole === 'investor') { %>
+        <a href="/dashboard" aria-current="<%= activePath === '/dashboard' ? 'page' : undefined %>">Dashboard</a>
+        <a href="/cases" aria-current="<%= activePath === '/cases' ? 'page' : undefined %>">My cases</a>
+        <a href="/cases/new" aria-current="<%= activePath === '/cases/new' ? 'page' : undefined %>">New application</a>
+        <a href="/grievances/new" aria-current="<%= activePath === '/grievances/new' ? 'page' : undefined %>">Grievances</a>
+      <% } %>
+      <% if (effectiveRole === 'department_officer') { %>
+        <a href="/department" aria-current="<%= activePath === '/department' ? 'page' : undefined %>">Department queue</a>
+      <% } %>
+      <% if (effectiveRole === 'department_supervisor' || effectiveRole === 'supervisor') { %>
+        <a href="/supervisor" aria-current="<%= activePath === '/supervisor' ? 'page' : undefined %>">Workload</a>
+      <% } %>
+      <% if (effectiveRole === 'nodal_officer') { %>
+        <a href="/nodal" aria-current="<%= activePath === '/nodal' ? 'page' : undefined %>">Nodal dashboard</a>
+      <% } %>
+      <% if (effectiveRole === 'admin') { %>
+        <a href="/admin" aria-current="<%= activePath === '/admin' ? 'page' : undefined %>">Admin</a>
+        <a href="/admin/users" aria-current="<%= activePath === '/admin/users' ? 'page' : undefined %>">Users</a>
+        <a href="/admin/operations" aria-current="<%= activePath === '/admin/operations' ? 'page' : undefined %>">Integrations</a>
+      <% } %>
+      <% if (effectiveRole === 'auditor') { %>
+        <a href="/audit" aria-current="<%= activePath === '/audit' ? 'page' : undefined %>">Audit</a>
+      <% } %>
+      <a href="/auth/sessions" aria-current="<%= activePath === '/auth/sessions' ? 'page' : undefined %>">Sessions</a>
+      <form method="post" action="/auth/logout" class="inline-form"><button class="link-button" type="submit">Logout</button></form>
+    <% } else { %>
+      <a href="/auth/login" aria-current="<%= activePath === '/auth/login' ? 'page' : undefined %>">Sign in</a>
+      <a href="/auth/register" aria-current="<%= activePath === '/auth/register' ? 'page' : undefined %>">Register</a>
+    <% } %>
+  </div>
+</nav>

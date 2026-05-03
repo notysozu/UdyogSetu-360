@@ -1,0 +1,26 @@
+<section class="content-shell">
+  <div class="section-heading">
+    <p class="eyebrow">Administration</p>
+    <h1>Manage <%= managedUser.name %></h1>
+  </div>
+  <form class="card form-card" method="post" action="/admin/users/<%= managedUser._id %>/roles?_method=PATCH">
+    <label>Primary role
+      <select name="primaryRole">
+        <% ['investor', 'department_officer', 'department_supervisor', 'nodal_officer', 'admin', 'auditor'].forEach((role) => { %>
+          <option value="<%= role %>" <%= (managedUser.primaryRole || managedUser.role) === role ? 'selected' : '' %>><%= role %></option>
+        <% }) %>
+      </select>
+    </label>
+    <button class="button" type="submit">Update role</button>
+  </form>
+  <form class="card form-card" method="post" action="/admin/users/<%= managedUser._id %>/status?_method=PATCH">
+    <label>Status
+      <select name="status">
+        <% ['invited', 'active', 'suspended', 'locked', 'disabled'].forEach((status) => { %>
+          <option value="<%= status %>" <%= managedUser.status === status ? 'selected' : '' %>><%= status %></option>
+        <% }) %>
+      </select>
+    </label>
+    <button class="button" type="submit">Update status</button>
+  </form>
+</section>

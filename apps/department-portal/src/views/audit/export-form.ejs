@@ -1,0 +1,16 @@
+<section class="card">
+  <h2>Export Audit Trail</h2>
+  <form method="post" action="/admin/audit/export">
+    <label for="format">Format</label>
+    <select id="format" name="format">
+      <option value="json">JSON</option>
+      <option value="csv">CSV</option>
+    </select>
+    <label for="caseId">Universal Case ID (optional)</label>
+    <input id="caseId" name="filter[universalCaseId]" />
+    <button type="submit">Create Export</button>
+  </form>
+  <% if (result) { %>
+    <%- include('../partials/audit/export-status', { result: result }) %>
+  <% } %>
+</section>

@@ -1,0 +1,7 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/checklist">
+  <h3>Update checklist</h3>
+  <div class="form-field"><label for="itemCode">Item code</label><input id="itemCode" name="itemCode" required></div>
+  <div class="form-field"><label for="status">Status</label><select id="status" name="status"><option value="satisfied">Satisfied</option><option value="not_satisfied">Not satisfied</option><option value="needs_clarification">Needs clarification</option><option value="not_applicable">Not applicable</option></select></div>
+  <div class="form-field"><label for="remarks">Remarks</label><textarea id="remarks" name="remarks" rows="3"></textarea></div>
+  <button class="button" type="submit">Save checklist update</button>
+</form>

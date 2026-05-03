@@ -1,0 +1,5 @@
+<ul>
+  <% Object.entries(health || {}).forEach(function(item) { %>
+    <li><strong><%= item[0] %>:</strong> <%= item[1] %></li>
+  <% }) %>
+</ul>

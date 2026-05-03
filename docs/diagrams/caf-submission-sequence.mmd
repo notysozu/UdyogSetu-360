@@ -1,0 +1,24 @@
+sequenceDiagram
+  autonumber
+  actor Investor
+  participant SWS as SWS/Public Gateway
+  participant Case as Case Service
+  participant AI as AI Service
+  participant Doc as Document Service
+  participant Orch as Orchestration Service
+  participant Mongo as MongoDB
+  participant Kafka as Kafka Outbox
+  participant Rabbit as RabbitMQ
+  Investor->>SWS: Submit CAF and documents
+  SWS->>Case: Create/update canonical case
+  Case->>AI: Advisory completeness/routing check
+  AI-->>Case: Recommendation + confidence
+  Case->>Doc: Confirm document metadata
+  Doc->>Mongo: Store metadata
+  Case->>Mongo: Persist final case
+  Case->>Kafka: Append case.submitted.v1
+  Case->>Orch: Request approval tracks
+  Orch->>Mongo: Create tasks and SLA timers
+  Orch->>Kafka: Append task.created.v1
+  Orch->>Rabbit: Create delivery jobs
+  Case-->>SWS: Universal Case ID and acknowledgement

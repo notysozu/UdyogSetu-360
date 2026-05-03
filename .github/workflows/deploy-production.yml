@@ -1,0 +1,17 @@
+name: Deploy Production
+
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-production:
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@v4
+      - name: Manual approval gate
+        run: echo "GitHub environment protection must require manual approval."
+      - name: Deploy production placeholder
+        run: echo "Deploy approved images and run post-deploy health checks."
+      - name: Rollback instructions
+        run: echo "See docs/runbooks/rollback.md"

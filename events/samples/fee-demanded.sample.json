@@ -1,0 +1,32 @@
+{
+  "id": "66666666-6666-4666-8666-666666666666",
+  "source": "us360.orchestration-service",
+  "specversion": "1.0",
+  "type": "fee.demanded.v1",
+  "subject": "fee/US360-KA-2026-000001",
+  "time": "2026-05-02T00:05:00.000Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://udyogsetu360.local/schemas/fee.demanded.v1.json",
+  "correlationid": "corr-fee-demanded-001",
+  "causationid": null,
+  "traceparent": null,
+  "partitionkey": "US360-KA-2026-000001",
+  "data": {
+    "eventVersion": 1,
+    "aggregateType": "fee",
+    "aggregateId": "68143f0d86e5ab0012345676",
+    "universalCaseId": "US360-KA-2026-000001",
+    "previousStatus": "draft",
+    "nextStatus": "demanded",
+    "actor": {
+      "actorType": "user",
+      "actorId": "68143f0d86e5ab0012345602",
+      "role": "department_officer"
+    },
+    "payload": {
+      "amount": 5000,
+      "currency": "INR"
+    },
+    "metadata": {}
+  }
+}

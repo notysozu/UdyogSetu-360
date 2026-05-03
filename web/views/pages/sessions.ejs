@@ -1,0 +1,38 @@
+<section class="content-shell">
+  <div class="section-heading">
+    <p class="eyebrow">Security</p>
+    <h1>Active Sessions</h1>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <caption>Your active authenticated sessions</caption>
+      <thead>
+        <tr>
+          <th>Session</th>
+          <th>IP Address</th>
+          <th>Last Seen</th>
+          <th>Expires</th>
+          <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% sessions.forEach((session) => { %>
+          <tr>
+            <td><code><%= session.sessionId %></code></td>
+            <td><%= session.ipAddress || 'Unknown' %></td>
+            <td><%= session.lastSeenAt ? new Date(session.lastSeenAt).toLocaleString() : 'Unknown' %></td>
+            <td><%= session.expiresAt ? new Date(session.expiresAt).toLocaleString() : 'Unknown' %></td>
+            <td>
+              <form method="post" action="/auth/sessions/<%= session.sessionId %>?_method=DELETE" class="inline-form">
+                <button class="button button-muted" type="submit">Revoke</button>
+              </form>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+  <form method="post" action="/auth/logout-all">
+    <button class="button" type="submit">Logout all sessions</button>
+  </form>
+</section>

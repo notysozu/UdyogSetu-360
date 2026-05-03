@@ -1,0 +1,8 @@
+<section class="analytics-page">
+  <h1>Investor History</h1>
+  <%- include('../partials/analytics/privacy-notice') %>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.displayName || r.maskedOrganisationName, r.sector, r.district, r.totalCases, r.activeCases, r.approvedCases, r.rejectedCases, (r.riskFlags || []).join(', ')]); %>
+  <%- include('../partials/analytics/table-card', { title: 'Organisation History Summary', headers: ['Organisation', 'Sector', 'District', 'Total Cases', 'Active', 'Approved', 'Rejected', 'Risk Flags'], rows }) %>
+  <%- include('../partials/analytics/export-button', { exportType: 'investor_history' }) %>
+</section>

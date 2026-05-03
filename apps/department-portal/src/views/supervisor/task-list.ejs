@@ -1,0 +1,1 @@
+<section class="card"><h2>Supervisor task list</h2><% tasks.forEach(function(task) { %><%- include('../partials/department/task-card', { task: task, href: '/supervisor/tasks/' + task._id }) %><% }) %></section>

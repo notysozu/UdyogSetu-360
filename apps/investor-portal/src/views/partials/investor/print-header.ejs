@@ -1,0 +1,5 @@
+<header class="print-header">
+  <h1>UdyogSetu 360</h1>
+  <p>Case reference: <%= caseDoc?.universalCaseId || caseDoc?.caseId || 'N/A' %></p>
+  <p>Printed on: <%= view.formatDateTime(new Date(), currentLocale) %></p>
+</header>

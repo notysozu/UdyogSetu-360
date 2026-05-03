@@ -1,0 +1,305 @@
+services:
+  mongodb:
+    image: mongo:7
+    container_name: us360-mongodb
+    restart: unless-stopped
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo_data:/data/db
+      - ./infra/mongo:/docker-entrypoint-initdb.d:ro
+
+  mongo-express:
+    image: mongo-express:1.0.2
+    container_name: us360-mongo-express
+    restart: unless-stopped
+    environment:
+      ME_CONFIG_MONGODB_URL: mongodb://mongodb:27017/
+    ports:
+      - '8081:8081'
+    depends_on:
+      - mongodb
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: us360-rabbitmq
+    restart: unless-stopped
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+  minio:
+    image: minio/minio
+    container_name: us360-minio
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: ${S3_ACCESS_KEY:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${S3_SECRET_KEY:-minioadmin}
+    ports:
+      - '9000:9000'
+      - '9001:9001'
+    volumes:
+      - minio_data:/data
+
+  minio-create-bucket:
+    image: minio/mc
+    container_name: us360-minio-init
+    depends_on:
+      - minio
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 ${S3_ACCESS_KEY:-minioadmin} ${S3_SECRET_KEY:-minioadmin} &&
+      mc mb -p local/${S3_BUCKET:-udyogsetu-documents} || true &&
+      mc anonymous set private local/${S3_BUCKET:-udyogsetu-documents} || true
+      "
+
+  kafka:
+    image: bitnami/kafka:3.7
+    container_name: us360-kafka
+    restart: unless-stopped
+    environment:
+      KAFKA_CFG_NODE_ID: 1
+      KAFKA_CFG_PROCESS_ROLES: broker,controller
+      KAFKA_CFG_CONTROLLER_LISTENER_NAMES: CONTROLLER
+      KAFKA_CFG_LISTENERS: PLAINTEXT://:9092,CONTROLLER://:9093
+      KAFKA_CFG_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_CFG_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT
+      KAFKA_CFG_CONTROLLER_QUORUM_VOTERS: 1@kafka:9093
+      ALLOW_PLAINTEXT_LISTENER: 'yes'
+    ports:
+      - '9092:9092'
+
+  gateway:
+    image: node:20
+    container_name: us360-gateway
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:gateway"
+    env_file:
+      - ./.env
+    environment:
+      GATEWAY_PORT: 4000
+      MONGODB_URI: mongodb://mongodb:27017/udyogsetu360
+    ports:
+      - '4000:4000'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+
+  public-portal:
+    image: node:20
+    container_name: us360-public-portal
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:public"
+    env_file:
+      - ./.env
+    environment:
+      PUBLIC_PORTAL_PORT: 4003
+      PORT: 4003
+      MONGO_URI: mongodb://mongodb:27017/udyogsetu360
+      AI_SERVICE_URL: http://ai-service:8000
+      AI_ADVISORY_BASE_URL: http://ai-service:8000
+    ports:
+      - '4003:4003'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+      - ai-service
+
+  investor-portal:
+    image: node:20
+    container_name: us360-investor-portal
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:investor"
+    env_file:
+      - ./.env
+    environment:
+      INVESTOR_PORTAL_PORT: 4001
+      PORT: 4001
+      MONGO_URI: mongodb://mongodb:27017/udyogsetu360
+      AI_SERVICE_URL: http://ai-service:8000
+      AI_ADVISORY_BASE_URL: http://ai-service:8000
+    ports:
+      - '4001:4001'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+      - ai-service
+
+  department-portal:
+    image: node:20
+    container_name: us360-department-portal
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:department"
+    env_file:
+      - ./.env
+    environment:
+      DEPARTMENT_PORTAL_PORT: 4002
+      PORT: 4002
+      MONGO_URI: mongodb://mongodb:27017/udyogsetu360
+      AI_SERVICE_URL: http://ai-service:8000
+      AI_ADVISORY_BASE_URL: http://ai-service:8000
+    ports:
+      - '4002:4002'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+      - ai-service
+
+  case-service:
+    image: node:20
+    container_name: us360-case-service
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:case"
+    env_file:
+      - ./.env
+    environment:
+      CASE_SERVICE_PORT: 4100
+      MONGODB_URI: mongodb://mongodb:27017/udyogsetu360
+      AI_SERVICE_BASE_URL: http://ai-service:8000
+      AI_ADVISORY_BASE_URL: http://ai-service:8000
+    ports:
+      - '4100:4100'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+      - minio
+      - minio-create-bucket
+
+  orchestration-service:
+    image: node:20
+    container_name: us360-orchestration-service
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:orchestration"
+    env_file:
+      - ./.env
+    environment:
+      ORCHESTRATION_SERVICE_PORT: 4101
+      MONGODB_URI: mongodb://mongodb:27017/udyogsetu360
+    ports:
+      - '4101:4101'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+
+  adapter-runtime:
+    image: node:20
+    container_name: us360-adapter-runtime
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:adapter"
+    env_file:
+      - ./.env
+    environment:
+      ADAPTER_RUNTIME_PORT: 4102
+      MONGODB_URI: mongodb://mongodb:27017/udyogsetu360
+    ports:
+      - '4102:4102'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+
+  notification-service:
+    image: node:20
+    container_name: us360-notification-service
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:notification"
+    env_file:
+      - ./.env
+    environment:
+      NOTIFICATION_SERVICE_PORT: 4103
+      MONGODB_URI: mongodb://mongodb:27017/udyogsetu360
+    ports:
+      - '4103:4103'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+
+  audit-service:
+    image: node:20
+    container_name: us360-audit-service
+    working_dir: /workspace
+    command: sh -c "npm install && npm run dev:audit"
+    env_file:
+      - ./.env
+    environment:
+      AUDIT_SERVICE_PORT: 4104
+      MONGODB_URI: mongodb://mongodb:27017/udyogsetu360
+    ports:
+      - '4104:4104'
+    volumes:
+      - ./:/workspace
+    depends_on:
+      - mongodb
+
+  ai-service:
+    build:
+      context: .
+      dockerfile: services/ai-service/Dockerfile
+    container_name: us360-ai
+    env_file:
+      - ./.env
+    environment:
+      AI_SERVICE_HOST: 0.0.0.0
+      AI_SERVICE_PORT: 8000
+    ports:
+      - '8000:8000'
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  ai-advisory-service:
+    build:
+      context: .
+      dockerfile: services/ai-advisory-service/Dockerfile
+    container_name: us360-ai-advisory
+    env_file:
+      - ./.env
+    environment:
+      AI_SERVICE_PORT: 8010
+      AI_ADVISORY_PORT: 8010
+      AI_ADVISORY_MODEL_MODE: dummy
+    ports:
+      - '8010:8010'
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8010/ai/v1/advisory/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  n8n:
+    image: docker.n8n.io/n8nio/n8n:latest
+    container_name: us360-n8n
+    restart: unless-stopped
+    environment:
+      N8N_BASIC_AUTH_ACTIVE: 'true'
+      N8N_BASIC_AUTH_USER: ${N8N_BASIC_AUTH_USER:-admin}
+      N8N_BASIC_AUTH_PASSWORD: ${N8N_BASIC_AUTH_PASSWORD:-admin123}
+      WEBHOOK_URL: http://localhost:5678/
+      N8N_EDITOR_BASE_URL: http://localhost:5678
+      GENERIC_TIMEZONE: Asia/Kolkata
+    ports:
+      - '5678:5678'
+    volumes:
+      - n8n_data:/home/node/.n8n
+      - ./n8n:/files/n8n:ro
+
+volumes:
+  mongo_data:
+  minio_data:
+  n8n_data:
+  rabbitmq_data:

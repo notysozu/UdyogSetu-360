@@ -1,0 +1,5 @@
+.sla-ok { color: #166534; }
+.sla-warning { color: #92400e; }
+.sla-breached { color: #991b1b; }
+.sla-paused { color: #334155; }
+.sla-completed { color: #0369a1; }

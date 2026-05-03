@@ -1,0 +1,16 @@
+<%- include('../partials/public/no-pii-notice') %>
+<section class="page-header"><div><p class="eyebrow">Grievances</p><h1>Grievance trends</h1></div></section>
+<section class="metrics-grid">
+  <%- include('../partials/public/metric-card', { label: 'Opened', value: view.formatNumber(bundle.grievanceMetrics.grievancesOpened) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Resolved', value: view.formatNumber(bundle.grievanceMetrics.grievancesResolved) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Open grievances', value: view.formatNumber(bundle.grievanceMetrics.openGrievances) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Closure rate', value: view.formatPercentage(bundle.grievanceMetrics.closureRate) }) %>
+</section>
+<%- include('../partials/public/public-table', {
+  caption: 'Department-wise grievance counts',
+  columns: [
+    { label: 'Department', render: (row) => view.departmentLabel(row.departmentCode) },
+    { label: 'Grievances', render: (row) => view.formatNumber(row.grievanceCount) }
+  ],
+  rows: bundle.grievanceMetrics.byDepartment
+}) %>

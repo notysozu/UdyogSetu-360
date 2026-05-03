@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: notification-service
+  namespace: udyogsetu
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: notification-service
+  template:
+    metadata:
+      labels:
+        app: notification-service
+    spec:
+      containers:
+        - name: notification-service
+          image: registry.example/udyogsetu/notification-service:latest
+          ports:
+            - containerPort: 4103
+          envFrom:
+            - configMapRef:
+                name: udyogsetu-config
+            - secretRef:
+                name: udyogsetu-secrets
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4103

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="<%= currentLocale %>">
+  <head>
+    <%- include('../partials/investor/head') %>
+  </head>
+  <body class="investor-shell">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <%- include('../partials/investor/topbar') %>
+    <div class="portal-frame">
+      <% if (isAuthenticated) { %>
+        <%- include('../partials/investor/sidebar') %>
+      <% } %>
+      <main id="main-content" class="portal-main" tabindex="-1">
+        <%- include('../partials/investor/flash-messages') %>
+        <%- body %>
+      </main>
+    </div>
+    <%- include('../partials/investor/footer') %>
+  </body>
+</html>

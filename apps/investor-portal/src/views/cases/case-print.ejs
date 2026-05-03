@@ -1,0 +1,12 @@
+<%- include('../partials/investor/print-header', { caseDoc: caseDoc }) %>
+<section class="card">
+  <h2><%= caseDoc?.universalCaseId || caseDoc?.caseId %></h2>
+  <p><strong>Project:</strong> <%= caseDoc?.title || caseDoc?.projectName || 'Case detail' %></p>
+  <p><strong>Status:</strong> <%= view.statusLabel(caseDoc?.status) %></p>
+</section>
+<section class="card">
+  <h2>Timeline</h2>
+  <% timeline.forEach(function(item) { %>
+    <%- include('../partials/investor/timeline-item', { item: item }) %>
+  <% }) %>
+</section>

@@ -1,0 +1,45 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Investor workspace</p>
+    <h1>Your applications</h1>
+  </div>
+  <a class="button" href="/cases/new">Start new application</a>
+</section>
+
+<section class="grid-3">
+  <article class="metric-card"><span>Total cases</span><strong><%= cases.length %></strong></article>
+  <article class="metric-card"><span>In progress</span><strong><%= cases.filter(c => ['SUBMITTED','IN_PROGRESS','QUERY_RAISED'].includes(c.status)).length %></strong></article>
+  <article class="metric-card"><span>Notifications</span><strong><%= notifications.length %></strong></article>
+</section>
+
+<section class="card">
+  <h2>Case list</h2>
+  <div class="table-wrap">
+    <table aria-label="Investor case list">
+      <caption>Your submitted applications and their current status</caption>
+      <thead><tr><th>Case ID</th><th>Enterprise</th><th>Status</th><th>Departments</th><th></th></tr></thead>
+      <tbody>
+        <% cases.forEach((caseDoc) => { %>
+          <tr>
+            <td><%= caseDoc.caseId %></td>
+            <td><%= caseDoc.enterprise.name %></td>
+            <td><%- include('../partials/statusBadge', { status: caseDoc.status }) %></td>
+            <td><%= caseDoc.approvals.map(a => a.department?.code).join(', ') %></td>
+            <td><a href="/cases/<%= caseDoc.caseId %>">Open</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Recent notifications</h2>
+  <% if (!notifications.length) { %><p>No notifications yet.</p><% } %>
+  <% notifications.forEach((item) => { %>
+    <div class="notice-row" role="article" aria-label="Notification">
+      <strong><%= item.title %></strong>
+      <p><%= item.message %></p>
+    </div>
+  <% }) %>
+</section>

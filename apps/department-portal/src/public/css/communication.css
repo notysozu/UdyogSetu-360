@@ -1,0 +1,4 @@
+.status-badge { display: inline-block; padding: 0.2rem 0.5rem; border-radius: 999px; border: 1px solid #475569; font-size: 0.8rem; }
+.status-badge--open, .status-badge--acknowledged, .status-badge--in_review, .status-badge--escalated { background: #f8fafc; color: #0f172a; }
+.status-badge--resolved, .status-badge--closed { background: #ecfdf5; color: #065f46; border-color: #10b981; }
+.button-row { display: flex; gap: 0.5rem; flex-wrap: wrap; }

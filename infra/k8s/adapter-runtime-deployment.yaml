@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: adapter-runtime
+  namespace: udyogsetu
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: adapter-runtime
+  template:
+    metadata:
+      labels:
+        app: adapter-runtime
+    spec:
+      containers:
+        - name: adapter-runtime
+          image: registry.example/udyogsetu/adapter-runtime:latest
+          ports:
+            - containerPort: 4102
+          envFrom:
+            - configMapRef:
+                name: udyogsetu-config
+            - secretRef:
+                name: udyogsetu-secrets
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4102

@@ -1,0 +1,3 @@
+<section class="card"><h2><%= data.caseDoc.universalCaseId %></h2><p><strong>Status:</strong> <%= view.statusLabel(data.caseDoc.status) %></p></section>
+<section class="card"><h2>Department tracks</h2><% data.tasks.forEach(function(task) { %><%- include('../partials/department/task-card', { task: task }) %><% }) %></section>
+<section class="card"><h2>Add coordination note</h2><form method="post" action="/nodal/cases/<%= data.caseDoc.caseId || data.caseDoc.universalCaseId %>/comment"><div class="form-field"><label for="body">Comment</label><textarea id="body" name="body" rows="4" required></textarea></div><button class="button" type="submit">Add note</button></form></section>

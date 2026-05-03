@@ -1,0 +1,5 @@
+@media print {
+  .public-header, .public-footer, .filter-card, .no-print { display: none !important; }
+  body { background: #fff; color: #000; }
+  .result-card, .table-wrap, .metric-card { box-shadow: none; border-color: #666; }
+}

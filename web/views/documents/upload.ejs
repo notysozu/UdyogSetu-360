@@ -1,0 +1,20 @@
+<section class="stack">
+  <h1>Upload Document</h1>
+  <p>Upload a supporting file for <strong><%= caseDoc?.caseId || caseDoc?.universalCaseId || 'this case' %></strong>.</p>
+  <form action="/api/v1/cases/<%= caseDoc?._id %>/documents/upload" method="post" enctype="multipart/form-data" class="stack" data-upload-form>
+    <label for="documentType">Document type</label>
+    <select id="documentType" name="documentType" required>
+      <option value="project_report">Project Report</option>
+      <option value="layout_plan">Layout Plan</option>
+      <option value="authorisation_letter">Authorisation Letter</option>
+      <option value="other">Other</option>
+    </select>
+    <label for="title">Title</label>
+    <input id="title" name="title" type="text" required />
+    <label for="file">File</label>
+    <input id="file" name="file" type="file" required aria-describedby="file-help" />
+    <p id="file-help">PDF, PNG, JPEG, WEBP, or ZIP up to 25 MB.</p>
+    <button type="submit">Upload</button>
+    <progress value="0" max="100" hidden data-upload-progress></progress>
+  </form>
+</section>

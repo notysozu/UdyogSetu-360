@@ -1,0 +1,15 @@
+<table>
+  <caption>Replay attempts</caption>
+  <thead><tr><th>Replay ID</th><th>Status</th><th>Mode</th><th>Dry run</th><th>Events</th></tr></thead>
+  <tbody>
+    <% (items || []).forEach(function(item) { %>
+      <tr>
+        <td><a href="/admin/operations/replay/<%= item.replayId %>"><%= item.replayId %></a></td>
+        <td><%= item.status %></td>
+        <td><%= item.mode %></td>
+        <td><%= item.dryRun ? 'Yes' : 'No' %></td>
+        <td><%= item.processedEvents %> / <%= item.totalEvents %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

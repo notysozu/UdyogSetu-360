@@ -1,0 +1,7 @@
+<section>
+  <p><strong>Status:</strong> <%= result.ok ? 'PASS' : 'FAIL' %></p>
+  <p><strong>Checked:</strong> <%= result.checked %></p>
+  <% if (result.issues && result.issues.length) { %>
+    <pre><%= JSON.stringify(result.issues, null, 2) %></pre>
+  <% } %>
+</section>

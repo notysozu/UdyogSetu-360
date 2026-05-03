@@ -1,0 +1,7 @@
+<section class="card"><h2><%= task.title %></h2><p>Read-only summary plus assignment actions.</p><%- include('../partials/department/sla-countdown', { sla: sla }) %></section>
+<section class="card">
+  <h2>Assign or reassign</h2>
+  <%- include('../tasks/forms/assign-form', { task: task }) %>
+</section>
+<section class="card"><h2>Documents</h2><% documents.forEach(function(document) { %><%- include('../partials/department/document-review-card', { task: task, document: document }) %><% }) %></section>
+<section class="card"><h2>Comments</h2><%- include('../partials/department/comment-thread', { comments: comments }) %></section>

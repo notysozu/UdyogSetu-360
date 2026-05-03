@@ -1,0 +1,12 @@
+<article class="task-card">
+  <div class="task-card__header">
+    <div>
+      <p class="task-card__eyebrow"><%= view.departmentLabel(task.departmentCode) %></p>
+      <h3><%= task.title %></h3>
+    </div>
+    <%- include('./status-badge', { status: task.status }) %>
+  </div>
+  <p>SLA due: <%= view.formatDate(task.dueAt, currentLocale) %></p>
+  <p>Current action: <%= task.metadata?.queryMessage || task.metadata?.inspectionStatus || 'Monitoring in progress' %></p>
+  <%- include('./progress-steps', { percent: view.percentage((task.checklist || []).filter(function(item) { return item.status === 'completed'; }).length, (task.checklist || []).length || 1) }) %>
+</article>

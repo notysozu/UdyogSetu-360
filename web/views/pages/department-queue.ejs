@@ -1,0 +1,65 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Department portal</p>
+    <h1>Approval queue</h1>
+  </div>
+</section>
+
+<section class="card">
+  <form method="get" action="/department" class="compact-form horizontal" aria-label="Department queue filter">
+    <label for="department-filter">Filter visible departments</label>
+    <select id="department-filter" name="department">
+      <option value="">All visible departments</option>
+      <% departments.forEach((department) => { %>
+        <option value="<%= department.code %>"><%= department.code %> — <%= department.name %></option>
+      <% }) %>
+    </select>
+    <button class="button button-muted" type="submit">Filter</button>
+  </form>
+</section>
+
+<section class="queue-list">
+  <% cases.forEach((caseDoc) => { %>
+    <article class="card queue-card">
+      <div class="queue-head">
+        <div>
+          <h2><%= caseDoc.caseId %></h2>
+          <p><%= caseDoc.enterprise.name %> · <%= caseDoc.enterprise.industry %></p>
+        </div>
+        <%- include('../partials/statusBadge', { status: caseDoc.status }) %>
+      </div>
+      <% caseDoc.approvals.forEach((approval) => { %>
+        <div class="task-row">
+          <div>
+            <strong><%= approval.department?.code %></strong>
+            <p><%= approval.department?.name %> · SLA: <%= approval.slaDueAt ? approval.slaDueAt.toDateString() : '-' %></p>
+          </div>
+          <form method="post" action="/department/cases/<%= caseDoc.caseId %>/actions" class="action-form">
+            <input type="hidden" name="departmentId" value="<%= approval.department?._id %>">
+            <label>
+              <span class="sr-only-enhanced">Update status</span>
+              <select name="status" aria-label="Update status">
+              <option value="ACKNOWLEDGED">Acknowledge</option>
+              <option value="UNDER_SCRUTINY">Under scrutiny</option>
+              <option value="QUERY_RAISED">Raise query</option>
+              <option value="INSPECTION_SCHEDULED">Inspection scheduled</option>
+              <option value="APPROVED">Approve</option>
+              <option value="REJECTED">Reject</option>
+              <option value="CERTIFICATE_ISSUED">Certificate issued</option>
+              </select>
+            </label>
+            <label>
+              <span class="sr-only-enhanced">Certificate reference</span>
+              <input name="certificateRef" placeholder="Certificate ref optional" aria-label="Certificate reference">
+            </label>
+            <label>
+              <span class="sr-only-enhanced">Officer note</span>
+              <input name="note" placeholder="Officer note" aria-label="Officer note">
+            </label>
+            <button class="button" type="submit">Update</button>
+          </form>
+        </div>
+      <% }) %>
+    </article>
+  <% }) %>
+</section>

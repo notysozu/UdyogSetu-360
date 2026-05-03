@@ -1,0 +1,7 @@
+<section class="kpi-grid">
+  <article class="kpi-card"><h2>Total tasks</h2><p><%= dashboard.workload.total %></p></article>
+  <article class="kpi-card"><h2>Unassigned</h2><p><%= dashboard.unassignedTasks %></p></article>
+  <article class="kpi-card"><h2>Overdue</h2><p><%= dashboard.overdueTasks %></p></article>
+  <article class="kpi-card"><h2>Recommendations pending</h2><p><%= dashboard.approvalRecommendationsPending %></p></article>
+</section>
+<section class="card"><h2>Officer workload</h2><div class="table-wrap"><table><caption>Officer workload distribution</caption><thead><tr><th>Officer</th><th>Active</th><th>Overdue</th></tr></thead><tbody><% dashboard.officerWorkload.forEach(function(officer) { %><tr><td><%= officer.officerLabel %></td><td><%= officer.activeTaskCount %></td><td><%= officer.overdueTaskCount %></td></tr><% }) %></tbody></table></div></section>

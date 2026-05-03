@@ -1,0 +1,10 @@
+<section class="analytics-page">
+  <h1>Query Ageing</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.departmentCode, r.openQueries, r.respondedQueries, r.overdueQueries, r.averageAgeHours, r.averageResponseHours]); %>
+  <%- include('../partials/analytics/table-card', { title: 'Query Ageing Summary', headers: ['Department', 'Open', 'Responded', 'Overdue', 'Average Age (h)', 'Average Response (h)'], rows }) %>
+  <% if (analytics && analytics[0]) { %>
+    <%- include('../partials/analytics/age-bucket-table', { buckets: analytics[0].ageingBuckets || {}, caption: 'Age buckets' }) %>
+  <% } %>
+  <%- include('../partials/analytics/export-button', { exportType: 'query_ageing' }) %>
+</section>

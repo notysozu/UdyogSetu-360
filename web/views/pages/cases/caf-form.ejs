@@ -1,0 +1,65 @@
+<%
+  const fieldError = function (path) {
+    return errors && errors[path] && errors[path][0];
+  };
+%>
+
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Single Window System</p>
+    <h1>Combined Application Form</h1>
+    <p>Save your draft, validate it, and submit one application that routes to all required departments.</p>
+  </div>
+</section>
+
+<% if (Object.keys(errors || {}).length) { %>
+  <section class="card flash flash-error" aria-live="assertive">
+    <h2>Error Summary</h2>
+    <ul>
+      <% Object.entries(errors).forEach(function(entry) { %>
+        <% entry[1].forEach(function(message) { %>
+          <li><strong><%= entry[0] %>:</strong> <%= message %></li>
+        <% }) %>
+      <% }) %>
+    </ul>
+  </section>
+<% } %>
+
+<% if ((warnings || []).length) { %>
+  <section class="card flash flash-warning" aria-live="polite">
+    <h2>Draft Warnings</h2>
+    <ul>
+      <% warnings.forEach(function(message) { %><li><%= message %></li><% }) %>
+    </ul>
+  </section>
+<% } %>
+
+<form class="stack" method="post" action="<%= formAction %>" data-caf-form data-case-id="<%= caseDoc ? caseDoc.caseId : '' %>" data-autosave="<%= caseDoc ? 'true' : 'false' %>">
+  <% if (saveMethodOverride) { %><input type="hidden" name="_method" value="<%= saveMethodOverride %>"><% } %>
+  <input type="hidden" name="idempotencyKey" value="<%= generatedIdempotencyKey %>">
+  <%- include('../../partials/caf/enterprise-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/project-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/land-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/environment-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/power-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/fire-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/factory-safety-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/labour-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/attachments-section', { formData, errors, fieldError }) %>
+  <%- include('../../partials/caf/review-section', { formData }) %>
+
+  <section class="card">
+    <div class="button-row">
+      <button class="button" type="submit" data-save-draft>Save Draft</button>
+      <% if (caseDoc && validateAction) { %>
+        <button class="button button-muted" type="submit" formaction="<%= validateAction %>" data-validate-draft>Validate & Review</button>
+      <% } %>
+      <% if (caseDoc && submitAction) { %>
+        <button class="button" type="submit" formaction="<%= submitAction %>" data-submit-final>Final Submit</button>
+      <% } %>
+    </div>
+    <p class="form-helper">Final submission requires validation, duplicate checks, attachment checks, and a single immutable Universal Case ID.</p>
+  </section>
+</form>
+
+<script src="/js/caf-form.js" defer></script>

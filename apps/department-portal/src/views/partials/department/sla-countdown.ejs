@@ -1,0 +1,10 @@
+<% if (sla) { 
+  const days = view.daysUntil(sla.dueAt);
+  const css = sla.status === 'breached' ? 'sla-breached' : sla.status === 'warning' ? 'sla-warning' : sla.status === 'paused' ? 'sla-paused' : sla.status === 'completed' ? 'sla-completed' : 'sla-ok';
+%>
+  <div class="sla-pill <%= css %>" data-sla-countdown data-due-at="<%= sla.dueAt ? new Date(sla.dueAt).toISOString() : '' %>">
+    <strong><%= view.statusLabel(sla.status) %></strong>
+    <span>Due <%= view.formatDateTime(sla.dueAt, currentLocale) %></span>
+    <% if (days != null) { %><span><%= days %> day(s) remaining</span><% } %>
+  </div>
+<% } %>

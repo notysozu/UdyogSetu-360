@@ -1,0 +1,14 @@
+@media print {
+  .analytics-filter-bar,
+  .analytics-export-form,
+  .portal-sidebar,
+  .portal-topbar,
+  button,
+  a {
+    display: none !important;
+  }
+
+  .analytics-page {
+    display: block;
+  }
+}

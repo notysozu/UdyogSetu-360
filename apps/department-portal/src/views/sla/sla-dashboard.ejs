@@ -1,0 +1,17 @@
+<section class="card">
+  <h2>SLA Dashboard</h2>
+  <p><strong>Approval warnings:</strong> <%= approval.warningCount || 0 %></p>
+  <p><strong>Approval overdue:</strong> <%= approval.overdueCount || 0 %></p>
+  <p><strong>Grievance warnings:</strong> <%= grievance.warningCount || 0 %></p>
+  <p><strong>Grievance overdue:</strong> <%= grievance.overdueCount || 0 %></p>
+</section>
+
+<section class="card">
+  <h3>Approval Age Buckets</h3>
+  <%- include('../partials/sla/age-bucket-card', { buckets: approval.ageBuckets || {} }) %>
+</section>
+
+<section class="card">
+  <h3>Grievance Age Buckets</h3>
+  <%- include('../partials/sla/age-bucket-card', { buckets: grievance.ageBuckets || {} }) %>
+</section>

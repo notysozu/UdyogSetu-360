@@ -1,0 +1,27 @@
+# UdyogSetu 360 Accessibility Checklist
+
+- Confirm the floating `Accessibility` button appears on the homepage, dashboards, auth pages, forms, detail pages, and error pages.
+- Open the accessibility panel using mouse, keyboard `Enter`, and keyboard `Space`.
+- Use the `Text Size` slider and verify text changes globally from `80%` to `140%`.
+- Refresh the page and confirm the saved text size is preserved.
+- Enable `High Contrast Mode` and confirm cards, text, and controls remain legible.
+- Enable `Dark Mode` and confirm the dashboard and public portal remain usable.
+- Enable `Grayscale Mode` and confirm the interface remains understandable without colour cues alone.
+- Enable `Reduce Motion` and confirm transitions, animations, and smooth scrolling are reduced.
+- Enable `Dyslexia-Friendly Font` and confirm the app switches to a system-safe readable font stack.
+- Enable `Increase Letter Spacing` and confirm paragraphs and labels remain readable without layout breakage.
+- Enable `Highlight Links` and confirm links become more visually distinct.
+- Enable `Large Cursor Mode` and confirm interactive targets feel larger and easier to hit.
+- Enable `Focus Mode` and confirm the current keyboard focus is strongly outlined.
+- Enable `Screen Reader Mode` and confirm helper text becomes more explicit where intended.
+- Click `Reset Accessibility Settings` and confirm every preference returns to default.
+- Use the `Skip to main content` link from keyboard navigation and confirm focus lands in `#main-content`.
+- Verify keyboard tab order remains logical on the homepage, dashboards, forms, and dialogs.
+- Confirm `Escape` closes the accessibility panel.
+- Confirm `Escape` still closes the cookie settings dialog on the homepage.
+- Check all forms for visible labels, helper text, keyboard submission, and non-placeholder-only guidance.
+- Verify flash success messages announce politely and error messages announce assertively.
+- Check dashboard tables for captions and readable headers.
+- Confirm status badges include visible text and do not rely on colour alone.
+- Review the mobile layout to confirm the floating accessibility button and panel do not block critical actions.
+- Confirm accessibility settings persist across route changes without requiring login or MongoDB storage.

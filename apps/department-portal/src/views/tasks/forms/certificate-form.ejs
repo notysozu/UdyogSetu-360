@@ -1,0 +1,8 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/certificate" enctype="multipart/form-data">
+  <h3>Issue certificate</h3>
+  <div class="form-field"><label for="certificateType">Certificate type</label><input id="certificateType" name="certificateType" required></div>
+  <div class="form-field"><label for="certificateNumber">Certificate number</label><input id="certificateNumber" name="certificateNumber"></div>
+  <div class="form-field"><label for="validFrom">Valid from</label><input id="validFrom" name="validFrom" type="date"></div>
+  <div class="form-field"><label for="validUntil">Valid until</label><input id="validUntil" name="validUntil" type="date"></div>
+  <button class="button" type="submit">Issue certificate</button>
+</form>

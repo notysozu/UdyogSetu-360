@@ -1,0 +1,12 @@
+[project]
+name = "udyogsetu-360-ai-service"
+version = "1.0.0"
+description = "Advisory FastAPI AI service for UdyogSetu 360"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+testpaths = ["app/tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"

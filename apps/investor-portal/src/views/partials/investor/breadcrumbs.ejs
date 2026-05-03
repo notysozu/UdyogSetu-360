@@ -1,0 +1,15 @@
+<% if (Array.isArray(items) && items.length) { %>
+  <nav aria-label="Breadcrumb" class="breadcrumbs">
+    <ol>
+      <% items.forEach(function(item, index) { %>
+        <li>
+          <% if (item.href && index !== items.length - 1) { %>
+            <a href="<%= item.href %>"><%= item.label %></a>
+          <% } else { %>
+            <span aria-current="page"><%= item.label %></span>
+          <% } %>
+        </li>
+      <% }); %>
+    </ol>
+  </nav>
+<% } %>

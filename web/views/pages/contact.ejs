@@ -1,0 +1,38 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Contact and support</p>
+    <h1>Contact UdyogSetu 360</h1>
+    <p>Send feedback, helpdesk requests or department integration questions.</p>
+  </div>
+</section>
+
+<form class="card form-grid" method="post" action="/contact">
+  <p class="form-helper" style="grid-column: 1 / -1;">Use this form for support, technical help and integration questions. Required fields are marked in text.</p>
+  <% if (errors && errors.length) { %>
+    <div class="alert alert-error" role="alert" aria-live="assertive">
+      <% errors.forEach((item) => { %>
+        <div><%= item %></div>
+      <% }) %>
+    </div>
+  <% } %>
+
+  <label>Name
+    <input name="name" required value="<%= values.name || '' %>">
+  </label>
+  <label>Email
+    <input name="email" type="email" required value="<%= values.email || '' %>">
+  </label>
+  <label>Topic
+    <select name="topic">
+      <option value="general" <%= values.topic === 'general' ? 'selected' : '' %>>General</option>
+      <option value="feedback" <%= values.topic === 'feedback' ? 'selected' : '' %>>Feedback</option>
+      <option value="helpdesk" <%= values.topic === 'helpdesk' ? 'selected' : '' %>>Helpdesk</option>
+      <option value="technical" <%= values.topic === 'technical' ? 'selected' : '' %>>Technical</option>
+      <option value="department" <%= values.topic === 'department' ? 'selected' : '' %>>Department integration</option>
+    </select>
+  </label>
+  <label style="grid-column: 1 / -1;">Message
+    <textarea name="message" required placeholder="How can we help?"><%= values.message || '' %></textarea>
+  </label>
+  <button class="button" type="submit">Submit Contact Request</button>
+</form>

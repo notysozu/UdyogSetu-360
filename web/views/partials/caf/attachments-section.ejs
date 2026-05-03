@@ -1,0 +1,41 @@
+<% const attachments = Array.isArray(formData.attachments) && formData.attachments.length ? formData.attachments : [{}, {}, {}]; %>
+<fieldset class="card">
+  <legend>Attachments</legend>
+  <p class="form-helper">Add attachment metadata. Binary files stay out of MongoDB; only metadata is stored here for now.</p>
+  <div id="caf-attachments-list" class="stack">
+    <% attachments.forEach(function(item, index) { %>
+      <div class="card card-subtle attachment-row">
+        <div class="grid-3">
+          <label>Document type
+            <select name="attachments[<%= index %>][documentType]">
+              <option value="">Select</option>
+              <% ['pan_card','gst_certificate','udyam_certificate','land_document','project_report','layout_plan','pollution_control_documents','fire_safety_plan','factory_safety_documents','labour_documents','authorisation_letter','other'].forEach(function(type) { %>
+                <option value="<%= type %>" <%= item.documentType === type ? 'selected' : '' %>><%= type.replaceAll('_', ' ') %></option>
+              <% }) %>
+            </select>
+          </label>
+          <label>Title
+            <input name="attachments[<%= index %>][title]" value="<%= item.title || '' %>">
+          </label>
+          <label>File name
+            <input name="attachments[<%= index %>][fileName]" value="<%= item.fileName || '' %>">
+          </label>
+          <label>MIME type
+            <input name="attachments[<%= index %>][mimeType]" value="<%= item.mimeType || 'application/pdf' %>">
+          </label>
+          <label>File size
+            <input name="attachments[<%= index %>][fileSize]" type="number" min="0" value="<%= item.fileSize ?? '' %>">
+          </label>
+          <label>Object key
+            <input name="attachments[<%= index %>][objectKey]" value="<%= item.objectKey || '' %>">
+          </label>
+          <label>Checksum
+            <input name="attachments[<%= index %>][checksum]" value="<%= item.checksum || '' %>">
+          </label>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+  <% if (fieldError('attachments')) { %><p class="field-error"><%= fieldError('attachments') %></p><% } %>
+  <button class="button button-muted" type="button" id="add-attachment-row">Add attachment metadata row</button>
+</fieldset>

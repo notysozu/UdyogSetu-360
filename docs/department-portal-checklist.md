@@ -1,0 +1,25 @@
+# Department Portal Checklist
+
+- Officer dashboard works
+- Task inbox works
+- Task detail works
+- Checklist scrutiny works
+- Document review works
+- Query issuance works
+- Inspection scheduling works
+- Fee demand works
+- Approval works
+- Rejection works
+- Certificate issuance works
+- Comments work
+- SLA countdown works
+- Supervisor views work
+- Nodal views work
+- Auditor views work
+- Every action creates domain event
+- Every action creates audit entry
+- Access control works
+- Responsive UI works
+- Accessible UI works
+- Tests added
+- Existing flows preserved

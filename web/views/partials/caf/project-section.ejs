@@ -1,0 +1,78 @@
+<% const project = formData.project || {}; %>
+<fieldset class="card">
+  <legend>Project Details</legend>
+  <div class="grid-2">
+    <label>Project name <span class="required-text">Required on final submit</span>
+      <input name="project[projectName]" value="<%= project.projectName || '' %>">
+      <% if (fieldError('project.projectName')) { %><span class="field-error"><%= fieldError('project.projectName') %></span><% } %>
+    </label>
+    <label>Project type <span class="required-text">Required on final submit</span>
+      <input name="project[projectType]" value="<%= project.projectType || '' %>">
+      <% if (fieldError('project.projectType')) { %><span class="field-error"><%= fieldError('project.projectType') %></span><% } %>
+    </label>
+    <label>Sector <span class="required-text">Required on final submit</span>
+      <input name="project[sector]" value="<%= project.sector || '' %>">
+      <% if (fieldError('project.sector')) { %><span class="field-error"><%= fieldError('project.sector') %></span><% } %>
+    </label>
+    <label>Investment amount (INR) <span class="required-text">Required on final submit</span>
+      <input name="project[investmentAmount]" type="number" min="0" step="0.01" value="<%= project.investmentAmount ?? '' %>">
+      <% if (fieldError('project.investmentAmount')) { %><span class="field-error"><%= fieldError('project.investmentAmount') %></span><% } %>
+    </label>
+    <label>Employment expected <span class="required-text">Required on final submit</span>
+      <input name="project[employmentExpected]" type="number" min="0" value="<%= project.employmentExpected ?? '' %>">
+      <% if (fieldError('project.employmentExpected')) { %><span class="field-error"><%= fieldError('project.employmentExpected') %></span><% } %>
+    </label>
+    <label>Project description
+      <textarea name="project[projectDescription]" rows="3"><%= project.projectDescription || '' %></textarea>
+    </label>
+    <label>Proposed start date
+      <input name="project[proposedStartDate]" type="date" value="<%= project.proposedStartDate ? new Date(project.proposedStartDate).toISOString().slice(0, 10) : '' %>">
+    </label>
+    <label>Commercial operation date
+      <input name="project[proposedCommercialOperationDate]" type="date" value="<%= project.proposedCommercialOperationDate ? new Date(project.proposedCommercialOperationDate).toISOString().slice(0, 10) : '' %>">
+      <% if (fieldError('project.proposedCommercialOperationDate')) { %><span class="field-error"><%= fieldError('project.proposedCommercialOperationDate') %></span><% } %>
+    </label>
+    <label>Project address <span class="required-text">Required on final submit</span>
+      <textarea name="project[projectAddress]" rows="3"><%= project.projectAddress || '' %></textarea>
+      <% if (fieldError('project.projectAddress')) { %><span class="field-error"><%= fieldError('project.projectAddress') %></span><% } %>
+    </label>
+    <label>Project district <span class="required-text">Required on final submit</span>
+      <input name="project[projectDistrict]" value="<%= project.projectDistrict || '' %>">
+      <% if (fieldError('project.projectDistrict')) { %><span class="field-error"><%= fieldError('project.projectDistrict') %></span><% } %>
+    </label>
+    <label>Project taluk <span class="required-text">Required on final submit</span>
+      <input name="project[projectTaluk]" value="<%= project.projectTaluk || '' %>">
+      <% if (fieldError('project.projectTaluk')) { %><span class="field-error"><%= fieldError('project.projectTaluk') %></span><% } %>
+    </label>
+    <label>Project pincode <span class="required-text">Required on final submit</span>
+      <input name="project[projectPincode]" value="<%= project.projectPincode || '' %>">
+      <% if (fieldError('project.projectPincode')) { %><span class="field-error"><%= fieldError('project.projectPincode') %></span><% } %>
+    </label>
+    <label>Land area sq. m. <span class="required-text">Required on final submit</span>
+      <input name="project[landAreaSqM]" type="number" min="0" step="0.01" value="<%= project.landAreaSqM ?? '' %>">
+      <% if (fieldError('project.landAreaSqM')) { %><span class="field-error"><%= fieldError('project.landAreaSqM') %></span><% } %>
+    </label>
+    <label>Built-up area sq. m.
+      <input name="project[builtUpAreaSqM]" type="number" min="0" step="0.01" value="<%= project.builtUpAreaSqM ?? '' %>">
+    </label>
+    <label>Power requirement kW <span class="required-text">Required on final submit</span>
+      <input name="project[powerRequirementKw]" type="number" min="0" step="0.01" value="<%= project.powerRequirementKw ?? '' %>">
+      <% if (fieldError('project.powerRequirementKw')) { %><span class="field-error"><%= fieldError('project.powerRequirementKw') %></span><% } %>
+    </label>
+    <label>Water requirement KLD
+      <input name="project[waterRequirementKld]" type="number" min="0" step="0.01" value="<%= project.waterRequirementKld ?? '' %>">
+    </label>
+    <label>Hazardous process
+      <input name="project[hazardousProcess]" type="checkbox" value="true" <%= project.hazardousProcess ? 'checked' : '' %>>
+    </label>
+    <label>Boiler installed
+      <input name="project[boilerInstalled]" type="checkbox" value="true" <%= project.boilerInstalled ? 'checked' : '' %>>
+    </label>
+    <label>Workers count
+      <input name="project[workersCount]" type="number" min="0" value="<%= project.workersCount ?? '' %>">
+    </label>
+    <label>Shifts count
+      <input name="project[shiftsCount]" type="number" min="0" value="<%= project.shiftsCount ?? '' %>">
+    </label>
+  </div>
+</fieldset>

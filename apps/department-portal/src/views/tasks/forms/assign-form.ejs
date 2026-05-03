@@ -1,0 +1,11 @@
+<form class="card compact-form" method="post" action="/supervisor/tasks/<%= task._id %>/assign">
+  <h3>Assign task</h3>
+  <div class="form-field"><label for="officerId">Officer ID</label><input id="officerId" name="officerId" required></div>
+  <div class="form-field"><label for="overrideReason">Reason</label><input id="overrideReason" name="overrideReason"></div>
+  <button class="button" type="submit">Assign</button>
+</form>
+<form class="card compact-form" method="post" action="/supervisor/tasks/<%= task._id %>/escalate">
+  <h3>Escalate task</h3>
+  <div class="form-field"><label for="reason">Reason</label><textarea id="reason" name="reason" rows="3" required></textarea></div>
+  <button class="button button--secondary" type="submit">Escalate</button>
+</form>

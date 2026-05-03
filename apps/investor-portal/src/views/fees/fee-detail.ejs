@@ -1,0 +1,11 @@
+<section class="card">
+  <h2>Fee detail</h2>
+  <p><strong>Amount:</strong> <%= view.formatCurrency(fee.amount, currentLocale) %></p>
+  <p><strong>Department:</strong> <%= view.departmentLabel(fee.departmentCode) %></p>
+  <p><strong>Due date:</strong> <%= view.formatDate(fee.dueAt, currentLocale) %></p>
+  <p><strong>Status:</strong> <%= fee.status %></p>
+  <p>Online payment integration placeholder.</p>
+  <form method="post" action="/fees/<%= fee._id %>/pay-placeholder">
+    <button class="button button--secondary" type="submit">Pay now placeholder</button>
+  </form>
+</section>

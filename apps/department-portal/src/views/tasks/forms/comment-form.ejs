@@ -1,0 +1,6 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/comments">
+  <h3>Add comment</h3>
+  <div class="form-field"><label for="body">Comment</label><textarea id="body" name="body" rows="3" required></textarea></div>
+  <div class="form-field"><label for="visibility">Visibility</label><select id="visibility" name="visibility"><option value="internal">Internal</option><option value="investor_visible">Investor visible</option><option value="nodal_visible">Nodal visible</option><option value="audit_only">Audit only</option></select></div>
+  <button class="button" type="submit">Add comment</button>
+</form>

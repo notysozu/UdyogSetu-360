@@ -1,0 +1,13 @@
+<section class="analytics-page analytics-review-pack">
+  <%- include('../partials/analytics/print-header') %>
+  <h1>Review Committee Pack</h1>
+  <p>This print-friendly pack includes top bottlenecks, delays, defects, rejection patterns, and escalations.</p>
+  <div class="analytics-grid">
+    <%- include('../partials/analytics/metric-card', { label: 'Total Applications', value: analytics.overview?.totalApplications || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Active Cases', value: analytics.overview?.activeCases || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Approvals', value: analytics.overview?.approvals || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Rejections', value: analytics.overview?.rejections || 0 }) %>
+  </div>
+  <p><button type="button" data-analytics-print>Print pack</button></p>
+  <%- include('../partials/analytics/export-button', { exportType: 'review_pack' }) %>
+</section>

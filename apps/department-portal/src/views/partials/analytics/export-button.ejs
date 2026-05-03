@@ -1,0 +1,10 @@
+<form method="post" action="/admin/analytics/exports" class="analytics-export-form">
+  <input type="hidden" name="exportType" value="<%= exportType %>">
+  <label for="format-<%= exportType %>">Format</label>
+  <select id="format-<%= exportType %>" name="format">
+    <option value="csv">CSV</option>
+    <option value="json">JSON</option>
+    <option value="html_print">HTML Print</option>
+  </select>
+  <button type="submit">Export</button>
+</form>

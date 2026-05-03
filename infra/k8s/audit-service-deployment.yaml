@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: audit-service
+  namespace: udyogsetu
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: audit-service
+  template:
+    metadata:
+      labels:
+        app: audit-service
+    spec:
+      containers:
+        - name: audit-service
+          image: registry.example/udyogsetu/audit-service:latest
+          ports:
+            - containerPort: 4104
+          envFrom:
+            - configMapRef:
+                name: udyogsetu-config
+            - secretRef:
+                name: udyogsetu-secrets
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 4104

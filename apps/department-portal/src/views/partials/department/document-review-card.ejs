@@ -1,0 +1,18 @@
+<article class="document-card">
+  <div class="document-card__header">
+    <div>
+      <h3><%= document.title || document.file?.originalName || 'Document' %></h3>
+      <p><%= document.documentType %> • Version <%= document.version || 1 %></p>
+    </div>
+    <%- include('./status-badge', { status: document.verification?.status || document.status }) %>
+  </div>
+  <form class="inline-form" method="post" action="/department/tasks/<%= task._id %>/documents/<%= document._id %>/review">
+    <input type="hidden" name="decision" value="verify">
+    <button class="button" type="submit">Verify</button>
+  </form>
+  <form class="inline-form" method="post" action="/department/tasks/<%= task._id %>/documents/<%= document._id %>/review">
+    <input type="hidden" name="decision" value="reject">
+    <div class="form-field"><label for="reason-<%= document._id %>">Reject reason</label><input id="reason-<%= document._id %>" name="reason"></div>
+    <button class="button button--secondary" type="submit">Reject</button>
+  </form>
+</article>

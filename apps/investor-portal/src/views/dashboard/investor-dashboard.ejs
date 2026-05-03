@@ -1,0 +1,106 @@
+<%- include('../partials/investor/breadcrumbs', { items: [{ label: t('dashboard', 'Dashboard') }] }) %>
+<section class="card welcome-card">
+  <h2>Welcome, <%= currentUser?.name || 'Investor' %></h2>
+  <p><strong>Organisation:</strong> <%= currentUser?.organisation || 'Not set' %></p>
+  <p><strong>Date:</strong> <%= view.formatDate(today, currentLocale) %></p>
+  <p>Complete your profile and keep case documents current to avoid delays.</p>
+</section>
+
+<section class="kpi-grid" aria-label="Dashboard summary">
+  <article class="kpi-card"><h3>Total cases</h3><p><%= summary.totalCases %></p></article>
+  <article class="kpi-card"><h3>Active cases</h3><p><%= summary.activeCases %></p></article>
+  <article class="kpi-card"><h3>Pending actions</h3><p><%= summary.pendingActions %></p></article>
+  <article class="kpi-card"><h3>Certificates issued</h3><p><%= summary.certificatesIssued %></p></article>
+  <article class="kpi-card"><h3>Open grievances</h3><p><%= summary.openGrievances %></p></article>
+  <article class="kpi-card"><h3>Upcoming renewals</h3><p><%= summary.upcomingRenewals %></p></article>
+</section>
+
+<div class="page-grid">
+  <section class="card">
+    <h2>Pending actions</h2>
+    <% if (pendingActions.length) { %>
+      <ul class="action-list">
+        <% pendingActions.forEach(function(item) { %>
+          <li><strong><%= item.actionLabel %></strong> for case <a href="/cases/<%= item.caseId %>"><%= item.caseId %></a> in <%= view.departmentLabel(item.departmentCode) %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <%- include('../partials/investor/empty-state', { title: 'No pending actions', message: 'You are up to date for now.' }) %>
+    <% } %>
+  </section>
+
+  <section class="card">
+    <h2>Renewal reminders</h2>
+    <% if (renewalReminders.length) { %>
+      <ul class="renewal-list">
+        <% renewalReminders.forEach(function(item) { %>
+          <li><a href="/certificates/<%= item._id || item.certificateNumber %>"><%= item.certificateNumber || item.title %></a> expires in <strong><%= item.daysRemaining %> days</strong></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No certificates are due for renewal in the next 90 days.</p>
+    <% } %>
+  </section>
+  
+</div>
+
+<section class="card">
+  <h2>Recent cases</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>Recent applications</caption>
+      <thead><tr><th>Case ID</th><th>Project</th><th>Status</th><th>Current stage</th><th>Departments</th><th>Last updated</th><th>Action</th></tr></thead>
+      <tbody>
+        <% recentCases.forEach(function(item) { %>
+          <tr>
+            <td><button class="button-link" type="button" data-copy-case-id="<%= item.universalCaseId || item.caseId %>"><%= item.universalCaseId || item.caseId %></button></td>
+            <td><%= item.title || item.projectName || 'Untitled project' %></td>
+            <td><%- include('../partials/investor/status-badge', { status: item.status }) %></td>
+            <td><%= item.currentStage || 'In progress' %></td>
+            <td><%= (item.departmentCodes || item.requiredDepartments?.map(function(dep) { return dep.departmentCode; }) || []).map(function(dep) { return view.departmentLabel(dep); }).join(', ') || 'Shared workflow' %></td>
+            <td><%= view.formatDate(item.lastActivityAt || item.updatedAt, currentLocale) %></td>
+            <td><a href="/cases/<%= item.caseId || item.universalCaseId %>">Open</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="page-grid">
+  <section class="card">
+    <h2>Timeline highlights</h2>
+    <div class="timeline">
+      <% timelineHighlights.forEach(function(item) { %>
+        <%- include('../partials/investor/timeline-item', { item: item }) %>
+      <% }) %>
+    </div>
+  </section>
+  <section class="card">
+    <h2>Notifications preview</h2>
+    <p><strong><%= notifications.unreadCount %></strong> unread notifications</p>
+    <% if (notifications.items.length) { %>
+      <ul class="notification-list">
+        <% notifications.items.forEach(function(item) { %>
+          <li class="notification-item <%= item.readAt ? '' : 'is-unread' %>">
+            <div>
+              <h3><%= item.title %></h3>
+              <p><%= item.message %></p>
+            </div>
+          </li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No recent notifications.</p>
+    <% } %>
+  </section>
+  <section class="card">
+    <h2>Quick links</h2>
+    <ul class="action-list">
+      <li><a href="/cases/new">Start a new CAF</a></li>
+      <li><a href="/documents">Open document centre</a></li>
+      <li><a href="/notifications">Review notifications</a></li>
+      <li><a href="/grievances/new">Submit a grievance</a></li>
+    </ul>
+  </section>
+</div>

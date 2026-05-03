@@ -1,0 +1,21 @@
+<% const fire = formData.fire || {}; %>
+<fieldset class="card">
+  <legend>Fire Safety Details</legend>
+  <div class="grid-2">
+    <label>Building height (m)
+      <input name="fire[buildingHeightM]" type="number" min="0" step="0.01" value="<%= fire.buildingHeightM ?? '' %>">
+    </label>
+    <label>Occupancy type
+      <input name="fire[occupancyType]" value="<%= fire.occupancyType || '' %>">
+    </label>
+    <label>Fire NOC required
+      <input name="fire[fireNocRequired]" type="checkbox" value="true" <%= fire.fireNocRequired ? 'checked' : '' %>>
+    </label>
+    <label>Storage of flammables
+      <input name="fire[storageOfFlammables]" type="checkbox" value="true" <%= fire.storageOfFlammables ? 'checked' : '' %>>
+    </label>
+    <label>Emergency exits provided
+      <input name="fire[emergencyExitsProvided]" type="checkbox" value="true" <%= fire.emergencyExitsProvided ? 'checked' : '' %>>
+    </label>
+  </div>
+</fieldset>

@@ -1,0 +1,15 @@
+<table>
+  <caption>Audit events</caption>
+  <thead><tr><th>Sequence</th><th>Event ID</th><th>Action</th><th>Resource</th><th>Time</th></tr></thead>
+  <tbody>
+    <% (items || []).forEach(function(item) { %>
+      <tr>
+        <td><%= item.auditSequence %></td>
+        <td><a href="/admin/audit/events/<%= item.eventId %>"><%= item.eventId %></a></td>
+        <td><%= item.action %></td>
+        <td><%= item.resourceType %>/<%= item.resourceId %></td>
+        <td><%= new Date(item.createdAt).toLocaleString() %></td>
+      </tr>
+    <% }) %>
+  </tbody>
+</table>

@@ -1,0 +1,16 @@
+<section class="card">
+  <h2>Raised queries</h2>
+  <% if (queries.length) { %>
+    <ul class="query-list">
+      <% queries.forEach(function(query) { %>
+        <li>
+          <a href="/queries/<%= query._id %>"><%= query.title %></a>
+          <span><%= view.departmentLabel(query.departmentCode) %></span>
+          <span><%= view.formatDate(query.dueAt, currentLocale) %></span>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No active queries.</p>
+  <% } %>
+</section>

@@ -1,0 +1,73 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Review before submit</p>
+    <h1>CAF Review</h1>
+    <p>Validation has passed. Review the derived approval tracks and then submit the case.</p>
+  </div>
+</section>
+
+<section class="grid-2">
+  <article class="card">
+    <h2>Application Summary</h2>
+    <p><strong>Draft Case ID:</strong> <%= caseDoc.caseId %></p>
+    <p><strong>Organisation:</strong> <%= formData.enterprise.legalName || 'Not provided' %></p>
+    <p><strong>Project:</strong> <%= formData.project.projectName || 'Not provided' %></p>
+    <p><strong>District:</strong> <%= formData.project.projectDistrict || 'Not provided' %></p>
+  </article>
+
+  <article class="card">
+    <h2>Validation Status</h2>
+    <p><strong>Errors:</strong> <%= Object.keys(validation.errors || {}).length %></p>
+    <p><strong>Warnings:</strong> <%= (validation.warnings || []).length %></p>
+    <p><strong>Duplicate confidence:</strong> <%= duplicateCheck ? duplicateCheck.confidence : 0 %>%</p>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Approval Tracks</h2>
+  <div class="stack">
+    <% approvalInfo.approvalTracks.forEach(function(track) { %>
+      <div class="card card-subtle">
+        <p><strong><%= track.title %></strong></p>
+        <p>Department: <%= track.departmentCode %></p>
+        <p>SLA days: <%= track.slaDays %></p>
+        <p><%= track.explanation %></p>
+      </div>
+    <% }) %>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Required Attachments</h2>
+  <ul>
+    <% approvalInfo.requiredAttachments.forEach(function(item) { %>
+      <li><%= item.replaceAll('_', ' ') %></li>
+    <% }) %>
+  </ul>
+</section>
+
+<% if (duplicateCheck && duplicateCheck.isDuplicate) { %>
+  <section class="card flash flash-warning">
+    <h2>Duplicate Warning</h2>
+    <p>We found similar applications. You can continue only with an override reason.</p>
+    <ul>
+      <% duplicateCheck.reasons.forEach(function(reason) { %><li><%= reason %></li><% }) %>
+    </ul>
+  </section>
+<% } %>
+
+<form method="post" action="<%= submitAction %>" class="card">
+  <input type="hidden" name="idempotencyKey" value="<%= generatedIdempotencyKey %>">
+  <% if (duplicateCheck && duplicateCheck.isDuplicate && !duplicateCheck.blocking) { %>
+    <label>Duplicate override confirmation
+      <input type="checkbox" name="duplicateOverrideConfirmed" value="true" required>
+    </label>
+    <label>Duplicate override reason
+      <textarea name="duplicateOverrideReason" rows="3" required></textarea>
+    </label>
+  <% } %>
+  <div class="button-row">
+    <a class="button button-muted" href="/cases/<%= caseDoc.caseId %>/edit">Back to edit</a>
+    <button class="button" type="submit">Submit Combined Application Form</button>
+  </div>
+</form>

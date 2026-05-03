@@ -1,0 +1,13 @@
+<article class="document-card">
+  <div class="document-card__header">
+    <div>
+      <h3><a href="/documents/<%= document._id %>"><%= document.title || document.file?.originalName || 'Document' %></a></h3>
+      <p><%= document.documentType %> • Version <%= document.version || 1 %></p>
+    </div>
+    <%- include('./status-badge', { status: document.verification?.status || document.status }) %>
+  </div>
+  <p><%= document.description || 'No description provided.' %></p>
+  <% if (document.tags && document.tags.length) { %>
+    <p class="tag-list"><%= document.tags.join(', ') %></p>
+  <% } %>
+</article>

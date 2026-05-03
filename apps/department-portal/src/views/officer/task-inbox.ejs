@@ -1,0 +1,8 @@
+<section class="card">
+  <h2>Task inbox</h2>
+  <% if (tasks.length) { tasks.forEach(function(task) { %>
+    <%- include('../partials/department/task-card', { task: task }) %>
+  <% }) } else { %>
+    <%- include('../partials/department/empty-state', { title: 'No tasks', message: 'No tasks matched the current filters.' }) %>
+  <% } %>
+</section>

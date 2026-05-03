@@ -1,0 +1,21 @@
+<% const power = formData.power || {}; %>
+<fieldset class="card">
+  <legend>Power Details</legend>
+  <div class="grid-2">
+    <label>Connection type
+      <input name="power[connectionType]" value="<%= power.connectionType || '' %>">
+    </label>
+    <label>Connected load kW
+      <input name="power[connectedLoadKw]" type="number" min="0" step="0.01" value="<%= power.connectedLoadKw ?? '' %>">
+    </label>
+    <label>Contract demand kVA
+      <input name="power[contractDemandKva]" type="number" min="0" step="0.01" value="<%= power.contractDemandKva ?? '' %>">
+    </label>
+    <label>Backup generator
+      <input name="power[backupGenerator]" type="checkbox" value="true" <%= power.backupGenerator ? 'checked' : '' %>>
+    </label>
+    <label>Transformer required
+      <input name="power[transformerRequired]" type="checkbox" value="true" <%= power.transformerRequired ? 'checked' : '' %>>
+    </label>
+  </div>
+</fieldset>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title><%= title || pageTitle %></title>
+  <link rel="stylesheet" href="/css/public-dashboard.css">
+  <link rel="stylesheet" href="/css/public-verification.css">
+  <link rel="stylesheet" href="/css/public-print.css" media="print">
+</head>
+<body>
+  <a class="skip-link" href="#main-content">Skip to content</a>
+  <header class="public-header">
+    <div class="public-shell">
+      <div>
+        <p class="eyebrow">UdyogSetu 360</p>
+        <h1 class="site-title">Public Transparency Dashboard</h1>
+      </div>
+      <nav aria-label="Public navigation">
+        <ul class="top-nav">
+          <li><a href="/public/dashboard">Dashboard</a></li>
+          <li><a href="/public/departments">Departments</a></li>
+          <li><a href="/public/grievances">Grievances</a></li>
+          <li><a href="/public/certificates">Certificates</a></li>
+          <li><a href="/verify">Verify</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <main id="main-content" class="public-shell">
+    <%- body %>
+  </main>
+  <footer class="public-footer">
+    <div class="public-shell">
+      <p>This dashboard displays aggregate public metrics only. Personal or enterprise-specific data is not shown.</p>
+    </div>
+  </footer>
+  <script src="/js/public-dashboard.js" defer></script>
+  <script src="/js/public-verification.js" defer></script>
+</body>
+</html>

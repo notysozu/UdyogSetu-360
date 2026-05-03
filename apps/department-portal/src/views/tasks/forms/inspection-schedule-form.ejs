@@ -1,0 +1,7 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/inspection/schedule">
+  <h3>Schedule inspection</h3>
+  <div class="form-field"><label for="inspectionType">Inspection type</label><input id="inspectionType" name="inspectionType" required></div>
+  <div class="form-field"><label for="scheduledAt">Scheduled at</label><input id="scheduledAt" name="scheduledAt" type="datetime-local" required></div>
+  <div class="form-field"><label for="location">Location</label><input id="location" name="location" required></div>
+  <button class="button" type="submit">Schedule inspection</button>
+</form>

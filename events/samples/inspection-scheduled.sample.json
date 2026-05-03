@@ -1,0 +1,32 @@
+{
+  "id": "55555555-5555-4555-8555-555555555555",
+  "source": "us360.orchestration-service",
+  "specversion": "1.0",
+  "type": "inspection.scheduled.v1",
+  "subject": "inspection/US360-KA-2026-000001",
+  "time": "2026-05-02T00:04:00.000Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://udyogsetu360.local/schemas/inspection.scheduled.v1.json",
+  "correlationid": "corr-inspection-scheduled-001",
+  "causationid": null,
+  "traceparent": null,
+  "partitionkey": "US360-KA-2026-000001",
+  "data": {
+    "eventVersion": 1,
+    "aggregateType": "inspection",
+    "aggregateId": "68143f0d86e5ab0012345675",
+    "universalCaseId": "US360-KA-2026-000001",
+    "previousStatus": "requested",
+    "nextStatus": "scheduled",
+    "actor": {
+      "actorType": "user",
+      "actorId": "68143f0d86e5ab0012345602",
+      "role": "department_officer"
+    },
+    "payload": {
+      "departmentCode": "fire",
+      "scheduledAt": "2026-05-10T10:00:00.000Z"
+    },
+    "metadata": {}
+  }
+}

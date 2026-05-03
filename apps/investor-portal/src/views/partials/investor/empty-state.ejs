@@ -1,0 +1,7 @@
+<section class="empty-state">
+  <h2><%= title %></h2>
+  <p><%= message %></p>
+  <% if (href) { %>
+    <a class="button" href="<%= href %>"><%= actionLabel || 'Continue' %></a>
+  <% } %>
+</section>

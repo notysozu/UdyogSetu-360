@@ -1,0 +1,95 @@
+<%- include('../partials/investor/breadcrumbs', { items: [{ label: 'Cases', href: '/cases' }, { label: caseDoc.universalCaseId || caseDoc.caseId }] }) %>
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2><%= caseDoc.universalCaseId || caseDoc.caseId %></h2>
+      <p><%= caseDoc.title || caseDoc.projectName || 'Case detail' %></p>
+    </div>
+    <div class="section-actions">
+      <a class="button button--secondary" href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/print">Print</a>
+      <a class="button button--secondary" href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/acknowledgement">Acknowledgement</a>
+    </div>
+  </div>
+  <p><strong>Status:</strong> <%- include('../partials/investor/status-badge', { status: caseDoc.status }) %></p>
+  <p><strong>Current stage:</strong> <%= caseDoc.currentStage || 'In progress' %></p>
+</section>
+<div class="page-grid">
+  <section class="card">
+    <h2>Department-wise progress</h2>
+    <% tasks.forEach(function(task) { %>
+      <%- include('../partials/investor/task-card', { task: task }) %>
+    <% }) %>
+  </section>
+  <section class="card">
+    <h2>Quick sections</h2>
+    <ul class="action-list">
+      <li><a href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/timeline">View full timeline</a></li>
+      <li><a href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/tasks">Review all tasks</a></li>
+      <li><a href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/documents">Open case documents</a></li>
+      <li><a href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/queries">Raised queries</a></li>
+      <li><a href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/fees">Fee placeholders</a></li>
+      <li><a href="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/certificates">Certificates</a></li>
+    </ul>
+  </section>
+</div>
+<section class="card">
+  <h2>Recent timeline</h2>
+  <div class="timeline">
+    <% timeline.forEach(function(item) { %>
+      <%- include('../partials/investor/timeline-item', { item: item }) %>
+    <% }) %>
+  </div>
+</section>
+<div class="page-grid">
+  <section class="card">
+    <h2>Documents</h2>
+    <% if (documents.length) { %>
+      <ul class="action-list">
+        <% documents.slice(0, 5).forEach(function(document) { %>
+          <li><a href="/documents/<%= document._id %>"><%= document.title || document.file?.originalName || 'Document' %></a> • <%= view.statusLabel(document.verification?.status || document.status) %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No documents linked yet.</p>
+    <% } %>
+  </section>
+  <section class="card">
+    <h2>Raised queries</h2>
+    <% if (queries.length) { %>
+      <ul class="action-list">
+        <% queries.forEach(function(query) { %>
+          <li><a href="/queries/<%= query._id %>"><%= query.title %></a> • due <%= view.formatDate(query.dueAt, currentLocale) %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No active queries.</p>
+    <% } %>
+  </section>
+</div>
+<div class="page-grid">
+  <section class="card">
+    <h2>Submitted responses</h2>
+    <% if (responses.length) { %>
+      <% responses.slice(0, 3).forEach(function(item) { %>
+        <article class="response-card">
+          <p><%= item.payload?.message || 'Response submitted.' %></p>
+          <p><%= view.formatDateTime(item.occurredAt || item.createdAt, currentLocale) %></p>
+        </article>
+      <% }) %>
+    <% } else { %>
+      <p>No responses submitted yet.</p>
+    <% } %>
+  </section>
+  <section class="card">
+    <h2>Grievances</h2>
+    <% if (grievances.length) { %>
+      <ul class="action-list">
+        <% grievances.forEach(function(grievance) { %>
+          <li><a href="/grievances/<%= grievance._id %>"><%= grievance.subject %></a> • <%= grievance.status %></li>
+        <% }) %>
+      </ul>
+    <% } else { %>
+      <p>No grievances linked to this case.</p>
+    <% } %>
+  </section>
+</div>

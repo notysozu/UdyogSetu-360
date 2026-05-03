@@ -1,0 +1,30 @@
+<form method="post" action="/verify" class="filter-card verification-form">
+  <fieldset>
+    <legend>Verify a certificate or approval</legend>
+    <p class="helper-text">Use one of these methods: verification token, certificate/reference number with Universal Case ID, or certificate/reference number with checksum.</p>
+    <div class="form-grid">
+      <div class="filter-group">
+        <label for="certificateNumber">Certificate or reference number</label>
+        <input id="certificateNumber" name="certificateNumber" value="<%= values?.certificateNumber || '' %>">
+      </div>
+      <div class="filter-group">
+        <label for="universalCaseId">Universal Case ID</label>
+        <input id="universalCaseId" name="universalCaseId" value="<%= values?.universalCaseId || '' %>" placeholder="US360-KA-2026-000001">
+      </div>
+      <div class="filter-group">
+        <label for="checksum">Checksum</label>
+        <input id="checksum" name="checksum" value="<%= values?.checksum || '' %>">
+      </div>
+      <div class="filter-group">
+        <label for="verificationToken">Verification token</label>
+        <input id="verificationToken" name="verificationToken" value="<%= values?.verificationToken || '' %>">
+      </div>
+    </div>
+    <% if (String(process.env.PUBLIC_VERIFY_ENABLE_CAPTCHA_PLACEHOLDER || 'false') === 'true') { %>
+      <div class="filter-group">
+        <label><input type="checkbox" name="captchaPlaceholder" value="yes"> I confirm this is a manual verification request</label>
+      </div>
+    <% } %>
+    <button class="button" type="submit">Verify record</button>
+  </fieldset>
+</form>

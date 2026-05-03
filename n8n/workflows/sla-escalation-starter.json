@@ -1,0 +1,109 @@
+{
+  "name": "UdyogSetu 360 - SLA Escalation Starter",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 6
+            }
+          ]
+        }
+      },
+      "id": "schedule-trigger",
+      "name": "Every 6 hours",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        260,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "url": "http://web:3000/api/v1/health",
+        "options": {}
+      },
+      "id": "health-check",
+      "name": "Check Node API",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        520,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "http://web:3000/webhooks/n8n/escalation",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "x-udyogsetu-secret",
+              "value": "dev-n8n-secret"
+            }
+          ]
+        },
+        "sendBody": true,
+        "bodyParameters": {
+          "parameters": [
+            {
+              "name": "caseId",
+              "value": "US360-CHANGE-ME"
+            },
+            {
+              "name": "title",
+              "value": "SLA reminder from n8n"
+            },
+            {
+              "name": "message",
+              "value": "This starter workflow can be connected to real ageing queries later."
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "send-escalation",
+      "name": "Send escalation webhook",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        780,
+        300
+      ]
+    }
+  ],
+  "connections": {
+    "Every 6 hours": {
+      "main": [
+        [
+          {
+            "node": "Check Node API",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Node API": {
+      "main": [
+        [
+          {
+            "node": "Send escalation webhook",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "active": false,
+  "versionId": "starter"
+}

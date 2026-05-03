@@ -1,0 +1,17 @@
+<section class="card">
+  <h2>Renewals</h2>
+  <% if (reminders && reminders.length) { %>
+    <ul class="renewal-list">
+      <% reminders.forEach(function(item) { %>
+        <li>
+          <strong><%= item.certificateNumber || item.title %></strong>
+          expires on <%= view.formatDate(item.expiresAt, currentLocale) %>
+          and has <%= item.daysRemaining %> days remaining.
+          <a href="/certificates/<%= item._id || item.certificateNumber %>/renew">Renew</a>
+        </li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No renewal reminders are due right now.</p>
+  <% } %>
+</section>

@@ -1,0 +1,14 @@
+<section class="card">
+  <h2><%= query.title %></h2>
+  <p><strong>Department:</strong> <%= view.departmentLabel(query.departmentCode) %></p>
+  <p><strong>Due date:</strong> <%= view.formatDate(query.dueAt, currentLocale) %></p>
+  <p><%= query.message %></p>
+</section>
+<section class="card">
+  <h2>Submit response</h2>
+  <form method="post" action="/queries/<%= query._id %>/respond">
+    <input type="hidden" name="caseId" value="<%= query.caseId %>">
+    <div class="form-field"><label for="message">Response</label><textarea id="message" name="message" rows="5" required></textarea></div>
+    <button class="button" type="submit">Submit</button>
+  </form>
+</section>

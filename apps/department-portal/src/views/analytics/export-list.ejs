@@ -1,0 +1,6 @@
+<section class="analytics-page">
+  <h1>Analytics Exports</h1>
+  <%- include('../partials/analytics/export-button', { exportType: 'overview' }) %>
+  <% const rows = (rows || []).map(r => [r.exportId, r.exportType, r.format, r.status, r.rowCount || 0, r.createdAt ? new Date(r.createdAt).toISOString() : '-']); %>
+  <%- include('../partials/analytics/table-card', { title: 'Export Jobs', headers: ['Export ID', 'Type', 'Format', 'Status', 'Rows', 'Created At'], rows }) %>
+</section>

@@ -1,0 +1,17 @@
+<form class="analytics-filter-bar" method="get">
+  <fieldset>
+    <legend>Filters</legend>
+    <label for="fromDate">From date</label>
+    <input id="fromDate" name="fromDate" type="date" value="<%= filters?.fromDate || '' %>">
+    <label for="toDate">To date</label>
+    <input id="toDate" name="toDate" type="date" value="<%= filters?.toDate || '' %>">
+    <label for="departmentCode">Department</label>
+    <select id="departmentCode" name="departmentCode">
+      <option value="">All departments</option>
+      <% ['pollution','power','fire','industrial_safety','labour'].forEach(function(dep){ %>
+        <option value="<%= dep %>" <%= filters?.departmentCode === dep ? 'selected' : '' %>><%= dep %></option>
+      <% }) %>
+    </select>
+    <button type="submit">Apply</button>
+  </fieldset>
+</form>

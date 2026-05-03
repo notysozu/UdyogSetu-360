@@ -1,0 +1,8 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/fee-demand">
+  <h3>Create fee demand</h3>
+  <div class="form-field"><label for="feeType">Fee type</label><input id="feeType" name="feeType" required></div>
+  <div class="form-field"><label for="amount">Amount</label><input id="amount" name="amount" type="number" min="0" required></div>
+  <div class="form-field"><label for="totalAmount">Total amount</label><input id="totalAmount" name="totalAmount" type="number" min="0"></div>
+  <div class="form-field"><label for="dueAt">Due date</label><input id="dueAt" name="dueAt" type="date" required></div>
+  <button class="button" type="submit">Create fee demand</button>
+</form>

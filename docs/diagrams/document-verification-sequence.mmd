@@ -1,0 +1,18 @@
+sequenceDiagram
+  autonumber
+  actor Investor
+  participant Doc as Document Service
+  participant S3 as S3/MinIO
+  participant Scanner as DigiLocker/Scanner
+  participant N8N
+  participant Node as Node Verification API
+  participant Audit as Audit/Event
+  Investor->>Doc: Request upload intent
+  Doc->>S3: Create signed upload URL
+  Investor->>S3: Upload binary
+  Investor->>Doc: Confirm upload metadata
+  Doc->>Audit: document.uploaded audit/event
+  Scanner->>N8N: Verification callback
+  N8N->>Node: Safe verification payload
+  Node->>Doc: Update verification status through service
+  Node->>Audit: document.verified or document.rejected

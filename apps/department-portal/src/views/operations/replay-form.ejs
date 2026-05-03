@@ -1,0 +1,18 @@
+<section class="card">
+  <h2>Start Replay</h2>
+  <form method="post" action="/admin/operations/replay">
+    <label for="reason">Reason</label>
+    <textarea id="reason" name="reason" required></textarea>
+    <label for="mode">Mode</label>
+    <select id="mode" name="mode">
+      <option value="dry_run">Dry Run</option>
+      <option value="republish">Republish</option>
+      <option value="reprocess_handlers">Reprocess Handlers</option>
+      <option value="rebuild_projection">Rebuild Projection</option>
+    </select>
+    <label for="universalCaseId">Universal Case ID (optional)</label>
+    <input id="universalCaseId" name="universalCaseId" />
+    <label><input type="checkbox" name="dryRun" value="true" checked /> Dry run</label>
+    <button type="submit">Start replay</button>
+  </form>
+</section>

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title || 'UdyogSetu 360' %></title>
+    <link rel="stylesheet" href="/css/styles.css">
+    <link rel="stylesheet" href="/css/accessibility.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    >
+    <script>
+      (function () {
+        try {
+          var root = document.documentElement;
+          var scale = Number(localStorage.getItem('us360_font_scale') || '100');
+          if (!Number.isNaN(scale)) root.style.setProperty('--app-font-scale', String(Math.min(140, Math.max(80, scale)) / 100));
+          if (localStorage.getItem('us360_high_contrast') === 'true') root.classList.add('a11y-high-contrast');
+          if (localStorage.getItem('us360_dark_mode') === 'true') root.classList.add('a11y-dark-mode');
+          if (localStorage.getItem('us360_grayscale') === 'true') root.classList.add('a11y-grayscale');
+          if (localStorage.getItem('us360_reduce_motion') === 'true') root.classList.add('a11y-reduce-motion');
+          if (localStorage.getItem('us360_dyslexia_font') === 'true') root.classList.add('a11y-dyslexia-font');
+          if (localStorage.getItem('us360_letter_spacing') === 'true') root.classList.add('a11y-letter-spacing');
+          if (localStorage.getItem('us360_highlight_links') === 'true') root.classList.add('a11y-highlight-links');
+          if (localStorage.getItem('us360_large_cursor') === 'true') root.classList.add('a11y-large-cursor');
+          if (localStorage.getItem('us360_focus_mode') === 'true') root.classList.add('a11y-focus-mode');
+          if (localStorage.getItem('us360_screen_reader_mode') === 'true') root.classList.add('a11y-screen-reader-mode');
+        } catch (_error) {}
+      })();
+    </script>
+  </head>
+  <body class="app-theme-shell">
+    <%- include('../partials/nav') %>
+    <section class="app-hero-band" aria-hidden="true">
+      <div class="app-hero-band__inner">
+        <p class="app-hero-band__eyebrow">Karnataka Government Interoperability Platform</p>
+        <h1 class="app-hero-band__title"><%= title || 'UdyogSetu 360' %></h1>
+        <p class="app-hero-band__copy">One Submission. Every Department. Fully Synced.</p>
+      </div>
+    </section>
+    <%- include('../partials/accessibility-panel') %>
+    <main id="main-content" class="page-shell app-page-shell" tabindex="-1">
+      <%- include('../partials/flash') %>
+      <%- body %>
+    </main>
+    <footer class="site-footer">
+      <span>UdyogSetu 360</span>
+      <span>Correlation ID: <%= correlationId %></span>
+    </footer>
+    <script src="/js/main.js"></script>
+    <script src="/js/accessibility.js" defer></script>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+<section class="analytics-page">
+  <h1>Rejection Reasons</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.departmentCode, r.caseType, r.taskType, r.rejectionCategory, r.rejectionReason, r.rejectionCount]); %>
+  <%- include('../partials/analytics/table-card', { title: 'Top Rejection Reasons', headers: ['Department', 'Case Type', 'Task Type', 'Category', 'Reason', 'Count'], rows }) %>
+  <%- include('../partials/analytics/export-button', { exportType: 'rejection_reasons' }) %>
+</section>

@@ -1,0 +1,8 @@
+<section class="card">
+  <h2>Replay Attempt <%= attempt.replayId %></h2>
+  <p><strong>Status:</strong> <%= attempt.status %></p>
+  <p><strong>Reason:</strong> <%= attempt.reason %></p>
+  <p><strong>Mode:</strong> <%= attempt.mode %></p>
+  <p><strong>Dry run:</strong> <%= attempt.dryRun ? 'Yes' : 'No' %></p>
+  <p><strong>Processed:</strong> <%= attempt.processedEvents %> / <%= attempt.totalEvents %></p>
+</section>

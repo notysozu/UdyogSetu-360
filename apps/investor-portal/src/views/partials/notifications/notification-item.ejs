@@ -1,0 +1,5 @@
+<article class="notification-item <%= notification.readAt ? 'read' : 'unread' %>">
+  <h3><%= notification.title || notification.subject || 'Notification' %></h3>
+  <p><%= notification.body %></p>
+  <p><small><%= new Date(notification.createdAt || Date.now()).toLocaleString() %></small></p>
+</article>

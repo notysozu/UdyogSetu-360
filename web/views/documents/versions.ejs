@@ -1,0 +1,12 @@
+<section class="stack">
+  <h1>Versions for <%= document.title || document.documentType %></h1>
+  <ul class="stack">
+    <% for (const version of versions) { %>
+      <li>
+        <span>Version <%= version.version %></span>
+        <span><%= version.status %></span>
+        <a href="/documents/<%= version._id %>">Open</a>
+      </li>
+    <% } %>
+  </ul>
+</section>

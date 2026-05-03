@@ -1,0 +1,9 @@
+<% const state = (sla && sla.status) || 'running'; %>
+<div class="sla-countdown sla-<%= state %>">
+  <strong>SLA:</strong>
+  <% if (sla && sla.dueAt) { %>
+    Due <time datetime="<%= new Date(sla.dueAt).toISOString() %>"><%= new Date(sla.dueAt).toLocaleString() %></time>
+  <% } else { %>
+    Not available
+  <% } %>
+</div>

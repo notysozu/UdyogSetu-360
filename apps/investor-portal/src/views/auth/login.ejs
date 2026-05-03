@@ -1,0 +1,16 @@
+<section class="auth-card">
+  <h2>Investor Sign In</h2>
+  <p>Use your UdyogSetu 360 investor account to continue.</p>
+  <form method="post" action="/auth/login">
+    <input type="hidden" name="next" value="<%= next || '' %>">
+    <div class="form-field">
+      <label for="email">Email address</label>
+      <input id="email" name="email" type="email" autocomplete="email" value="<%= values?.email || '' %>" required>
+    </div>
+    <div class="form-field">
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" autocomplete="current-password" required>
+    </div>
+    <button class="button" type="submit">Sign in</button>
+  </form>
+</section>

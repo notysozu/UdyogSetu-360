@@ -1,0 +1,26 @@
+<nav id="department-sidebar" class="sidebar" aria-label="Department navigation">
+  <ul class="sidebar__list">
+    <% if (['department_officer','admin','department_supervisor'].includes(currentRole)) { %>
+      <li><a href="/department">Officer dashboard</a></li>
+      <li><a href="/department/tasks">Task inbox</a></li>
+      <li><a href="/department/grievances">Grievances</a></li>
+      <li><a href="/department/sla">SLA</a></li>
+    <% } %>
+    <% if (['department_supervisor','admin'].includes(currentRole)) { %>
+      <li><a href="/supervisor">Supervisor dashboard</a></li>
+      <li><a href="/supervisor/workload">Workload</a></li>
+      <li><a href="/supervisor/sla">SLA dashboard</a></li>
+    <% } %>
+    <% if (['nodal_officer','admin'].includes(currentRole)) { %>
+      <li><a href="/nodal">Nodal dashboard</a></li>
+      <li><a href="/nodal/cases">Cross-department cases</a></li>
+      <li><a href="/nodal/escalations">Escalations</a></li>
+    <% } %>
+    <% if (['auditor','admin'].includes(currentRole)) { %>
+      <li><a href="/audit">Audit dashboard</a></li>
+      <li><a href="/audit/events">Audit events</a></li>
+      <li><a href="/admin/audit">Admin audit viewer</a></li>
+      <li><a href="/admin/operations">Operations console</a></li>
+    <% } %>
+  </ul>
+</nav>

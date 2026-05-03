@@ -1,0 +1,30 @@
+<section class="content-shell">
+  <div class="section-heading">
+    <p class="eyebrow">Operations</p>
+    <h1><%= heading %></h1>
+    <p><%= description %></p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <caption><%= heading %> case overview</caption>
+      <thead>
+        <tr>
+          <th>Case ID</th>
+          <th>Enterprise</th>
+          <th>Status</th>
+          <th>Stage</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% cases.forEach((caseDoc) => { %>
+          <tr>
+            <td><code><%= caseDoc.caseId || caseDoc.universalCaseId %></code></td>
+            <td><%= caseDoc.enterprise?.name || caseDoc.title || 'Case' %></td>
+            <td><%= caseDoc.status %></td>
+            <td><%= caseDoc.currentStage %></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>

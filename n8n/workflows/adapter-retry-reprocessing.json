@@ -1,0 +1,8 @@
+{
+  "name": "adapter-retry-reprocessing",
+  "nodes": [],
+  "connections": {},
+  "active": false,
+  "settings": {},
+  "tags": ["adapters", "retry"]
+}

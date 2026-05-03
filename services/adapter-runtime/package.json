@@ -1,0 +1,17 @@
+{
+  "name": "@udyogsetu/adapter-runtime",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node src/server.js",
+    "test": "node --test",
+    "seed:adapters": "node src/seed/adapter-config.seed.js"
+  },
+  "dependencies": {
+    "amqplib": "^1.0.3",
+    "express": "^4.21.2",
+    "mongoose": "^8.23.1"
+  }
+}

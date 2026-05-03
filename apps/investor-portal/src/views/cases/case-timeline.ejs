@@ -1,0 +1,9 @@
+<%- include('../partials/investor/breadcrumbs', { items: [{ label: 'Cases', href: '/cases' }, { label: caseDoc?.caseId || 'Case', href: '/cases/' + (caseDoc?.caseId || '') }, { label: 'Timeline' }] }) %>
+<section class="card">
+  <h2>Case timeline</h2>
+  <div class="timeline">
+    <% timeline.forEach(function(item) { %>
+      <%- include('../partials/investor/timeline-item', { item: item }) %>
+    <% }) %>
+  </div>
+</section>

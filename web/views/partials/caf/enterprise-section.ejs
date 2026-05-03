@@ -1,0 +1,73 @@
+<% const enterprise = formData.enterprise || {}; %>
+<fieldset class="card">
+  <legend>Enterprise Details</legend>
+  <p class="form-helper">Provide the registered enterprise and authorised signatory details.</p>
+  <div class="grid-2">
+    <label>Legal name <span class="required-text">Required on final submit</span>
+      <input name="enterprise[legalName]" value="<%= enterprise.legalName || '' %>" autocomplete="organization">
+      <% if (fieldError('enterprise.legalName')) { %><span class="field-error"><%= fieldError('enterprise.legalName') %></span><% } %>
+    </label>
+    <label>Trade name
+      <input name="enterprise[tradeName]" value="<%= enterprise.tradeName || '' %>">
+    </label>
+    <label>Organisation type <span class="required-text">Required on final submit</span>
+      <select name="enterprise[organisationType]">
+        <option value="">Select</option>
+        <% ['proprietorship','partnership','llp','private_limited','public_limited','trust','society','government','other'].forEach(function(type) { %>
+          <option value="<%= type %>" <%= enterprise.organisationType === type ? 'selected' : '' %>><%= type.replaceAll('_', ' ') %></option>
+        <% }) %>
+      </select>
+      <% if (fieldError('enterprise.organisationType')) { %><span class="field-error"><%= fieldError('enterprise.organisationType') %></span><% } %>
+    </label>
+    <label>Registration number
+      <input name="enterprise[registrationNumber]" value="<%= enterprise.registrationNumber || '' %>">
+    </label>
+    <label>PAN
+      <input name="enterprise[pan]" value="<%= enterprise.pan || '' %>">
+      <% if (fieldError('enterprise.pan')) { %><span class="field-error"><%= fieldError('enterprise.pan') %></span><% } %>
+    </label>
+    <label>GSTIN
+      <input name="enterprise[gstin]" value="<%= enterprise.gstin || '' %>">
+      <% if (fieldError('enterprise.gstin')) { %><span class="field-error"><%= fieldError('enterprise.gstin') %></span><% } %>
+    </label>
+    <label>Udyam number
+      <input name="enterprise[udyamNumber]" value="<%= enterprise.udyamNumber || '' %>">
+    </label>
+    <label>Contact email <span class="required-text">Required on final submit</span>
+      <input name="enterprise[contactEmail]" type="email" value="<%= enterprise.contactEmail || '' %>" autocomplete="email">
+      <% if (fieldError('enterprise.contactEmail')) { %><span class="field-error"><%= fieldError('enterprise.contactEmail') %></span><% } %>
+    </label>
+    <label>Contact phone <span class="required-text">Required on final submit</span>
+      <input name="enterprise[contactPhone]" value="<%= enterprise.contactPhone || '' %>" autocomplete="tel">
+      <% if (fieldError('enterprise.contactPhone')) { %><span class="field-error"><%= fieldError('enterprise.contactPhone') %></span><% } %>
+    </label>
+    <label>Registered address
+      <textarea name="enterprise[registeredAddress]" rows="3"><%= enterprise.registeredAddress || '' %></textarea>
+    </label>
+    <label>District <span class="required-text">Required on final submit</span>
+      <input name="enterprise[district]" value="<%= enterprise.district || '' %>">
+      <% if (fieldError('enterprise.district')) { %><span class="field-error"><%= fieldError('enterprise.district') %></span><% } %>
+    </label>
+    <label>Taluk
+      <input name="enterprise[taluk]" value="<%= enterprise.taluk || '' %>">
+    </label>
+    <label>Pincode
+      <input name="enterprise[pincode]" value="<%= enterprise.pincode || '' %>">
+      <% if (fieldError('enterprise.pincode')) { %><span class="field-error"><%= fieldError('enterprise.pincode') %></span><% } %>
+    </label>
+    <label>Authorised signatory name <span class="required-text">Required on final submit</span>
+      <input name="enterprise[authorisedSignatoryName]" value="<%= enterprise.authorisedSignatoryName || '' %>">
+      <% if (fieldError('enterprise.authorisedSignatoryName')) { %><span class="field-error"><%= fieldError('enterprise.authorisedSignatoryName') %></span><% } %>
+    </label>
+    <label>Authorised signatory designation
+      <input name="enterprise[authorisedSignatoryDesignation]" value="<%= enterprise.authorisedSignatoryDesignation || '' %>">
+    </label>
+    <label>Authorised signatory email <span class="required-text">Required on final submit</span>
+      <input name="enterprise[authorisedSignatoryEmail]" type="email" value="<%= enterprise.authorisedSignatoryEmail || '' %>">
+      <% if (fieldError('enterprise.authorisedSignatoryEmail')) { %><span class="field-error"><%= fieldError('enterprise.authorisedSignatoryEmail') %></span><% } %>
+    </label>
+    <label>Authorised signatory phone
+      <input name="enterprise[authorisedSignatoryPhone]" value="<%= enterprise.authorisedSignatoryPhone || '' %>">
+    </label>
+  </div>
+</fieldset>

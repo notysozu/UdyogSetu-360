@@ -1,0 +1,6 @@
+<% if ((success && success.length) || (error && error.length)) { %>
+  <section class="flash-stack" aria-live="polite">
+    <% success.forEach(function(message) { %><div class="flash flash--success"><%= message %></div><% }) %>
+    <% error.forEach(function(message) { %><div class="flash flash--error"><%= message %></div><% }) %>
+  </section>
+<% } %>

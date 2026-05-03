@@ -1,0 +1,18 @@
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2>Grievances</h2>
+      <p>Track support tickets and case-related escalations.</p>
+    </div>
+    <a class="button" href="/grievances/new">Submit grievance</a>
+  </div>
+  <% if (grievances.length) { %>
+    <ul class="grievance-list">
+      <% grievances.forEach(function(grievance) { %>
+        <li><a href="/grievances/<%= grievance._id %>"><%= grievance.subject %></a> • <%- include('../partials/grievances/grievance-status-badge', { status: grievance.status }) %></li>
+      <% }) %>
+    </ul>
+  <% } else { %>
+    <p>No grievances submitted yet.</p>
+  <% } %>
+</section>

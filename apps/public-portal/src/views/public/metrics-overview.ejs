@@ -1,0 +1,13 @@
+<%- include('../partials/public/no-pii-notice') %>
+<section class="page-header"><div><p class="eyebrow">Public metrics</p><h1>Metrics overview</h1></div></section>
+<section class="metrics-grid">
+  <%- include('../partials/public/metric-card', { label: 'Applications received', value: view.formatNumber(bundle.overview.totalApplicationsReceived) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Active applications', value: view.formatNumber(bundle.overview.activeApplications) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Approved applications', value: view.formatNumber(bundle.overview.approvedApplications) }) %>
+  <%- include('../partials/public/metric-card', { label: 'Rejected applications', value: view.formatNumber(bundle.overview.rejectedApplications) }) %>
+</section>
+<%- include('../partials/public/public-table', {
+  caption: 'Stage-wise public counts',
+  columns: [{ label: 'Stage', key: 'stage' }, { label: 'Count', render: (row) => view.formatNumber(row.count || 0) }],
+  rows: bundle.stageCounts
+}) %>

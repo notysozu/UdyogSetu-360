@@ -1,0 +1,21 @@
+# Public Dashboard Checklist
+
+- Public dashboard route works
+- Overview metrics show
+- Stage counts show
+- Department turnaround shows
+- Approval rates show
+- Certificate metrics show
+- Grievance trends show
+- No PII exposed
+- Minimum group threshold enforced
+- Cache works
+- Rate limits work
+- Verification form works
+- Certificate number + case ID verification works
+- Token verification works
+- Checksum verification works
+- Verification attempt logged
+- Sample seeded metrics work
+- Print result works
+- Existing flows preserved

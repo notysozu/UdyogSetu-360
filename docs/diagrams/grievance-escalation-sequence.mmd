@@ -1,0 +1,17 @@
+sequenceDiagram
+  autonumber
+  actor Investor
+  participant Grievance as Grievance Service
+  participant SLA as SLA Monitor
+  participant Notify as Notification Service
+  participant Officer as Department Officer
+  participant Nodal as Nodal Officer
+  Investor->>Grievance: Create grievance
+  Grievance->>Notify: Notify department
+  Officer->>Grievance: Acknowledge and reply
+  SLA->>Grievance: Check ageing
+  SLA->>Notify: Warning or breach notification
+  SLA->>Nodal: Escalation queue item
+  Nodal->>Grievance: Coordination note
+  Officer->>Grievance: Resolve
+  Investor->>Grievance: Close with reason

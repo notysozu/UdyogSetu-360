@@ -1,0 +1,19 @@
+<section class="result-card <%= result.verified ? 'result-card--valid' : 'result-card--invalid' %>">
+  <p class="eyebrow">Verification status</p>
+  <h2><%= view.verificationStatusLabel(result.status) %></h2>
+  <p><%= result.publicMessage %></p>
+  <dl class="detail-grid">
+    <div><dt>Certificate number</dt><dd><%= view.safeValue(result.certificateNumber) %></dd></div>
+    <div><dt>Universal Case ID</dt><dd><%= view.safeValue(result.universalCaseId) %></dd></div>
+    <div><dt>Issuing department</dt><dd><%= view.safeValue(result.issuingDepartment) %></dd></div>
+    <div><dt>Certificate type</dt><dd><%= view.safeValue(result.certificateType) %></dd></div>
+    <div><dt>Issued at</dt><dd><%= view.formatDate(result.issuedAt) %></dd></div>
+    <div><dt>Valid until</dt><dd><%= view.formatDate(result.validUntil) %></dd></div>
+    <div><dt>Verification ID</dt><dd><code id="verification-id"><%= result.verificationId %></code></dd></div>
+    <div><dt>Verified at</dt><dd><%= view.formatDateTime(result.verificationTimestamp) %></dd></div>
+  </dl>
+  <div class="action-row no-print">
+    <button type="button" class="button button-secondary" data-copy-target="verification-id">Copy Verification ID</button>
+    <button type="button" class="button" data-print-page>Print result</button>
+  </div>
+</section>

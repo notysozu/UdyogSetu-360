@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-advisory-service
+  namespace: udyogsetu
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ai-advisory-service
+  template:
+    metadata:
+      labels:
+        app: ai-advisory-service
+    spec:
+      containers:
+        - name: ai-advisory-service
+          image: registry.example/udyogsetu/ai-advisory-service:latest
+          ports:
+            - containerPort: 8010
+          envFrom:
+            - configMapRef:
+                name: udyogsetu-config
+            - secretRef:
+                name: udyogsetu-secrets
+          readinessProbe:
+            httpGet:
+              path: /ai/v1/advisory/health
+              port: 8010

@@ -1,0 +1,4 @@
+.operations-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.status-ok { color: #166534; font-weight: 700; }
+.status-warning { color: #92400e; font-weight: 700; }
+.status-error { color: #991b1b; font-weight: 700; }

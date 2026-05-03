@@ -1,0 +1,23 @@
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2>Document centre</h2>
+      <p>Track uploads, verification and document versions.</p>
+    </div>
+    <a class="button" href="/cases">Upload to a case</a>
+  </div>
+  <form class="filter-grid" method="get" action="/documents">
+    <div class="form-field"><label for="documentType">Document type</label><input id="documentType" name="documentType" value="<%= filters.documentType || '' %>"></div>
+    <div class="form-field"><label for="status">Status</label><input id="status" name="status" value="<%= filters.status || '' %>"></div>
+    <div class="form-field"><button class="button" type="submit">Filter</button></div>
+  </form>
+</section>
+<section class="document-grid">
+  <% if (documents.length) { %>
+    <% documents.forEach(function(document) { %>
+      <%- include('../partials/investor/document-card', { document: document }) %>
+    <% }) %>
+  <% } else { %>
+    <%- include('../partials/investor/empty-state', { title: 'No documents found', message: 'Upload a case document to get started.' }) %>
+  <% } %>
+</section>

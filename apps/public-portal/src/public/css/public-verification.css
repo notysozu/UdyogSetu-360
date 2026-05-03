@@ -1,0 +1,5 @@
+.verification-form fieldset { border: 0; margin: 0; padding: 0; }
+.verification-form legend { font-size: 1.2rem; font-weight: 700; margin-bottom: .75rem; }
+.result-card--valid { border-color: #2f855a; }
+.result-card--invalid { border-color: #b45309; }
+code { word-break: break-all; }

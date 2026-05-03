@@ -1,0 +1,17 @@
+sequenceDiagram
+  autonumber
+  participant Domain as Domain Service
+  participant Mongo as MongoDB Transaction
+  participant Outbox
+  participant Publisher as Kafka Publisher
+  participant Kafka
+  participant Consumers
+  participant Projections
+  Domain->>Mongo: Write state change
+  Domain->>Outbox: Append event in same transaction
+  Publisher->>Outbox: Poll unpublished event
+  Publisher->>Kafka: Publish canonical event
+  Kafka->>Consumers: Deliver event
+  Consumers->>Consumers: Idempotency check
+  Consumers->>Projections: Update read models
+  Publisher->>Outbox: Mark published

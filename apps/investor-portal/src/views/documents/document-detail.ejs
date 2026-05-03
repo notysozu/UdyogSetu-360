@@ -1,0 +1,19 @@
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2><%= document.title || document.file?.originalName || 'Document detail' %></h2>
+      <p><%= document.documentType %> • Version <%= document.version || 1 %></p>
+    </div>
+    <a class="button" href="/documents/<%= document._id %>/download">Download</a>
+  </div>
+  <p><strong>Status:</strong> <%- include('../partials/investor/status-badge', { status: document.verification?.status || document.status }) %></p>
+  <p><strong>Size:</strong> <%= document.file?.sizeBytes || 'Unknown' %> bytes</p>
+  <p><strong>Tags:</strong> <%= (document.tags || []).join(', ') || 'None' %></p>
+</section>
+<section class="card">
+  <h2>Upload new version</h2>
+  <form method="post" action="/documents/<%= document._id %>/new-version" enctype="multipart/form-data">
+    <div class="form-field"><label for="file">Replacement file</label><input id="file" name="file" type="file" required></div>
+    <button class="button" type="submit">Upload new version</button>
+  </form>
+</section>

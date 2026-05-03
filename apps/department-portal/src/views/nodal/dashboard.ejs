@@ -1,0 +1,5 @@
+<section class="kpi-grid">
+  <article class="kpi-card"><h2>Active cases</h2><p><%= dashboard.activeCases %></p></article>
+  <article class="kpi-card"><h2>Delayed cases</h2><p><%= dashboard.delayedCases %></p></article>
+</section>
+<section class="card"><h2>Cross-department queue</h2><div class="table-wrap"><table><caption>Coordination cases</caption><thead><tr><th>Case</th><th>Departments</th><th>Tasks</th><th>Overdue</th></tr></thead><tbody><% dashboard.cases.forEach(function(item) { %><tr><td><a href="/nodal/cases/<%= item.universalCaseId %>"><%= item.universalCaseId %></a></td><td><%= item.departments.map(function(dep) { return view.departmentLabel(dep); }).join(', ') %></td><td><%= item.taskCount %></td><td><%= item.overdueCount %></td></tr><% }) %></tbody></table></div></section>

@@ -1,0 +1,4 @@
+.audit-pre { white-space: pre-wrap; word-break: break-word; }
+@media print {
+  .sidebar, .topbar, form, button { display: none !important; }
+}

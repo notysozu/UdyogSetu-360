@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway
+  namespace: udyogsetu
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+    spec:
+      containers:
+        - name: gateway
+          image: registry.example/udyogsetu/gateway:latest
+          ports:
+            - containerPort: 4000
+          envFrom:
+            - configMapRef:
+                name: udyogsetu-config
+            - secretRef:
+                name: udyogsetu-secrets
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 4000
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 4000

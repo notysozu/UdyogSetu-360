@@ -1,0 +1,42 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Certificate verification</p>
+    <h1>Verify a certificate</h1>
+    <p>Enter a certificate number, Universal Case ID or verification token.</p>
+  </div>
+</section>
+
+<form class="card compact-form" method="post" action="/verify">
+  <p class="form-helper">Enter one value only: a certificate number, case ID or verification token.</p>
+  <label>Certificate number, case ID or token
+    <input name="identifier" required value="<%= query || '' %>" placeholder="US360-20260501-12345">
+  </label>
+  <button class="button" type="submit">Verify Certificate</button>
+</form>
+
+<% if (result) { %>
+  <section class="card">
+    <% if (result.status === 'verified') { %>
+      <p class="eyebrow">Verified</p>
+      <h2>Certificate is valid</h2>
+      <div class="grid-2">
+        <p><strong>Certificate:</strong> <%= result.certificate.certificateNumber %></p>
+        <p><strong>Case ID:</strong> <%= result.certificate.caseId %></p>
+        <p><strong>Department:</strong> <%= result.certificate.departmentName || '-' %></p>
+        <p><strong>Enterprise:</strong> <%= result.certificate.enterpriseName || '-' %></p>
+      </div>
+    <% } else if (result.status === 'not_found') { %>
+      <p class="eyebrow">Not found</p>
+      <h2>No matching certificate found</h2>
+      <p><%= result.message %></p>
+    <% } else if (result.status === 'invalid') { %>
+      <p class="eyebrow">Invalid request</p>
+      <h2>Enter a valid lookup value</h2>
+      <p><%= result.message %></p>
+    <% } else { %>
+      <p class="eyebrow">Certificate status</p>
+      <h2>Certificate is <%= result.status %></h2>
+      <p>This record was found, but it is not currently marked as valid.</p>
+    <% } %>
+  </section>
+<% } %>

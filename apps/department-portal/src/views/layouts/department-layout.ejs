@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= title ? `${title} | UdyogSetu 360` : 'UdyogSetu 360 Department Portal' %></title>
+    <link rel="stylesheet" href="/css/department.css">
+    <link rel="stylesheet" href="/css/department-components.css">
+    <link rel="stylesheet" href="/css/communication.css">
+    <link rel="stylesheet" href="/css/grievances.css">
+    <link rel="stylesheet" href="/css/sla-ageing.css">
+    <link rel="stylesheet" href="/css/operations.css">
+    <link rel="stylesheet" href="/css/audit-viewer.css">
+    <link rel="stylesheet" href="/css/analytics.css">
+    <link rel="stylesheet" href="/css/analytics-print.css" media="print">
+    <link rel="stylesheet" href="/css/department-print.css" media="print">
+    <script defer src="/js/department-dashboard.js"></script>
+    <script defer src="/js/task-detail.js"></script>
+    <script defer src="/js/checklist-form.js"></script>
+    <script defer src="/js/sla-countdown.js"></script>
+    <script defer src="/js/comment-thread.js"></script>
+    <script defer src="/js/grievance-thread.js"></script>
+    <script defer src="/js/sla-dashboard.js"></script>
+    <script defer src="/js/operations-dashboard.js"></script>
+    <script defer src="/js/audit-viewer.js"></script>
+    <script defer src="/js/replay-tools.js"></script>
+    <script defer src="/js/case-trace.js"></script>
+    <script defer src="/js/analytics-dashboard.js"></script>
+    <script defer src="/js/analytics-filters.js"></script>
+    <script defer src="/js/analytics-export.js"></script>
+  </head>
+  <body class="department-shell">
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <%- include('../partials/department/topbar') %>
+    <div class="portal-frame">
+      <% if (isAuthenticated) { %><%- include('../partials/department/sidebar') %><% } %>
+      <main id="main-content" class="portal-main" tabindex="-1">
+        <%- include('../partials/department/flash-messages') %>
+        <%- body %>
+      </main>
+    </div>
+    <%- include('../partials/department/footer') %>
+  </body>
+</html>

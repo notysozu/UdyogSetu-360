@@ -1,0 +1,25 @@
+<section class="card">
+  <h2>Certificates</h2>
+  <% if (certificates.length) { %>
+    <div class="table-wrap">
+      <table>
+        <caption>Issued certificates</caption>
+        <thead><tr><th>Certificate</th><th>Department</th><th>Issued</th><th>Valid until</th><th>Status</th><th>Action</th></tr></thead>
+        <tbody>
+          <% certificates.forEach(function(certificate) { %>
+            <tr>
+              <td><%= certificate.certificateNumber || certificate.title %></td>
+              <td><%= certificate.departmentName || 'Department' %></td>
+              <td><%= view.formatDate(certificate.issuedAt, currentLocale) %></td>
+              <td><%= view.formatDate(certificate.expiresAt, currentLocale) %></td>
+              <td><%- include('../partials/investor/status-badge', { status: certificate.status || 'valid' }) %></td>
+              <td><a href="/certificates/<%= certificate._id || certificate.certificateNumber %>">Open</a></td>
+            </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  <% } else { %>
+    <p>No certificates available yet.</p>
+  <% } %>
+</section>

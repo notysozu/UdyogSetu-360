@@ -1,0 +1,9 @@
+<table>
+  <caption>Age buckets</caption>
+  <thead><tr><th>Bucket</th><th>Count</th></tr></thead>
+  <tbody>
+    <% Object.entries(buckets || {}).forEach(function(bucket) { %>
+      <tr><td><%= bucket[0] %></td><td><%= bucket[1] %></td></tr>
+    <% }) %>
+  </tbody>
+</table>

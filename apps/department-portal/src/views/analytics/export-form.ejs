@@ -1,0 +1,25 @@
+<section class="analytics-page">
+  <h1>Create Analytics Export</h1>
+  <form method="post" action="/admin/analytics/exports">
+    <label for="exportType">Export type</label>
+    <select id="exportType" name="exportType">
+      <option value="overview">Overview</option>
+      <option value="bottlenecks">Bottlenecks</option>
+      <option value="document_defects">Document defects</option>
+      <option value="department_turnaround">Department turnaround</option>
+      <option value="rejection_reasons">Rejection reasons</option>
+      <option value="query_ageing">Query ageing</option>
+      <option value="officer_workload">Officer workload</option>
+      <option value="escalation_frequency">Escalation frequency</option>
+      <option value="investor_history">Investor history</option>
+      <option value="review_pack">Review pack</option>
+    </select>
+    <label for="format">Format</label>
+    <select id="format" name="format">
+      <option value="csv">CSV</option>
+      <option value="json">JSON</option>
+      <option value="html_print">HTML print</option>
+    </select>
+    <button type="submit">Queue export</button>
+  </form>
+</section>

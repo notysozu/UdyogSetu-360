@@ -1,0 +1,8 @@
+{
+  "name": "sla-reminder-campaign",
+  "nodes": [],
+  "connections": {},
+  "active": false,
+  "settings": {},
+  "tags": ["notifications", "sla"]
+}

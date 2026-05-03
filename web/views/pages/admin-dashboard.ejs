@@ -1,0 +1,52 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Operations console</p>
+    <h1>Admin dashboard</h1>
+  </div>
+</section>
+
+<section class="grid-3">
+  <article class="metric-card"><span>Total cases</span><strong><%= metrics.totalCases %></strong></article>
+  <article class="metric-card"><span>Active departments</span><strong><%= metrics.totalDepartments %></strong></article>
+  <article class="metric-card"><span>Open grievances</span><strong><%= metrics.openGrievances %></strong></article>
+</section>
+
+<section class="grid-2">
+  <article class="card">
+    <h2>Status buckets</h2>
+    <% metrics.statusBuckets.forEach((bucket) => { %>
+      <div class="task-row"><span><%= bucket._id %></span><strong><%= bucket.count %></strong></div>
+    <% }) %>
+  </article>
+  <article class="card">
+    <h2>Pilot departments</h2>
+    <% departments.forEach((department) => { %>
+      <div class="task-row"><span><%= department.code %> · <%= department.name %></span><strong><%= department.slaDays %>d</strong></div>
+    <% }) %>
+  </article>
+</section>
+
+<section class="card">
+  <h2>Recent cases</h2>
+  <div class="table-wrap">
+    <table aria-label="Recent cases across the platform">
+      <caption>Recent applications with current status and timeline access</caption>
+      <thead><tr><th>Case ID</th><th>Enterprise</th><th>Status</th><th>Timeline</th></tr></thead>
+      <tbody>
+        <% cases.forEach((caseDoc) => { %>
+          <tr>
+            <td><%= caseDoc.caseId %></td>
+            <td><%= caseDoc.enterprise.name %></td>
+            <td><%- include('../partials/statusBadge', { status: caseDoc.status }) %></td>
+            <td><a href="<%= timelineBase || '/admin' %>/cases/<%= caseDoc.caseId %>/timeline">Events</a></td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="card">
+  <h2>Recent event stream</h2>
+  <%- include('../partials/timeline', { events: metrics.recentEvents }) %>
+</section>

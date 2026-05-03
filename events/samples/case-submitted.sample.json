@@ -1,0 +1,31 @@
+{
+  "id": "11111111-1111-4111-8111-111111111111",
+  "source": "us360.case-service",
+  "specversion": "1.0",
+  "type": "case.submitted.v1",
+  "subject": "case/US360-KA-2026-000001",
+  "time": "2026-05-02T00:00:00.000Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://udyogsetu360.local/schemas/case.submitted.v1.json",
+  "correlationid": "corr-case-submitted-001",
+  "causationid": "cause-case-submitted-001",
+  "traceparent": null,
+  "partitionkey": "US360-KA-2026-000001",
+  "data": {
+    "eventVersion": 1,
+    "aggregateType": "case",
+    "aggregateId": "68143f0d86e5ab0012345671",
+    "universalCaseId": "US360-KA-2026-000001",
+    "previousStatus": "draft",
+    "nextStatus": "submitted",
+    "actor": {
+      "actorType": "user",
+      "actorId": "68143f0d86e5ab0012345601",
+      "role": "investor"
+    },
+    "payload": {
+      "caseId": "68143f0d86e5ab0012345671"
+    },
+    "metadata": {}
+  }
+}

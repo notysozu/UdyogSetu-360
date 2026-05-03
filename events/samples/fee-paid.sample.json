@@ -1,0 +1,31 @@
+{
+  "id": "77777777-7777-4777-8777-777777777777",
+  "source": "us360.orchestration-service",
+  "specversion": "1.0",
+  "type": "fee.paid.v1",
+  "subject": "fee/US360-KA-2026-000001",
+  "time": "2026-05-02T00:06:00.000Z",
+  "datacontenttype": "application/json",
+  "dataschema": "https://udyogsetu360.local/schemas/fee.paid.v1.json",
+  "correlationid": "corr-fee-paid-001",
+  "causationid": null,
+  "traceparent": null,
+  "partitionkey": "US360-KA-2026-000001",
+  "data": {
+    "eventVersion": 1,
+    "aggregateType": "fee",
+    "aggregateId": "68143f0d86e5ab0012345676",
+    "universalCaseId": "US360-KA-2026-000001",
+    "previousStatus": "demanded",
+    "nextStatus": "paid",
+    "actor": {
+      "actorType": "user",
+      "actorId": "68143f0d86e5ab0012345601",
+      "role": "investor"
+    },
+    "payload": {
+      "paymentReference": "PAY-001"
+    },
+    "metadata": {}
+  }
+}

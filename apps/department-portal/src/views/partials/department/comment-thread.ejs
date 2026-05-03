@@ -1,0 +1,12 @@
+<section class="comment-thread" data-comment-thread>
+  <% if (comments && comments.length) { %>
+    <% comments.forEach(function(comment) { %>
+      <article class="comment">
+        <p class="comment__meta"><strong><%= comment.authorRole || 'system' %></strong> • <%= comment.visibility %> • <%= view.formatDateTime(comment.createdAt, currentLocale) %></p>
+        <p><%= comment.body %></p>
+      </article>
+    <% }) %>
+  <% } else { %>
+    <p>No comments yet.</p>
+  <% } %>
+</section>

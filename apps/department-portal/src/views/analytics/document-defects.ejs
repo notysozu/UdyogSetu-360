@@ -1,0 +1,7 @@
+<section class="analytics-page">
+  <h1>Recurring Document Defects</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.departmentCode, r.documentType, r.defectCategory, r.defectReason, r.occurrenceCount, r.affectedCaseCount]); %>
+  <%- include('../partials/analytics/table-card', { title: 'Document Defect Trends', headers: ['Department', 'Document Type', 'Category', 'Reason', 'Occurrences', 'Affected Cases'], rows }) %>
+  <%- include('../partials/analytics/export-button', { exportType: 'document_defects' }) %>
+</section>

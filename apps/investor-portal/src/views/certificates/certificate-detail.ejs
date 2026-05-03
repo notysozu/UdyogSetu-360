@@ -1,0 +1,15 @@
+<section class="card">
+  <div class="section-header">
+    <div>
+      <h2><%= certificate.certificateNumber %></h2>
+      <p><%= certificate.departmentName || 'Issuing department' %></p>
+    </div>
+    <a class="button" href="/certificates/<%= certificate._id || certificate.certificateNumber %>/download">Download</a>
+  </div>
+  <p><strong>Issued date:</strong> <%= view.formatDate(certificate.issuedAt, currentLocale) %></p>
+  <p><strong>Valid until:</strong> <%= view.formatDate(certificate.expiresAt, currentLocale) %></p>
+  <p><strong>Status:</strong> <%= view.statusLabel(certificate.status) %></p>
+  <% if (certificate.verificationToken) { %>
+    <p><strong>Verification link:</strong> <code>/verify/certificate/<%= certificate.verificationToken %></code></p>
+  <% } %>
+</section>

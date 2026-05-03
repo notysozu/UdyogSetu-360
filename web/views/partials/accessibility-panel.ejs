@@ -1,0 +1,106 @@
+<div class="a11y-system" data-a11y-root>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <button
+    type="button"
+    class="a11y-fab"
+    data-a11y-toggle
+    aria-expanded="false"
+    aria-controls="a11y-panel"
+    aria-label="Open accessibility settings"
+  >
+    <span aria-hidden="true">Aa</span>
+    <span>Accessibility</span>
+  </button>
+
+  <aside
+    id="a11y-panel"
+    class="a11y-panel"
+    data-a11y-panel
+    aria-labelledby="a11y-panel-title"
+    aria-modal="false"
+    hidden
+  >
+    <div class="a11y-panel__header">
+      <div>
+        <p class="a11y-panel__eyebrow">Accessibility</p>
+        <h2 id="a11y-panel-title" class="a11y-panel__title">Reading and display tools</h2>
+      </div>
+      <button type="button" class="a11y-panel__close" data-a11y-close aria-label="Close accessibility settings">Close</button>
+    </div>
+
+    <div class="a11y-panel__body">
+      <div class="a11y-control a11y-control--stacked">
+        <div class="a11y-control__row">
+          <label for="a11y-font-scale" class="a11y-control__label">Text Size</label>
+          <output id="a11y-font-scale-value" class="a11y-control__value" data-a11y-font-scale-value>100%</output>
+        </div>
+        <input
+          id="a11y-font-scale"
+          data-a11y-setting="font_scale"
+          type="range"
+          min="80"
+          max="140"
+          step="5"
+          value="100"
+          aria-describedby="a11y-font-scale-help"
+        >
+        <p id="a11y-font-scale-help" class="a11y-control__help">Adjust text size globally from 80% to 140%.</p>
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-high-contrast" class="a11y-control__label">High Contrast Mode</label>
+        <input id="a11y-high-contrast" data-a11y-setting="high_contrast" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-dark-mode" class="a11y-control__label">Dark Mode</label>
+        <input id="a11y-dark-mode" data-a11y-setting="dark_mode" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-grayscale" class="a11y-control__label">Grayscale Mode</label>
+        <input id="a11y-grayscale" data-a11y-setting="grayscale" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-reduce-motion" class="a11y-control__label">Reduce Motion</label>
+        <input id="a11y-reduce-motion" data-a11y-setting="reduce_motion" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-dyslexia-font" class="a11y-control__label">Dyslexia-Friendly Font</label>
+        <input id="a11y-dyslexia-font" data-a11y-setting="dyslexia_font" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-letter-spacing" class="a11y-control__label">Increase Letter Spacing</label>
+        <input id="a11y-letter-spacing" data-a11y-setting="letter_spacing" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-highlight-links" class="a11y-control__label">Highlight Links</label>
+        <input id="a11y-highlight-links" data-a11y-setting="highlight_links" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-large-cursor" class="a11y-control__label">Large Cursor Mode</label>
+        <input id="a11y-large-cursor" data-a11y-setting="large_cursor" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-focus-mode" class="a11y-control__label">Focus Mode</label>
+        <input id="a11y-focus-mode" data-a11y-setting="focus_mode" type="checkbox">
+      </div>
+
+      <div class="a11y-control">
+        <label for="a11y-screen-reader" class="a11y-control__label">Screen Reader Mode</label>
+        <input id="a11y-screen-reader" data-a11y-setting="screen_reader_mode" type="checkbox">
+      </div>
+    </div>
+
+    <div class="a11y-panel__footer">
+      <button type="button" class="a11y-reset" data-a11y-reset>Reset Accessibility Settings</button>
+    </div>
+  </aside>
+</div>

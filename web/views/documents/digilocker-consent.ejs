@@ -1,0 +1,14 @@
+<section class="stack">
+  <h1>DigiLocker Consent</h1>
+  <form action="/api/v1/digilocker/consents" method="post" class="stack">
+    <label for="requestedDocumentTypes">Requested document types</label>
+    <select id="requestedDocumentTypes" name="requestedDocumentTypes" multiple aria-describedby="digilocker-help">
+      <option value="pan_card">PAN Card</option>
+      <option value="udyam_certificate">Udyam Certificate</option>
+    </select>
+    <p id="digilocker-help">Hold Ctrl or Cmd to select more than one document type.</p>
+    <label for="purpose">Purpose</label>
+    <input id="purpose" name="purpose" type="text" required />
+    <button type="submit">Start DigiLocker Consent</button>
+  </form>
+</section>

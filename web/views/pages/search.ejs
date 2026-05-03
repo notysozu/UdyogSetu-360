@@ -1,0 +1,37 @@
+<section class="page-header">
+  <div>
+    <p class="eyebrow">Service search</p>
+    <h1>Search UdyogSetu 360 services</h1>
+    <p>Results for <strong><%= query || 'all services' %></strong> in <strong><%= service || 'All Services' %></strong>.</p>
+  </div>
+</section>
+
+<form class="card compact-form" method="get" action="/search">
+  <label>Search
+    <input name="q" value="<%= query || '' %>" placeholder="Search applications, departments, approvals, certificates...">
+  </label>
+  <label>Service category
+    <select name="service">
+      <% ['All Services', 'Approvals', 'Certificates', 'Grievances', 'Departments'].forEach((item) => { %>
+        <option <%= service === item ? 'selected' : '' %>><%= item %></option>
+      <% }) %>
+    </select>
+  </label>
+  <button class="button" type="submit">Search</button>
+</form>
+
+<section class="grid-3">
+  <% if (!results.length) { %>
+    <article class="card">
+      <h2>No results found</h2>
+      <p>Try searching for case ID, grievance, certificate or department services.</p>
+    </article>
+  <% } %>
+  <% results.forEach((item) => { %>
+    <article class="card">
+      <h2><%= item.title %></h2>
+      <p><%= item.description %></p>
+      <a class="button button-muted" href="<%= item.href %>">Open</a>
+    </article>
+  <% }) %>
+</section>

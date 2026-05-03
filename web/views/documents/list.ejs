@@ -1,0 +1,14 @@
+<section class="stack">
+  <h1>Documents</h1>
+  <p>Case: <strong><%= caseDoc?.caseId || caseDoc?.universalCaseId || 'Unknown' %></strong></p>
+  <a href="/cases/<%= caseDoc?.caseId %>/documents/upload">Upload another document</a>
+  <ul class="stack">
+    <% for (const document of documents) { %>
+      <li>
+        <a href="/documents/<%= document._id %>"><%= document.title || document.documentType %></a>
+        <span><%= document.status %></span>
+        <span>v<%= document.version %></span>
+      </li>
+    <% } %>
+  </ul>
+</section>

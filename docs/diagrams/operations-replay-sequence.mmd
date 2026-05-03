@@ -1,0 +1,18 @@
+sequenceDiagram
+  autonumber
+  actor Admin
+  participant Ops as Operations Console
+  participant Replay as Replay Service
+  participant Domain as Domain Events
+  participant Kafka
+  participant Idem as ProcessedEvent Idempotency
+  participant Audit
+  Admin->>Ops: Request dry-run replay with reason
+  Ops->>Replay: Validate scope and reason
+  Replay->>Domain: Load events
+  Replay->>Idem: Check duplicate processing
+  Replay-->>Ops: Dry-run impact report
+  Admin->>Ops: Confirm replay if permitted
+  Ops->>Replay: Execute replay
+  Replay->>Kafka: Republish selected events
+  Replay->>Audit: Record privileged replay action

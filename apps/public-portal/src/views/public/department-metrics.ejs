@@ -1,0 +1,16 @@
+<%- include('../partials/public/no-pii-notice') %>
+<section class="page-header"><div><p class="eyebrow">Departments</p><h1>Department turnaround</h1></div></section>
+<%- include('../partials/public/public-table', {
+  caption: 'Department turnaround metrics',
+  columns: [
+    { label: 'Department', render: (row) => view.departmentLabel(row.departmentCode) },
+    { label: 'Handled', render: (row) => view.formatNumber(row.applicationsHandled) },
+    { label: 'Approved', render: (row) => view.formatNumber(row.approvedCount) },
+    { label: 'Rejected', render: (row) => view.formatNumber(row.rejectedCount) },
+    { label: 'Average turnaround (days)', render: (row) => row.averageTurnaroundDays },
+    { label: 'Median turnaround (days)', render: (row) => row.medianTurnaroundDays },
+    { label: 'SLA breach %', render: (row) => view.formatPercentage(row.slaBreachPercentage) },
+    { label: 'Active pending', render: (row) => view.formatNumber(row.activePendingCount) }
+  ],
+  rows: bundle.departmentTurnaround
+}) %>

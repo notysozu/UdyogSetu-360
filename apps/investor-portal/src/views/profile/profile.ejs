@@ -1,0 +1,9 @@
+<section class="card">
+  <h2>Profile</h2>
+  <form method="post" action="/profile">
+    <div class="form-field"><label for="name">Name</label><input id="name" name="name" value="<%= profile?.name || '' %>"></div>
+    <div class="form-field"><label for="phone">Phone</label><input id="phone" name="phone" value="<%= profile?.phone || '' %>"></div>
+    <div class="form-field"><label for="organisation">Organisation</label><input id="organisation" name="organisation" value="<%= profile?.organisation || '' %>"></div>
+    <button class="button" type="submit">Save profile</button>
+  </form>
+</section>

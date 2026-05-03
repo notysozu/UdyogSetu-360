@@ -1,0 +1,21 @@
+sequenceDiagram
+  autonumber
+  participant SWS
+  participant Gateway as UdyogSetu Gateway
+  participant Adapter as Adapter Runtime
+  participant Dept as Department System
+  participant Kafka
+  participant Orch as Orchestration
+  participant Investor as Investor Dashboard
+  SWS->>Gateway: Submit canonical case update
+  Gateway->>Orch: Validate transition request
+  Orch->>Kafka: Publish case/task event
+  Orch->>Adapter: Queue southbound delivery
+  Adapter->>Dept: submitApplication / pushDocument
+  Dept-->>Adapter: acknowledgement + external reference
+  Adapter->>Kafka: Publish acknowledgement event
+  Kafka->>Investor: Projection updates timeline
+  Dept-->>Adapter: later status callback
+  Adapter->>Orch: Normalised callback
+  Orch->>Kafka: Publish task.status_changed.v1
+  Kafka->>Investor: Dashboard refreshes unified status

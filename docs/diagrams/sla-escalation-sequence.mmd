@@ -1,0 +1,13 @@
+sequenceDiagram
+  autonumber
+  participant Job as Scheduled Job
+  participant SLA as SLA Service
+  participant Notify as Notification Service
+  participant Audit as Audit Service
+  participant Ops as Operations Console
+  Job->>SLA: Scan active timers
+  SLA->>SLA: Detect warning/breach
+  SLA->>Notify: Queue notification
+  SLA->>Audit: Record SLA warning/breach/escalation
+  SLA->>Ops: Update health/ageing projection
+  Ops-->>SLA: Admin views escalation state

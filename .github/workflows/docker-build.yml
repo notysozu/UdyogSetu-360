@@ -1,0 +1,27 @@
+name: Docker Build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        dockerfile:
+          - apps/gateway/Dockerfile
+          - apps/investor-portal/Dockerfile
+          - apps/department-portal/Dockerfile
+          - apps/public-portal/Dockerfile
+          - services/case-service/Dockerfile
+          - services/orchestration-service/Dockerfile
+          - services/adapter-runtime/Dockerfile
+          - services/notification-service/Dockerfile
+          - services/audit-service/Dockerfile
+          - services/ai-service/Dockerfile
+          - services/ai-advisory-service/Dockerfile
+    steps:
+      - uses: actions/checkout@v4
+      - run: docker build -f ${{ matrix.dockerfile }} .

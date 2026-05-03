@@ -1,0 +1,7 @@
+<h3>Audit Events</h3>
+<pre><%= JSON.stringify(data.auditEvents || [], null, 2) %></pre>
+<h3>Domain Events</h3>
+<pre><%= JSON.stringify(data.domainEvents || [], null, 2) %></pre>
+<% if (data.notifications) { %><h3>Notifications</h3><pre><%= JSON.stringify(data.notifications || [], null, 2) %></pre><% } %>
+<% if (data.grievances) { %><h3>Grievances</h3><pre><%= JSON.stringify(data.grievances || [], null, 2) %></pre><% } %>
+<% if (data.slaTimers) { %><h3>SLA Timers</h3><pre><%= JSON.stringify(data.slaTimers || [], null, 2) %></pre><% } %>

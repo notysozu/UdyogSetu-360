@@ -1,0 +1,55 @@
+:root {
+  --bg: #f6f4ed;
+  --surface: #ffffff;
+  --surface-alt: #eef3f1;
+  --text: #182022;
+  --muted: #506067;
+  --border: #ced9d3;
+  --accent: #0f766e;
+  --accent-strong: #115e59;
+  --danger: #9f1239;
+  --radius: 18px;
+  --shadow: 0 16px 32px rgba(15, 23, 42, 0.08);
+}
+* { box-sizing: border-box; }
+body { margin: 0; font: 16px/1.5 Georgia, "Noto Serif", serif; color: var(--text); background: linear-gradient(180deg, #f8f6ef 0%, #f1f5f3 100%); }
+.public-shell { width: min(1200px, calc(100% - 2rem)); margin: 0 auto; }
+.skip-link { position: absolute; left: -999px; top: 0; background: var(--accent); color: #fff; padding: .75rem 1rem; z-index: 1000; }
+.skip-link:focus { left: 1rem; top: 1rem; }
+.public-header, .public-footer { background: rgba(255,255,255,.9); backdrop-filter: blur(8px); border-bottom: 1px solid var(--border); }
+.public-footer { border-top: 1px solid var(--border); border-bottom: 0; margin-top: 3rem; }
+.public-header .public-shell, .public-footer .public-shell { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding: 1rem 0; }
+.top-nav { display: flex; flex-wrap: wrap; gap: .75rem; list-style: none; margin: 0; padding: 0; }
+.top-nav a { display: inline-block; padding: .65rem .9rem; border-radius: 999px; color: var(--text); text-decoration: none; background: var(--surface-alt); }
+.top-nav a:focus, .top-nav a:hover { background: #d9ebe5; outline: 2px solid transparent; }
+.page-header { padding: 2rem 0 1rem; }
+.eyebrow { letter-spacing: .12em; text-transform: uppercase; font-size: .8rem; color: var(--accent-strong); margin: 0 0 .35rem; }
+.site-title, h1, h2 { line-height: 1.1; }
+.filter-card, .notice-card, .metric-card, .chart-card, .result-card, .empty-state, .table-wrap { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+.filter-card, .notice-card, .result-card, .empty-state, .table-wrap { padding: 1rem 1.1rem; margin-bottom: 1rem; }
+.filter-grid, .form-grid, .metrics-grid, .content-grid, .detail-grid { display: grid; gap: 1rem; }
+.filter-grid, .form-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); align-items: end; }
+.metrics-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 1rem 0 1.5rem; }
+.content-grid { grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); }
+.metric-card { padding: 1rem; }
+.metric-label { color: var(--muted); margin: 0 0 .5rem; }
+.metric-value { margin: 0; font-size: 1.8rem; font-weight: 700; }
+.filter-group label { display: block; font-weight: 600; margin-bottom: .35rem; }
+input, select, button { font: inherit; }
+input, select { width: 100%; min-height: 44px; padding: .7rem .8rem; border-radius: 12px; border: 1px solid #96a8a0; background: #fff; }
+.button { min-height: 44px; padding: .75rem 1rem; border: 0; border-radius: 999px; background: var(--accent); color: #fff; cursor: pointer; }
+.button-secondary { background: #334155; }
+.button:focus, input:focus, select:focus, a:focus { outline: 3px solid #f59e0b; outline-offset: 2px; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; }
+caption { text-align: left; font-weight: 700; padding-bottom: .75rem; }
+th, td { padding: .8rem .7rem; border-top: 1px solid var(--border); vertical-align: top; text-align: left; }
+.helper-text, .metric-hint { color: var(--muted); }
+.detail-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.detail-grid dt { font-weight: 700; }
+.detail-grid dd { margin: .3rem 0 0; }
+.action-row { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1rem; }
+@media (max-width: 720px) {
+  .public-header .public-shell, .public-footer .public-shell { display: block; }
+  .top-nav { margin-top: 1rem; }
+}

@@ -1,0 +1,33 @@
+<section class="auth-panel">
+  <div>
+    <p class="eyebrow">Investor onboarding</p>
+    <h1>Create your UdyogSetu 360 account</h1>
+    <p>Register as an investor to submit applications, track Universal Case IDs and raise grievances.</p>
+  </div>
+
+  <form class="card form-card" method="post" action="/auth/register">
+    <p class="form-helper">All fields are required. This form currently creates investor accounts only.</p>
+    <% if (errors && errors.length) { %>
+      <div class="alert alert-error" role="alert" aria-live="assertive">
+        <% errors.forEach((item) => { %>
+          <div><%= item %></div>
+        <% }) %>
+      </div>
+    <% } %>
+
+    <label>Name
+      <input name="name" autocomplete="name" required value="<%= values.name || '' %>">
+    </label>
+    <label>Email
+      <input name="email" type="email" autocomplete="email" required value="<%= values.email || '' %>">
+    </label>
+    <label>Organisation name
+      <input name="organisation" autocomplete="organization" required value="<%= values.organisation || '' %>">
+    </label>
+    <label>Password
+      <input name="password" type="password" autocomplete="new-password" minlength="8" required>
+    </label>
+    <button class="button" type="submit">Create account</button>
+    <p>Already registered? <a href="/auth/login">Sign in</a></p>
+  </form>
+</section>

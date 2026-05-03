@@ -1,0 +1,7 @@
+<section class="analytics-page">
+  <h1>Officer Workload Distribution</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% const rows = (analytics || []).map(r => [r.departmentCode, r.officerDisplayName || r.officerUserId, r.assignedTaskCount, r.activeTaskCount, r.overdueTaskCount, r.workloadScore, r.imbalanceFlag ? 'Yes' : 'No']); %>
+  <%- include('../partials/analytics/table-card', { title: 'Officer Workload', headers: ['Department', 'Officer', 'Assigned', 'Active', 'Overdue', 'Workload Score', 'Imbalance'], rows }) %>
+  <%- include('../partials/analytics/export-button', { exportType: 'officer_workload' }) %>
+</section>

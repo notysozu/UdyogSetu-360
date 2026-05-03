@@ -1,0 +1,7 @@
+<%- include('../partials/investor/print-header', { caseDoc: caseDoc }) %>
+<section class="card">
+  <h2>Application acknowledgement</h2>
+  <p><strong>Case ID:</strong> <%= caseDoc?.universalCaseId || caseDoc?.caseId %></p>
+  <p><strong>Submitted on:</strong> <%= view.formatDate(caseDoc?.submittedAt || caseDoc?.createdAt, currentLocale) %></p>
+  <p><strong>Organisation:</strong> <%= caseDoc?.enterprise?.name || currentUser?.organisation || 'Not available' %></p>
+</section>

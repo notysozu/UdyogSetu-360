@@ -1,0 +1,14 @@
+global:
+  scrape_interval: 15s
+
+scrape_configs:
+  - job_name: udyogsetu-services
+    metrics_path: /metrics
+    static_configs:
+      - targets:
+          - gateway:4000
+          - case-service:4100
+          - orchestration-service:4101
+          - adapter-runtime:4102
+          - notification-service:4103
+          - audit-service:4104

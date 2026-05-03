@@ -1,0 +1,15 @@
+<section class="stack">
+  <h1>DigiLocker Documents</h1>
+  <% if (consent) { %>
+    <p>Consent Status: <strong><%= consent.status %></strong></p>
+  <% } %>
+  <ul class="stack">
+    <% for (const document of documents) { %>
+      <li>
+        <strong><%= document.documentType %></strong>
+        <span><%= document.issuerName %></span>
+        <span><%= document.uri %></span>
+      </li>
+    <% } %>
+  </ul>
+</section>

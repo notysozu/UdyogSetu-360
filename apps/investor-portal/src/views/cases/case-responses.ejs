@@ -1,0 +1,32 @@
+<section class="card">
+  <h2>Submitted responses</h2>
+  <% if (responses.length) { %>
+    <% responses.forEach(function(item) { %>
+      <article class="response-card">
+        <h3><%= item.payload?.queryId || item.type %></h3>
+        <p><%= item.payload?.message || 'Response submitted.' %></p>
+        <p>Submitted at <%= view.formatDateTime(item.occurredAt || item.createdAt, currentLocale) %></p>
+      </article>
+    <% }) %>
+  <% } else { %>
+    <p>No responses have been submitted yet.</p>
+  <% } %>
+</section>
+<section class="card">
+  <h2>Respond to an active query</h2>
+  <form method="post" action="/cases/<%= caseDoc.caseId || caseDoc.universalCaseId %>/responses">
+    <div class="form-field">
+      <label for="queryId">Query</label>
+      <select id="queryId" name="queryId" required>
+        <% queries.forEach(function(query) { %>
+          <option value="<%= query._id %>"><%= query.title %> - <%= view.departmentLabel(query.departmentCode) %></option>
+        <% }) %>
+      </select>
+    </div>
+    <div class="form-field">
+      <label for="message">Response</label>
+      <textarea id="message" name="message" rows="5" required></textarea>
+    </div>
+    <button class="button" type="submit">Submit response</button>
+  </form>
+</section>

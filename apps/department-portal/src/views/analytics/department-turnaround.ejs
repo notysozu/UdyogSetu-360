@@ -1,0 +1,10 @@
+<section class="analytics-page">
+  <h1>Department Turnaround</h1>
+  <%- include('../partials/analytics/filter-bar') %>
+  <% if (!analytics || !analytics.length) { %>
+    <%- include('../partials/analytics/no-data') %>
+  <% } else { %>
+    <%- include('../partials/analytics/department-turnaround-table', { rows: analytics }) %>
+  <% } %>
+  <%- include('../partials/analytics/export-button', { exportType: 'department_turnaround' }) %>
+</section>

@@ -1,0 +1,14 @@
+<section class="analytics-page">
+  <h1>Management Analytics Overview</h1>
+  <%- include('../partials/analytics/privacy-notice') %>
+  <%- include('../partials/analytics/filter-bar') %>
+  <div class="analytics-grid">
+    <%- include('../partials/analytics/metric-card', { label: 'Total Applications', value: analytics.totalApplications || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Active Cases', value: analytics.activeCases || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Approvals', value: analytics.approvals || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Rejections', value: analytics.rejections || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'SLA Breaches', value: analytics.slaBreaches || 0 }) %>
+    <%- include('../partials/analytics/metric-card', { label: 'Escalations', value: analytics.escalations || 0 }) %>
+  </div>
+  <%- include('../partials/analytics/export-button', { exportType: 'overview' }) %>
+</section>

@@ -1,0 +1,17 @@
+{
+  "name": "inbound-webhook-reconciliation",
+  "nodes": [
+    {
+      "parameters": {},
+      "id": "webhook",
+      "name": "Inbound Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [240, 260]
+    }
+  ],
+  "connections": {},
+  "active": false,
+  "settings": {},
+  "tags": ["reconciliation", "starter"]
+}

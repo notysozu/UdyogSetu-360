@@ -1,0 +1,17 @@
+const DEPARTMENTS = Object.freeze({
+  POLLUTION: 'pollution',
+  POWER: 'power',
+  FIRE: 'fire',
+  INDUSTRIAL_SAFETY: 'industrial_safety',
+  LABOUR: 'labour'
+});
+
+const DEFAULT_DEPARTMENT_PIPELINE = Object.freeze([
+  DEPARTMENTS.POLLUTION,
+  DEPARTMENTS.POWER,
+  DEPARTMENTS.FIRE,
+  DEPARTMENTS.INDUSTRIAL_SAFETY,
+  DEPARTMENTS.LABOUR
+]);
+
+module.exports = { DEPARTMENTS, DEFAULT_DEPARTMENT_PIPELINE };

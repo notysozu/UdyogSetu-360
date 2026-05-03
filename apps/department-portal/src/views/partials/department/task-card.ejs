@@ -1,0 +1,11 @@
+<article class="task-card">
+  <div class="task-card__header">
+    <div>
+      <p class="task-card__eyebrow"><%= view.departmentLabel(task.departmentCode) %></p>
+      <h3><a href="<%= href || ('/department/tasks/' + task._id) %>"><%= task.title %></a></h3>
+    </div>
+    <%- include('./status-badge', { status: task.status }) %>
+  </div>
+  <p><strong>Case:</strong> <%= task.universalCaseId %></p>
+  <p><strong>Due:</strong> <%= view.formatDate(task.dueAt, currentLocale) %></p>
+</article>

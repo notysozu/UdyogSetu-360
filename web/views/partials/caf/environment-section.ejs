@@ -1,0 +1,29 @@
+<% const environment = formData.environment || {}; %>
+<fieldset class="card">
+  <legend>Environmental Details</legend>
+  <div class="grid-2">
+    <label>Pollution category
+      <select name="environment[pollutionCategory]">
+        <option value="">Select</option>
+        <% ['red','orange','green','white'].forEach(function(item) { %>
+          <option value="<%= item %>" <%= environment.pollutionCategory === item ? 'selected' : '' %>><%= item %></option>
+        <% }) %>
+      </select>
+    </label>
+    <label>Water source
+      <input name="environment[waterSource]" value="<%= environment.waterSource || '' %>">
+    </label>
+    <label>Consent type requested
+      <input name="environment[consentTypeRequested]" value="<%= environment.consentTypeRequested || '' %>">
+    </label>
+    <label>Effluent generated
+      <input name="environment[effluentGenerated]" type="checkbox" value="true" <%= environment.effluentGenerated ? 'checked' : '' %>>
+    </label>
+    <label>Emissions generated
+      <input name="environment[emissionsGenerated]" type="checkbox" value="true" <%= environment.emissionsGenerated ? 'checked' : '' %>>
+    </label>
+    <label>Hazardous waste generated
+      <input name="environment[hazardousWasteGenerated]" type="checkbox" value="true" <%= environment.hazardousWasteGenerated ? 'checked' : '' %>>
+    </label>
+  </div>
+</fieldset>

@@ -1,0 +1,15 @@
+<header class="topbar" role="banner">
+  <div class="topbar__inner">
+    <button class="topbar__toggle" type="button" data-sidebar-toggle aria-expanded="false" aria-controls="department-sidebar">Menu</button>
+    <div>
+      <p class="topbar__eyebrow">UdyogSetu 360</p>
+      <h1 class="topbar__title"><%= title || 'Department Portal' %></h1>
+    </div>
+    <div class="topbar__actions">
+      <% if (currentUser) { %>
+        <span class="topbar__role"><%= currentUser.primaryRole || currentUser.role %></span>
+        <form method="post" action="/auth/logout"><button class="button button--secondary" type="submit">Sign out</button></form>
+      <% } %>
+    </div>
+  </div>
+</header>

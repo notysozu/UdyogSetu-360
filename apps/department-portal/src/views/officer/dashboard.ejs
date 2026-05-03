@@ -1,0 +1,16 @@
+<section class="kpi-grid">
+  <article class="kpi-card"><h2>Assigned tasks</h2><p><%= dashboard.assignedTasks %></p></article>
+  <article class="kpi-card"><h2>Pending scrutiny</h2><p><%= dashboard.pendingScrutiny %></p></article>
+  <article class="kpi-card"><h2>Waiting queries</h2><p><%= dashboard.waitingQueries %></p></article>
+  <article class="kpi-card"><h2>Inspections scheduled</h2><p><%= dashboard.inspectionsScheduled %></p></article>
+  <article class="kpi-card"><h2>SLA warnings</h2><p><%= dashboard.slaWarnings %></p></article>
+  <article class="kpi-card"><h2>SLA breaches</h2><p><%= dashboard.slaBreaches %></p></article>
+</section>
+<section class="card">
+  <h2>Inbox</h2>
+  <% if (dashboard.inbox.length) { dashboard.inbox.forEach(function(task) { %>
+    <%- include('../partials/department/task-card', { task: task }) %>
+  <% }) } else { %>
+    <%- include('../partials/department/empty-state', { title: 'No tasks in inbox', message: 'Your current queue is clear.' }) %>
+  <% } %>
+</section>

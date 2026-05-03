@@ -1,0 +1,15 @@
+{
+  "name": "@udyogsetu/shared",
+  "version": "0.1.0",
+  "private": true,
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "dependencies": {
+    "amqplib": "^1.0.3",
+    "kafkajs": "^2.2.4",
+    "mongoose": "^8.23.1",
+    "zod": "^3.25.76"
+  }
+}

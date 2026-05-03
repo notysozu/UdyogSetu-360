@@ -1,0 +1,58 @@
+{
+  "name": "udyogsetu-360",
+  "version": "0.2.0",
+  "private": true,
+  "description": "Monorepo for the UdyogSetu 360 interoperability backbone.",
+  "workspaces": [
+    "web",
+    "apps/*",
+    "services/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "start": "npm --workspace web start",
+    "dev": "npm run dev:public",
+    "dev:gateway": "npm --workspace @udyogsetu/gateway run dev",
+    "dev:investor": "npm --workspace @udyogsetu/investor-portal run dev",
+    "dev:department": "npm --workspace @udyogsetu/department-portal run dev",
+    "dev:public": "npm --workspace @udyogsetu/public-portal run dev",
+    "dev:case": "npm --workspace @udyogsetu/case-service run dev",
+    "dev:orchestration": "npm --workspace @udyogsetu/orchestration-service run dev",
+    "dev:adapter": "npm --workspace @udyogsetu/adapter-runtime run dev",
+    "dev:notification": "npm --workspace @udyogsetu/notification-service run dev",
+    "dev:audit": "npm --workspace @udyogsetu/audit-service run dev",
+    "lint": "npm run lint --workspaces --if-present",
+    "format": "prettier --write .",
+    "test": "npm run test --workspaces --if-present",
+    "seed": "npm --workspace web run seed",
+    "seed:domain": "npm --workspace @udyogsetu/case-service run seed:domain",
+    "seed:communication": "node seed/communication.seed.js",
+    "seed:analytics": "node seed/analytics.seed.js",
+    "seed:demo-users": "node scripts/seed-demo-users.js",
+    "seed:demo-cases": "node scripts/seed-demo-cases.js",
+    "seed:pilot-departments": "node scripts/seed-pilot-departments.js",
+    "seed:public-metrics": "npm --workspace @udyogsetu/public-portal run seed:public-metrics",
+    "seed:adapters": "npm --workspace @udyogsetu/adapter-runtime run seed:adapters",
+    "kafka:topics": "node scripts/create-kafka-topics.js",
+    "kafka:sample:publish": "node scripts/publish-sample-event.js",
+    "kafka:sample:consume": "node scripts/run-sample-consumer.js",
+    "events:replay": "node scripts/replay-events.js",
+    "analytics:rollup": "node scripts/analytics-rollup.js",
+    "analytics:rebuild": "node scripts/analytics-rebuild.js",
+    "legacy:import": "node scripts/import-legacy-data.js",
+    "go-live:validate": "node scripts/validate-go-live-readiness.js",
+    "smoke": "sh scripts/smoke-test.sh",
+    "perf": "sh scripts/run-performance-tests.sh",
+    "docker:up": "docker compose up --build",
+    "docker:down": "docker compose down"
+  },
+  "devDependencies": {
+    "dotenv": "^16.4.7",
+    "eslint": "^9.16.0",
+    "globals": "^15.13.0",
+    "prettier": "^3.4.2"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}

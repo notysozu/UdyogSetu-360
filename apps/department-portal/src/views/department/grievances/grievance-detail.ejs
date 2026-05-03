@@ -1,0 +1,55 @@
+<section class="card">
+  <h2><%= grievance.subject %></h2>
+  <p><strong>Grievance:</strong> <%= grievance.grievanceNumber %></p>
+  <p><strong>Status:</strong> <span class="status-badge status-badge--<%= grievance.status %>"><%= grievance.status %></span></p>
+  <p><strong>Priority:</strong> <%= grievance.priority %></p>
+  <p><strong>Due:</strong> <%= grievance.dueAt ? new Date(grievance.dueAt).toLocaleString() : '-' %></p>
+  <p><%= grievance.description %></p>
+</section>
+
+<section class="card">
+  <h3>Actions</h3>
+  <div class="button-row">
+    <form method="post" action="/department/grievances/<%= grievance._id %>/acknowledge"><button type="submit">Acknowledge</button></form>
+    <form method="post" action="/department/grievances/<%= grievance._id %>/escalate">
+      <input name="reason" required aria-label="Escalation reason" placeholder="Escalation reason" />
+      <button type="submit">Escalate</button>
+    </form>
+  </div>
+</section>
+
+<section class="card">
+  <h3>Internal Comment</h3>
+  <form method="post" action="/department/grievances/<%= grievance._id %>/internal-comments">
+    <label for="internalBody">Comment</label>
+    <textarea id="internalBody" name="body" required></textarea>
+    <button type="submit">Add Internal Comment</button>
+  </form>
+</section>
+
+<section class="card">
+  <h3>External Reply</h3>
+  <form method="post" action="/department/grievances/<%= grievance._id %>/external-replies">
+    <label for="externalBody">Reply</label>
+    <textarea id="externalBody" name="body" required></textarea>
+    <button type="submit">Send Reply</button>
+  </form>
+</section>
+
+<section class="card">
+  <h3>Status History</h3>
+  <ul>
+    <% (grievance.statusHistory || []).forEach(function(entry) { %>
+      <li><%= entry.toStatus %> at <%= new Date(entry.changedAt).toLocaleString() %> <%= entry.reason ? '(' + entry.reason + ')' : '' %></li>
+    <% }) %>
+  </ul>
+</section>
+
+<section class="card">
+  <h3>Messages</h3>
+  <ul>
+    <% (grievance.messages || []).forEach(function(msg) { %>
+      <li><strong><%= msg.visibility %></strong>: <%= msg.body %> <small><%= new Date(msg.createdAt).toLocaleString() %></small></li>
+    <% }) %>
+  </ul>
+</section>

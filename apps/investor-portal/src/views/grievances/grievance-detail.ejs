@@ -1,0 +1,13 @@
+<section class="card">
+  <h2><%= grievance.subject %></h2>
+  <p><strong>Status:</strong> <%- include('../partials/grievances/grievance-status-badge', { status: grievance.status }) %></p>
+  <p><%= grievance.description || grievance.message %></p>
+</section>
+<section class="card">
+  <h2>Conversation</h2>
+  <%- include('../partials/grievances/grievance-message-thread', { messages: grievance.messages || grievance.responses || [] }) %>
+  <form method="post" action="/grievances/<%= grievance._id %>/messages">
+    <div class="form-field"><label for="message">Add message</label><textarea id="message" name="message" rows="4" required></textarea></div>
+    <button class="button" type="submit">Send message</button>
+  </form>
+</section>

@@ -1,0 +1,6 @@
+.breadcrumbs ol { list-style: none; display: flex; gap: .5rem; padding: 0; margin: 0 0 1rem; flex-wrap: wrap; }
+.breadcrumbs li::after { content: "/"; margin-left: .5rem; color: var(--muted); }
+.breadcrumbs li:last-child::after { content: ""; }
+.inline-form { display: grid; gap: .75rem; margin-top: .75rem; }
+.comment-thread .comment { padding-bottom: 1rem; border-bottom: 1px solid var(--border); }
+.comment__meta { color: var(--muted); }

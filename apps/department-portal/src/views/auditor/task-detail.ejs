@@ -1,0 +1,4 @@
+<section class="card"><h2><%= task.title %></h2><p>Read-only access for audit purposes.</p><%- include('../partials/department/sla-countdown', { sla: sla }) %></section>
+<section class="card"><h2>Checklist</h2><%- include('../partials/department/checklist-table', { task: task }) %></section>
+<section class="card"><h2>Documents</h2><% documents.forEach(function(document) { %><article class="document-card"><h3><%= document.title || document.file?.originalName %></h3><p><%= view.statusLabel(document.verification?.status || document.status) %></p></article><% }) %></section>
+<section class="card"><h2>Comments</h2><%- include('../partials/department/comment-thread', { comments: comments }) %></section>

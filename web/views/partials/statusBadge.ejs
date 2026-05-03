@@ -1,0 +1,6 @@
+<span
+  class="badge badge-<%= String(status || '').toLowerCase().replaceAll('_', '-') %>"
+  aria-label="Status <%= String(status || 'unknown').replaceAll('_', ' ') %>"
+>
+  <%= String(status || 'unknown').replaceAll('_', ' ') %>
+</span>

@@ -1,0 +1,14 @@
+<section class="card">
+  <h2>Stuck Case Detail</h2>
+  <p><strong>ID:</strong> <%= finding.findingId %></p>
+  <p><strong>Type:</strong> <%= finding.findingType %></p>
+  <p><strong>Severity:</strong> <%= finding.severity %></p>
+  <p><strong>Status:</strong> <%= finding.status %></p>
+  <p><%= finding.description %></p>
+  <form method="post" action="/admin/operations/stuck-cases/<%= finding.findingId %>/acknowledge"><button type="submit">Acknowledge</button></form>
+  <form method="post" action="/admin/operations/stuck-cases/<%= finding.findingId %>/resolve">
+    <label for="reason">Resolution reason</label>
+    <input id="reason" name="reason" required />
+    <button type="submit">Resolve</button>
+  </form>
+</section>

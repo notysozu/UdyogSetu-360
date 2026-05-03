@@ -1,0 +1,14 @@
+<section class="card">
+  <h2>Case documents</h2>
+  <form method="post" action="/cases/<%= caseId %>/documents/upload" enctype="multipart/form-data">
+    <div class="form-field"><label for="documentType">Document type</label><input id="documentType" name="documentType" required></div>
+    <div class="form-field"><label for="title">Title</label><input id="title" name="title" required></div>
+    <div class="form-field"><label for="file">Upload file</label><input id="file" name="file" type="file" required></div>
+    <button class="button" type="submit">Upload document</button>
+  </form>
+</section>
+<section class="document-grid">
+  <% documents.forEach(function(document) { %>
+    <%- include('../partials/investor/document-card', { document: document }) %>
+  <% }) %>
+</section>

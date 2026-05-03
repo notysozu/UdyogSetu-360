@@ -1,0 +1,8 @@
+<form class="card compact-form" method="post" action="/department/tasks/<%= task._id %>/query">
+  <h3>Raise query</h3>
+  <div class="form-field"><label for="subject">Subject</label><input id="subject" name="subject" required></div>
+  <div class="form-field"><label for="message">Message</label><textarea id="message" name="message" rows="4" required></textarea></div>
+  <div class="form-field"><label for="dueAt">Due date</label><input id="dueAt" name="dueAt" type="date"></div>
+  <div class="form-field"><label for="internalNote">Internal note</label><textarea id="internalNote" name="internalNote" rows="2"></textarea></div>
+  <button class="button" type="submit">Raise query</button>
+</form>
