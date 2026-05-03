@@ -55,6 +55,12 @@ and `packages/` layout creates room for gradual extraction into service boundari
 
 ## Getting Started
 
+If you want a cleaner operator path, use the step-by-step guides in `guides/`:
+
+- [Guides Index](</Users/sonukumar/Documents/Projects/GitHub/UdyogSetu 360 /guides/README.md>)
+- [Local Start Guide](</Users/sonukumar/Documents/Projects/GitHub/UdyogSetu 360 /guides/local-start.md>)
+- [Deployment Guide](</Users/sonukumar/Documents/Projects/GitHub/UdyogSetu 360 /guides/deployment.md>)
+
 1. Copy `.env.example` to `.env`
 2. Keep any existing `web/.env` file if you already use it locally
 3. Install dependencies from the repo root:
